@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 
 // Protects user routes — reads JWT from cookie and attaches userId to req
+
 const isAuth = (req, res, next) => {
     try {
         const token = req.cookies.token;
