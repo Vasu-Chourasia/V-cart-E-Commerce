@@ -1,16 +1,16 @@
-import { createContext } from "react";
+import { createContext } from "react"
 
-// provides the backend URL to all components
-export const authDataContext = createContext();
+export const authDataContext = createContext()
 
 function AuthContext({ children }) {
-    const serverUrl = "http://localhost:8000";
+    // uses env var in production, falls back to localhost in development
+    const serverUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000"
 
     return (
         <authDataContext.Provider value={{ serverUrl }}>
             {children}
         </authDataContext.Provider>
-    );
+    )
 }
 
-export default AuthContext;
+export default AuthContext

@@ -14,13 +14,20 @@ import orderRoutes from "./routes/orderRoutes.js";
 const port = process.env.PORT || 6000;
 const app = express();
 
+const allowedOrigins = [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    process.env.FRONTEND_URL,  // e.g. https://v-cart.vercel.app
+    process.env.ADMIN_URL,     // e.g. https://v-cart-admin.vercel.app
+].filter(Boolean); // remove undefined if env vars not set
+
 // middleware
 app.use(express.json());
 app.use(cookieParser());
 app.use(
     cors({
-        origin: ["http://localhost:5173", "http://localhost:5174"],
-        credentials: true, // needed so cookies are sent cross-origin
+        origin: allowedOrigins,
+        credentials: true,
     })
 );
 
