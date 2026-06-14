@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app"
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "v-cart-7adf6.firebaseapp.com",
+    authDomain: "v-cart-7adf6.firebaseapp.com",
     projectId: "v-cart-7adf6",
     storageBucket: "v-cart-7adf6.firebasestorage.app",
     messagingSenderId: "938248810096",
