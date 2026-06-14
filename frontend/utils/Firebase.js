@@ -1,14 +1,13 @@
 import { getAuth, GoogleAuthProvider } from "firebase/auth"
 import { initializeApp } from "firebase/app"
 
-// Firebase project config — apiKey stored in .env for security
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
-    authDomain: "loginonecart.firebaseapp.com",
-    projectId: "loginonecart",
-    storageBucket: "loginonecart.firebasestorage.app",
-    messagingSenderId: "242165258894",
-    appId: "1:242165258894:web:0155a2ced93e20073247df"
+    authDomain: "v-cart-7adf6.firebaseapp.com",
+    projectId: "v-cart-7adf6",
+    storageBucket: "v-cart-7adf6.firebasestorage.app",
+    messagingSenderId: "938248810096",
+    appId: "1:938248810096:web:9087e1330b5144d0d4ceb5"
 }
 
 const app = initializeApp(firebaseConfig)
