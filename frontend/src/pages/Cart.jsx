@@ -22,7 +22,7 @@ function Cart() {
     }
 
     return (
-        <div className='w-[99vw] min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] pt-[100px] pb-[100px] md:pb-[40px] px-[20px] md:px-[50px]'>
+        <div className='w-full min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] pt-[100px] pb-[100px] md:pb-[40px] px-[20px] md:px-[50px]'>
             <Title text1={'YOUR'} text2={'CART'} />
 
             <div className='flex flex-col lg:flex-row gap-[50px] mt-[30px]'>

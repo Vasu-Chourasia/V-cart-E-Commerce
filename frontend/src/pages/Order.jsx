@@ -28,7 +28,7 @@ function Order() {
     }, [])
 
     return (
-        <div className='w-[99vw] min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] pt-[100px] pb-[100px] md:pb-[40px] px-[20px] md:px-[50px]'>
+        <div className='w-full min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] pt-[100px] pb-[100px] md:pb-[40px] px-[20px] md:px-[50px]'>
             <Title text1={'MY'} text2={'ORDERS'} />
 
             <div className='flex flex-col gap-[20px] mt-[30px]'>
