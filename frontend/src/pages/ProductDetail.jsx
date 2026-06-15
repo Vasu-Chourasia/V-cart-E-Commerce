@@ -29,7 +29,7 @@ function ProductDetail() {
     return (
         <div>
             {/* product info section */}
-            <div className='w-[99vw] min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] flex items-center justify-start flex-col lg:flex-row gap-[20px] pt-[80px]'>
+            <div className='w-full min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] flex items-center justify-start flex-col lg:flex-row gap-[20px] pt-[80px]'>
 
                 {/* image gallery */}
                 <div className='lg:w-[50vw] w-[90vw] flex items-center justify-center gap-[10px] flex-col-reverse lg:flex-row'>
