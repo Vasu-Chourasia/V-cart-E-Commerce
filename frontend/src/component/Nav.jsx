@@ -29,7 +29,7 @@ function Nav() {
     }
 
     return (
-        <div className='w-[100vw] h-[70px] bg-[#ecfafaec] z-10 fixed top-0 flex items-center justify-between px-[30px] shadow-md shadow-black'>
+        <div className='w-full h-[70px] bg-[#ecfafaec] z-10 fixed top-0 flex items-center justify-between px-[30px] shadow-md shadow-black'>
 
             {/* logo */}
             <div className='w-[20%] lg:w-[30%] flex items-center gap-[10px]'>
@@ -108,7 +108,7 @@ function Nav() {
             )}
 
             {/* mobile bottom tab bar */}
-            <div className='w-[100vw] h-[70px] flex items-center justify-between px-[20px] text-[12px] fixed bottom-0 left-0 bg-[#191818] md:hidden'>
+            <div className='w-full h-[70px] flex items-center justify-between px-[20px] text-[12px] fixed bottom-0 left-0 bg-[#191818] md:hidden'>
                 <button className='text-white flex flex-col items-center gap-[2px]' onClick={() => navigate("/")}><IoMdHome className='w-[28px] h-[28px]' />Home</button>
                 <button className='text-white flex flex-col items-center gap-[2px]' onClick={() => navigate("/collection")}><HiOutlineCollection className='w-[28px] h-[28px]' />Collections</button>
                 <button className='text-white flex flex-col items-center gap-[2px]' onClick={() => navigate("/contact")}><MdContacts className='w-[28px] h-[28px]' />Contact</button>
