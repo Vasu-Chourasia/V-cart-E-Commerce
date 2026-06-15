@@ -47,7 +47,7 @@ function Collections() {
     }, [products, search, showSearch, selectedCategories, selectedSubCategories, sortType])
 
     return (
-        <div className='w-[99vw] min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] pt-[90px] pb-[100px] md:pb-[0px]'>
+        <div className='w-full min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] pt-[90px] pb-[100px] md:pb-[0px]'>
             <div className='flex gap-[20px] px-[20px]'>
 
                 {/* sidebar filters */}

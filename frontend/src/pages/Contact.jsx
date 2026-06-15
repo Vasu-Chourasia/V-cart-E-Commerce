@@ -5,7 +5,7 @@ import contact from '../assets/contact.jpg'
 
 function Contact() {
     return (
-        <div className='w-[99vw] min-h-[100vh] flex flex-col items-center bg-gradient-to-l from-[#141414] to-[#0c2025] gap-[50px] pt-[100px] pb-[50px]'>
+        <div className='w-full min-h-[100vh] flex flex-col items-center bg-gradient-to-l from-[#141414] to-[#0c2025] gap-[50px] pt-[100px] pb-[50px]'>
             <Title text1={'CONTACT'} text2={'US'} />
 
             <div className='w-[100%] flex items-center justify-center flex-col lg:flex-row'>

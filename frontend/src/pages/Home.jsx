@@ -11,7 +11,7 @@ function Home() {
     const [slideIndex, setSlideIndex] = useState(0)
 
     return (
-        <div className='w-[99vw] min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025]'>
+        <div className='w-full min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025]'>
 
             {/* hero banner */}
             <div className='w-[100%] h-[100vh] relative flex items-center'>
