@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { IoSearchCircleOutline, IoSearchCircleSharp } from "react-icons/io5"
 import { FaCircleUser } from "react-icons/fa6"
 import { MdOutlineShoppingCart, MdContacts } from "react-icons/md"
@@ -17,6 +17,7 @@ function Nav() {
     const { showSearch, setShowSearch, search, setSearch, getCartCount } = useContext(shopDataContext)
     const [showProfile, setShowProfile] = useState(false)
     const navigate = useNavigate()
+    const location = useLocation()
 
     const handleLogout = async () => {
         try {
@@ -29,43 +30,49 @@ function Nav() {
     }
 
     return (
-        <div className='w-full h-[70px] bg-[#ecfafaec] z-10 fixed top-0 flex items-center justify-between px-[30px] shadow-md shadow-black'>
+        <div className='w-full h-[70px] bg-[#0c2025e0] backdrop-blur-md border-b border-[#ffffff15] z-50 fixed top-0 flex items-center justify-between px-[30px] shadow-lg shadow-black/10'>
 
             {/* logo */}
-            <div className='w-[20%] lg:w-[30%] flex items-center gap-[10px]'>
-                <img src={logo} alt="V-Cart" className='w-[30px]' />
-                <h1 className='text-[25px] text-black font-sans'>V-Cart</h1>
+            <div className='flex items-center gap-[10px] cursor-pointer hover:opacity-90 transition-opacity' onClick={() => navigate("/")}>
+                <img src={logo} alt="V-Cart" className='w-[32px] h-[32px] object-contain hover:rotate-6 transition-transform duration-300' />
+                <h1 className='text-[24px] text-white font-sans font-bold tracking-wide bg-gradient-to-r from-white via-slate-100 to-[#a5f3fc] bg-clip-text text-transparent'>V-Cart</h1>
             </div>
 
             {/* desktop nav links */}
-            <div className='w-[50%] lg:w-[40%] hidden md:flex'>
-                <ul className='flex items-center justify-center gap-[19px] text-white'>
+            <div className='hidden md:flex items-center justify-center flex-1 mx-[40px]'>
+                <ul className='flex items-center gap-[30px]'>
                     {[
                         { label: "HOME", path: "/" },
                         { label: "COLLECTIONS", path: "/collection" },
                         { label: "ABOUT", path: "/about" },
                         { label: "CONTACT", path: "/contact" },
-                    ].map(({ label, path }) => (
-                        <li key={path}
-                            className='text-[15px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[10px] px-[20px] rounded-2xl'
-                            onClick={() => navigate(path)}>
-                            {label}
-                        </li>
-                    ))}
+                    ].map(({ label, path }) => {
+                        const isActive = location.pathname === path;
+                        return (
+                            <li key={path}
+                                className={`text-[14px] font-medium tracking-wider cursor-pointer relative py-[6px] transition-colors duration-200 ${isActive ? 'text-[#56dbfc]' : 'text-slate-300 hover:text-white'}`}
+                                onClick={() => navigate(path)}>
+                                {label}
+                                {isActive && (
+                                    <span className='absolute bottom-0 left-0 w-full h-[2px] bg-[#56dbfc] rounded-full shadow-[0_0_8px_rgba(86,219,252,0.8)]'></span>
+                                )}
+                            </li>
+                        );
+                    })}
                 </ul>
             </div>
 
             {/* right icons */}
-            <div className='w-[30%] flex items-center justify-end gap-[20px]'>
+            <div className='flex items-center gap-[22px]'>
                 {!showSearch
-                    ? <IoSearchCircleOutline className='w-[38px] h-[38px] text-black cursor-pointer' onClick={() => { setShowSearch(true); navigate("/collection") }} />
-                    : <IoSearchCircleSharp className='w-[38px] h-[38px] text-black cursor-pointer' onClick={() => setShowSearch(false)} />
+                    ? <IoSearchCircleOutline className='w-[32px] h-[32px] text-slate-300 hover:text-[#56dbfc] hover:scale-105 transition-all cursor-pointer' onClick={() => { setShowSearch(true); navigate("/collection") }} />
+                    : <IoSearchCircleSharp className='w-[32px] h-[32px] text-[#56dbfc] hover:scale-105 transition-all cursor-pointer' onClick={() => setShowSearch(false)} />
                 }
 
                 {/* user avatar / profile dropdown */}
                 {!userData
-                    ? <FaCircleUser className='w-[29px] h-[29px] text-black cursor-pointer' onClick={() => setShowProfile(p => !p)} />
-                    : <div className='w-[30px] h-[30px] bg-black text-white rounded-full flex items-center justify-center cursor-pointer font-semibold'
+                    ? <FaCircleUser className='w-[26px] h-[26px] text-slate-300 hover:text-[#56dbfc] hover:scale-105 transition-all cursor-pointer' onClick={() => setShowProfile(p => !p)} />
+                    : <div className='w-[30px] h-[30px] bg-[#56dbfc] text-black rounded-full flex items-center justify-center cursor-pointer font-semibold text-[14px] hover:opacity-90 transition-opacity'
                         onClick={() => setShowProfile(p => !p)}>
                         {userData.name.slice(0, 1).toUpperCase()}
                     </div>
@@ -73,8 +80,8 @@ function Nav() {
 
                 {/* cart icon + badge */}
                 <div className='relative hidden md:block'>
-                    <MdOutlineShoppingCart className='w-[30px] h-[30px] text-black cursor-pointer' onClick={() => navigate("/cart")} />
-                    <p className='absolute w-[18px] h-[18px] flex items-center justify-center bg-black text-white rounded-full text-[9px] -top-[5px] -right-[5px]'>
+                    <MdOutlineShoppingCart className='w-[26px] h-[26px] text-slate-300 hover:text-[#56dbfc] hover:scale-105 transition-all cursor-pointer' onClick={() => navigate("/cart")} />
+                    <p className='absolute w-[17px] h-[17px] flex items-center justify-center bg-[#56dbfc] text-black font-bold rounded-full text-[9px] -top-[5px] -right-[5px]'>
                         {getCartCount()}
                     </p>
                 </div>
@@ -82,10 +89,10 @@ function Nav() {
 
             {/* search bar dropdown */}
             {showSearch && (
-                <div className='w-[100%] h-[80px] bg-[#d8f6f9dd] absolute top-[100%] left-0 flex items-center justify-center'>
+                <div className='w-full h-[80px] bg-[#0c2025e6] border-b border-[#ffffff10] backdrop-blur-md absolute top-[100%] left-0 flex items-center justify-center z-40 transition-all duration-300'>
                     <input
                         type="text"
-                        className='lg:w-[50%] w-[80%] h-[60%] bg-[#233533] rounded-[30px] px-[50px] placeholder:text-white text-white text-[18px]'
+                        className='lg:w-[50%] w-[80%] h-[55%] bg-[#1a2f34] border border-[#ffffff15] rounded-[30px] px-[25px] placeholder:text-slate-400 text-white text-[16px] focus:outline-none focus:border-[#56dbfc] transition-colors shadow-inner'
                         placeholder='Search products...'
                         onChange={(e) => setSearch(e.target.value)}
                         value={search}
