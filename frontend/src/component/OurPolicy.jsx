@@ -22,12 +22,12 @@ function OurPolicy() {
     ]
 
     return (
-        <section className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
+        <section className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20'>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
                 {policies.map((policy) => (
                     <div 
                         key={policy.title} 
-                        className='flex flex-col items-center text-center gap-3 p-6 bg-[#13282e]/50 backdrop-blur-md border border-white/10 rounded-2xl hover:border-[#56dbfc]/40 hover:-translate-y-1 transition-all duration-300 shadow-md group'
+                        className='flex flex-col items-center text-center gap-3 p-6 sm:p-8 bg-[#13282e]/60 backdrop-blur-md border border-white/10 rounded-2xl hover:border-[#56dbfc]/40 hover:-translate-y-1 transition-all duration-300 shadow-md group'
                     >
                         <div className='w-14 h-14 rounded-xl bg-[#56dbfc]/10 border border-[#56dbfc]/20 flex items-center justify-center group-hover:scale-110 group-hover:bg-[#56dbfc]/20 transition-all duration-300'>
                             {policy.icon}
@@ -38,6 +38,7 @@ function OurPolicy() {
                 ))}
             </div>
         </section>
+
     )
 }
 

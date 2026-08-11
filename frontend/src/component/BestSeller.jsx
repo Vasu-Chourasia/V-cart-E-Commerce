@@ -10,26 +10,29 @@ function BestSeller() {
     const bestSellers = products.filter(p => p.bestseller).slice(0, 4)
 
     return (
-        <section className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col items-center gap-10'>
-            <Title 
-                text1={'BEST'} 
-                text2={'SELLERS'} 
-                subtext={'Discover top-rated customer favorites and trending products'}
-            />
-            <div className='w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6'>
-                {bestSellers.map(product => (
-                    <Card
-                        key={product._id}
-                        id={product._id}
-                        image={product.image1}
-                        name={product.name}
-                        price={product.price}
-                    />
-                ))}
+        <section className='w-full bg-[#08181c]/80 border-y border-white/10 py-16 md:py-20 my-4'>
+            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-10'>
+                <Title 
+                    text1={'BEST'} 
+                    text2={'SELLERS'} 
+                    subtext={'Discover top-rated customer favorites and trending products'}
+                />
+                <div className='w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6'>
+                    {bestSellers.map(product => (
+                        <Card
+                            key={product._id}
+                            id={product._id}
+                            image={product.image1}
+                            name={product.name}
+                            price={product.price}
+                        />
+                    ))}
+                </div>
             </div>
         </section>
     )
 }
 
 export default BestSeller
+
 
