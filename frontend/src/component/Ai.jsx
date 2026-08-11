@@ -74,17 +74,18 @@ function Ai() {
 
     return (
         <div
-            className='fixed lg:bottom-[20px] md:bottom-[40px] bottom-[80px] left-[2%] cursor-pointer'
+            className='fixed lg:bottom-6 md:bottom-8 bottom-20 left-4 cursor-pointer z-40 transition-all hover:scale-105'
             onClick={handleClick}
+            title="Click for Voice Assistant"
         >
             <img
                 src={ai}
                 alt="Voice assistant"
-                className={`w-[80px] transition-transform duration-300 ${active ? 'scale-125' : 'scale-100'}`}
+                className={`w-16 sm:w-20 transition-transform duration-300 ${active ? 'scale-125' : 'scale-100'}`}
                 style={{
                     filter: active
                         ? 'drop-shadow(0px 0px 30px #00d2fc)'
-                        : 'drop-shadow(0px 0px 20px black)'
+                        : 'drop-shadow(0px 0px 15px rgba(0, 0, 0, 0.8))'
                 }}
             />
         </div>
@@ -92,3 +93,4 @@ function Ai() {
 }
 
 export default Ai
+

@@ -28,63 +28,84 @@ function Order() {
     }, [])
 
     return (
-        <div className='w-full min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] pt-[100px] pb-[100px] md:pb-[40px] px-[20px] md:px-[50px]'>
-            <Title text1={'MY'} text2={'ORDERS'} />
+        <div className='w-full min-h-screen bg-gradient-to-br from-[#141414] via-[#0c2025] to-[#0c2025] pt-24 pb-20'>
+            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8'>
+                
+                <div className='border-b border-white/10 pb-4'>
+                    <Title text1={'MY'} text2={'ORDERS'} subtext={'Track order status and history'} />
+                </div>
 
-            <div className='flex flex-col gap-[20px] mt-[30px]'>
-                {orders.length === 0 && (
-                    <p className='text-slate-400 text-[16px] mt-[20px]'>No orders yet</p>
-                )}
-
-                {orders.map((order, index) => (
-                    <div key={index} className='bg-[#1e3a40] rounded-lg p-[20px] flex flex-col lg:flex-row lg:items-center gap-[20px] justify-between'>
-
-                        {/* items list */}
-                        <div className='flex flex-col gap-[5px]'>
-                            {order.items.map((item, i) => (
-                                <p key={i} className='text-[#56dbfc] text-[14px] font-semibold'>
-                                    {item.name.toUpperCase()} × {item.quantity}
-                                    <span className='text-slate-300 font-normal'> ({item.size})</span>
-                                    {i < order.items.length - 1 && ','}
-                                </p>
-                            ))}
+                <div className='space-y-4'>
+                    {orders.length === 0 && (
+                        <div className='w-full py-20 flex flex-col items-center justify-center text-center bg-[#12282e]/40 border border-white/10 rounded-2xl p-8 space-y-3'>
+                            <p className='text-lg font-semibold text-slate-200'>No orders placed yet</p>
+                            <p className='text-xs text-slate-400'>Your purchase history will appear here once you place an order.</p>
                         </div>
+                    )}
 
-                        {/* delivery address */}
-                        <div className='text-[13px] text-slate-300 flex flex-col gap-[2px]'>
-                            <p className='text-white font-semibold'>{order.address.firstName} {order.address.lastName}</p>
-                            <p>{order.address.street}</p>
-                            <p>{order.address.city}, {order.address.state}, {order.address.country} - {order.address.pinCode}</p>
-                            <p>{order.address.phone}</p>
-                        </div>
+                    {orders.map((order, index) => (
+                        <div 
+                            key={index} 
+                            className='bg-[#12282e]/60 backdrop-blur-md border border-white/10 hover:border-white/20 rounded-2xl p-6 shadow-md transition-all flex flex-col lg:flex-row lg:items-center justify-between gap-6'
+                        >
+                            {/* items list & details */}
+                            <div className='space-y-3 flex-1'>
+                                <div className='flex items-center gap-2'>
+                                    <span className='px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#56dbfc] bg-[#56dbfc]/10 rounded-md border border-[#56dbfc]/20'>
+                                        Order #{index + 1}
+                                    </span>
+                                    <span className='text-xs text-slate-400'>
+                                        {new Date(order.date).toLocaleDateString()}
+                                    </span>
+                                </div>
 
-                        {/* order meta */}
-                        <div className='text-[13px] text-slate-300 flex flex-col gap-[4px]'>
-                            <p>Items: {order.items.length}</p>
-                            <p>Method: {order.paymentMethod}</p>
-                            <p>Payment: <span className={order.payment ? 'text-green-400' : 'text-yellow-400'}>{order.payment ? 'Done' : 'Pending'}</span></p>
-                            <p>Date: {new Date(order.date).toLocaleDateString()}</p>
-                            <p className='text-white font-semibold text-[16px]'>{currency} {order.amount}</p>
-                        </div>
+                                <div className='space-y-1'>
+                                    {order.items.map((item, i) => (
+                                        <p key={i} className='text-white text-sm font-medium'>
+                                            {item.name} × {item.quantity}
+                                            <span className='text-slate-400 text-xs font-normal ml-1.5'>({item.size})</span>
+                                        </p>
+                                    ))}
+                                </div>
 
-                        {/* status + track button */}
-                        <div className='flex flex-col gap-[10px] items-start lg:items-end'>
-                            <div className='flex items-center gap-[8px]'>
-                                <div className='w-[10px] h-[10px] rounded-full bg-green-400'></div>
-                                <p className='text-white text-[14px] font-semibold'>{order.status}</p>
+                                <div className='text-xs text-slate-400 leading-relaxed pt-1'>
+                                    <p className='text-slate-300 font-medium'>
+                                        Deliver to: {order.address.firstName} {order.address.lastName} ({order.address.phone})
+                                    </p>
+                                    <p>{order.address.street}, {order.address.city}, {order.address.state} - {order.address.pinCode}</p>
+                                </div>
                             </div>
-                            <button
-                                onClick={fetchOrders}
-                                className='px-[20px] py-[8px] border border-slate-500 text-white text-[13px] rounded-lg hover:bg-slate-700'
-                            >
-                                Track Order
-                            </button>
+
+                            {/* order meta & total */}
+                            <div className='flex flex-row lg:flex-col justify-between items-start lg:items-end gap-2 border-t lg:border-t-0 border-white/10 pt-3 lg:pt-0'>
+                                <div className='text-left lg:text-right'>
+                                    <span className='text-xs text-slate-400 block'>Payment: {order.paymentMethod}</span>
+                                    <span className='text-xl font-extrabold text-[#56dbfc]'>{currency} {order.amount}</span>
+                                </div>
+
+                                {/* status + track button */}
+                                <div className='flex flex-col items-end gap-2'>
+                                    <div className='inline-flex items-center gap-2 px-3 py-1 bg-emerald-400/10 border border-emerald-400/20 rounded-full text-xs font-semibold text-emerald-400'>
+                                        <span className='w-2 h-2 rounded-full bg-emerald-400 animate-pulse'></span>
+                                        {order.status}
+                                    </div>
+                                    <button
+                                        onClick={fetchOrders}
+                                        className='px-4 py-1.5 border border-white/15 text-white text-xs font-medium rounded-xl hover:bg-white/10 transition-all'
+                                    >
+                                        Track Order
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
+
             </div>
         </div>
     )
 }
 
 export default Order
+

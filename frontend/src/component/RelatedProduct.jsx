@@ -14,9 +14,9 @@ function RelatedProduct({ category, subCategory, currentProductId }) {
     if (related.length === 0) return null
 
     return (
-        <div className='w-[100%] flex flex-col items-center gap-[30px] py-[50px] px-[20px]'>
-            <Title text1={'RELATED'} text2={'PRODUCTS'} />
-            <div className='flex flex-wrap justify-center gap-[20px]'>
+        <section className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col items-center gap-10'>
+            <Title text1={'RELATED'} text2={'PRODUCTS'} subtext={'You might also like these matching items'} />
+            <div className='w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6'>
                 {related.map(product => (
                     <Card
                         key={product._id}
@@ -27,8 +27,9 @@ function RelatedProduct({ category, subCategory, currentProductId }) {
                     />
                 ))}
             </div>
-        </div>
+        </section>
     )
 }
 
 export default RelatedProduct
+

@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
+
 
 * {
   margin: 0;
@@ -9,4 +11,24 @@
 html, body {
   overflow-x: hidden;
   width: 100%;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  scroll-behavior: smooth;
+  background-color: #0c2025;
+  color: #f8fafc;
 }
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #09171b;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e3e46;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #56dbfc;
+}
+

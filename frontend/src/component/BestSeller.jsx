@@ -10,9 +10,13 @@ function BestSeller() {
     const bestSellers = products.filter(p => p.bestseller).slice(0, 4)
 
     return (
-        <div className='w-[100%] flex flex-col items-center gap-[30px] py-[50px]'>
-            <Title text1={'BEST'} text2={'SELLERS'} />
-            <div className='flex flex-wrap justify-center gap-[20px]'>
+        <section className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col items-center gap-10'>
+            <Title 
+                text1={'BEST'} 
+                text2={'SELLERS'} 
+                subtext={'Discover top-rated customer favorites and trending products'}
+            />
+            <div className='w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6'>
                 {bestSellers.map(product => (
                     <Card
                         key={product._id}
@@ -23,8 +27,9 @@ function BestSeller() {
                     />
                 ))}
             </div>
-        </div>
+        </section>
     )
 }
 
 export default BestSeller
+

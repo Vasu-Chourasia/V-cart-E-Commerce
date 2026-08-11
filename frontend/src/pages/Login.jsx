@@ -53,70 +53,97 @@ function Login() {
     }
 
     return (
-        <div className='w-full min-h-screen bg-gradient-to-l from-[#141414] to-[#0c2025] text-white flex flex-col items-center justify-start'>
+        <div className='w-full min-h-screen bg-gradient-to-br from-[#141414] via-[#0c2025] to-[#0c2025] text-white flex flex-col items-center justify-center p-4 py-12'>
 
-            {/* header */}
-            <div className='w-[100%] h-[80px] flex items-center justify-start px-[30px] gap-[10px] cursor-pointer' onClick={() => navigate("/")}>
-                <img className='w-[40px]' src={Logo} alt="V-Cart logo" />
-                <h1 className='text-[22px] font-sans'>V-Cart</h1>
-            </div>
-
-            {/* title */}
-            <div className='w-[100%] h-[100px] flex items-center justify-center flex-col gap-[10px]'>
-                <span className='text-[25px] font-semibold'>Login</span>
-                <span className='text-[16px]'>Welcome to V-Cart, place your order</span>
+            {/* header / logo */}
+            <div 
+                className='flex items-center gap-2.5 cursor-pointer mb-8 group' 
+                onClick={() => navigate("/")}
+            >
+                <div className='p-1.5 rounded-xl bg-[#56dbfc]/10 border border-[#56dbfc]/20 group-hover:bg-[#56dbfc]/20 transition-all'>
+                    <img className='w-8 h-8 object-contain' src={Logo} alt="V-Cart logo" />
+                </div>
+                <h1 className='text-2xl font-bold tracking-tight text-white bg-gradient-to-r from-white via-slate-100 to-[#56dbfc] bg-clip-text text-transparent'>
+                    V-Cart
+                </h1>
             </div>
 
             {/* form card */}
-            <div className='max-w-[600px] w-[90%] bg-[#00000025] border-[1px] border-[#96969635] rounded-lg shadow-lg flex items-center justify-center py-[30px]'>
-                <form onSubmit={handleLogin} className='w-[90%] flex flex-col items-center gap-[20px]'>
+            <div className='max-w-md w-full bg-[#12282e]/70 border border-white/10 backdrop-blur-xl rounded-2xl shadow-2xl p-6 sm:p-8 space-y-6'>
+                <div className='text-center space-y-1.5'>
+                    <h2 className='text-2xl font-bold text-white tracking-tight'>Welcome Back</h2>
+                    <p className='text-xs text-slate-400'>Log in to your account to manage orders and shopping cart</p>
+                </div>
+
+                <form onSubmit={handleLogin} className='space-y-4'>
 
                     {/* Google button */}
-                    <div
-                        className='w-[90%] h-[50px] bg-[#42656cae] rounded-lg flex items-center justify-center gap-[10px] cursor-pointer'
+                    <button
+                        type='button'
+                        className='w-full h-11 bg-white/5 border border-white/15 hover:bg-white/10 active:scale-[0.99] rounded-xl flex items-center justify-center gap-3 text-sm font-semibold text-white transition-all shadow-sm'
                         onClick={googleLogin}
                     >
-                        <img src={google} alt="Google" className='w-[20px]' />
-                        Login with Google
-                    </div>
+                        <img src={google} alt="Google" className='w-4 h-4 object-contain' />
+                        Continue with Google
+                    </button>
 
-                    <div className='w-[100%] flex items-center gap-[10px]'>
-                        <div className='flex-1 h-[1px] bg-[#96969635]'></div>
-                        <span>OR</span>
-                        <div className='flex-1 h-[1px] bg-[#96969635]'></div>
+                    <div className='flex items-center gap-3 py-1'>
+                        <div className='flex-1 h-px bg-white/10'></div>
+                        <span className='text-[11px] font-bold text-slate-400 uppercase tracking-widest'>or email</span>
+                        <div className='flex-1 h-px bg-white/10'></div>
                     </div>
 
                     {/* inputs */}
-                    <div className='w-[90%] flex flex-col gap-[15px] relative'>
-                        <input
-                            type="text" placeholder='Email' required
-                            className='w-[100%] h-[50px] border-[2px] border-[#96969635] rounded-lg bg-transparent placeholder-[#ffffffc7] px-[20px] font-semibold'
-                            onChange={(e) => setEmail(e.target.value)} value={email}
-                        />
-                        <input
-                            type={show ? "text" : "password"} placeholder='Password' required
-                            className='w-[100%] h-[50px] border-[2px] border-[#96969635] rounded-lg bg-transparent placeholder-[#ffffffc7] px-[20px] font-semibold'
-                            onChange={(e) => setPassword(e.target.value)} value={password}
-                        />
-                        {!show
-                            ? <IoEyeOutline className='w-[20px] h-[20px] cursor-pointer absolute right-[3%] bottom-[18px]' onClick={() => setShow(true)} />
-                            : <IoEye className='w-[20px] h-[20px] cursor-pointer absolute right-[3%] bottom-[18px]' onClick={() => setShow(false)} />
-                        }
-                        <button type='submit'
-                            className='w-[100%] h-[50px] bg-[#6060f5] rounded-lg flex items-center justify-center mt-[10px] text-[17px] font-semibold'>
-                            {loading ? <Loading /> : "Login"}
+                    <div className='space-y-3.5'>
+                        <div>
+                            <label className='text-xs font-semibold text-slate-300 block mb-1'>Email Address</label>
+                            <input
+                                type="email" placeholder='name@example.com' required
+                                className='w-full h-11 bg-[#0c2025] border border-white/15 rounded-xl px-4 text-white text-sm focus:outline-none focus:border-[#56dbfc] transition-all placeholder:text-slate-500'
+                                onChange={(e) => setEmail(e.target.value)} value={email}
+                            />
+                        </div>
+
+                        <div>
+                            <label className='text-xs font-semibold text-slate-300 block mb-1'>Password</label>
+                            <div className='relative'>
+                                <input
+                                    type={show ? "text" : "password"} placeholder='••••••••' required
+                                    className='w-full h-11 bg-[#0c2025] border border-white/15 rounded-xl px-4 text-white text-sm focus:outline-none focus:border-[#56dbfc] transition-all placeholder:text-slate-500 pr-10'
+                                    onChange={(e) => setPassword(e.target.value)} value={password}
+                                />
+                                <button
+                                    type='button'
+                                    className='absolute right-3 top-3 text-slate-400 hover:text-white transition-colors'
+                                    onClick={() => setShow(!show)}
+                                >
+                                    {!show ? <IoEyeOutline className='w-5 h-5' /> : <IoEye className='w-5 h-5' />}
+                                </button>
+                            </div>
+                        </div>
+
+                        <button 
+                            type='submit'
+                            className='w-full h-12 bg-[#56dbfc] text-slate-950 rounded-xl text-sm font-bold flex items-center justify-center hover:bg-[#7be2fc] active:scale-[0.99] transition-all shadow-[0_0_20px_rgba(86,219,252,0.3)] mt-2'
+                        >
+                            {loading ? <Loading /> : "Sign In"}
                         </button>
-                        <p className='flex gap-[10px] justify-center'>
-                            No account?
-                            <span className='text-[#5555f6cf] font-semibold cursor-pointer' onClick={() => navigate("/signup")}>
-                                Create one
-                            </span>
-                        </p>
                     </div>
                 </form>
+
+                <div className='border-t border-white/10 pt-4 text-center text-xs text-slate-400'>
+                    Don't have an account?{' '}
+                    <button 
+                        className='text-[#56dbfc] font-bold hover:underline ml-1'
+                        onClick={() => navigate("/signup")}
+                    >
+                        Create account
+                    </button>
+                </div>
             </div>
         </div>
     )
 }
 
 export default Login
+

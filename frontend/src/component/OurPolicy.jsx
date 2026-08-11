@@ -1,37 +1,45 @@
 import React from 'react'
 import { MdOutlineSwapHoriz, MdOutlineAssignmentReturn, MdSupportAgent } from "react-icons/md"
 
-// static section showing store policies
+// static section showing store policies — glassmorphic cards
 function OurPolicy() {
     const policies = [
         {
-            icon: <MdOutlineSwapHoriz className='w-[40px] h-[40px] text-[#56dbfc]' />,
+            icon: <MdOutlineSwapHoriz className='w-8 h-8 text-[#56dbfc]' />,
             title: "Easy Exchange",
-            desc: "We offer a hassle-free exchange policy"
+            desc: "Hassle-free 7-day item exchange policy"
         },
         {
-            icon: <MdOutlineAssignmentReturn className='w-[40px] h-[40px] text-[#56dbfc]' />,
+            icon: <MdOutlineAssignmentReturn className='w-8 h-8 text-[#56dbfc]' />,
             title: "7 Day Returns",
-            desc: "We provide 7 days free return policy"
+            desc: "Free & effortless returns guarantee"
         },
         {
-            icon: <MdSupportAgent className='w-[40px] h-[40px] text-[#56dbfc]' />,
-            title: "Customer Support",
-            desc: "We provide 24/7 customer support"
+            icon: <MdSupportAgent className='w-8 h-8 text-[#56dbfc]' />,
+            title: "24/7 Support",
+            desc: "Dedicated customer support anytime"
         },
     ]
 
     return (
-        <div className='w-[100%] flex items-center justify-center gap-[20px] flex-col md:flex-row py-[40px]'>
-            {policies.map((policy) => (
-                <div key={policy.title} className='flex flex-col items-center gap-[10px] text-center px-[20px]'>
-                    {policy.icon}
-                    <p className='text-white font-semibold text-[16px]'>{policy.title}</p>
-                    <p className='text-slate-300 text-[14px]'>{policy.desc}</p>
-                </div>
-            ))}
-        </div>
+        <section className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+                {policies.map((policy) => (
+                    <div 
+                        key={policy.title} 
+                        className='flex flex-col items-center text-center gap-3 p-6 bg-[#13282e]/50 backdrop-blur-md border border-white/10 rounded-2xl hover:border-[#56dbfc]/40 hover:-translate-y-1 transition-all duration-300 shadow-md group'
+                    >
+                        <div className='w-14 h-14 rounded-xl bg-[#56dbfc]/10 border border-[#56dbfc]/20 flex items-center justify-center group-hover:scale-110 group-hover:bg-[#56dbfc]/20 transition-all duration-300'>
+                            {policy.icon}
+                        </div>
+                        <h3 className='text-white font-semibold text-base tracking-tight mt-1'>{policy.title}</h3>
+                        <p className='text-slate-300 text-xs md:text-sm font-normal leading-relaxed max-w-xs'>{policy.desc}</p>
+                    </div>
+                ))}
+            </div>
+        </section>
     )
 }
 
 export default OurPolicy
+

@@ -12,9 +12,13 @@ function LatestCollection() {
         .slice(0, 8)
 
     return (
-        <div className='w-[100%] flex flex-col items-center gap-[30px] py-[50px]'>
-            <Title text1={'LATEST'} text2={'COLLECTION'} />
-            <div className='flex flex-wrap justify-center gap-[20px]'>
+        <section className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col items-center gap-10'>
+            <Title 
+                text1={'LATEST'} 
+                text2={'COLLECTION'} 
+                subtext={'Explore our newest handpicked arrivals designed for style and comfort'}
+            />
+            <div className='w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6'>
                 {latest.map(product => (
                     <Card
                         key={product._id}
@@ -25,8 +29,9 @@ function LatestCollection() {
                     />
                 ))}
             </div>
-        </div>
+        </section>
     )
 }
 
 export default LatestCollection
+

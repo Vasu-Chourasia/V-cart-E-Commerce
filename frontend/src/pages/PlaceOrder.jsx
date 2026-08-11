@@ -103,74 +103,97 @@ function PlaceOrder() {
         }
     }
 
+    const inputClasses = "w-full h-11 bg-[#0c2025] border border-white/15 rounded-xl px-4 text-white text-sm focus:outline-none focus:border-[#56dbfc] transition-all placeholder:text-slate-500 font-normal"
+
     return (
-        <div className='w-full min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] flex flex-col md:flex-row items-center justify-center gap-[50px] pt-[90px] pb-[100px] md:pb-[40px] px-[20px]'>
+        <div className='w-full min-h-screen bg-gradient-to-br from-[#141414] via-[#0c2025] to-[#0c2025] pt-24 pb-20'>
+            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8'>
+                
+                <div className='border-b border-white/10 pb-4'>
+                    <Title text1={'CHECKOUT'} text2={'PROCESS'} subtext={'Complete your shipping details and choose payment method'} />
+                </div>
 
-            {/* delivery form */}
-            <div className='lg:w-[45%] w-[100%]'>
-                <form onSubmit={onSubmit} className='flex flex-col gap-[15px]'>
-                    <Title text1={'DELIVERY'} text2={'INFORMATION'} />
+                <form onSubmit={onSubmit} className='grid grid-cols-1 lg:grid-cols-12 gap-8 items-start'>
 
-                    <div className='flex gap-[10px]'>
-                        <input type="text" name='firstName' placeholder='First name' required
-                            className='w-[50%] h-[50px] bg-slate-700 rounded-lg px-[15px] text-white placeholder:text-slate-400'
-                            value={formData.firstName} onChange={onChange} />
-                        <input type="text" name='lastName' placeholder='Last name' required
-                            className='w-[50%] h-[50px] bg-slate-700 rounded-lg px-[15px] text-white placeholder:text-slate-400'
-                            value={formData.lastName} onChange={onChange} />
-                    </div>
-                    <input type="email" name='email' placeholder='Email address' required
-                        className='w-[100%] h-[50px] bg-slate-700 rounded-lg px-[15px] text-white placeholder:text-slate-400'
-                        value={formData.email} onChange={onChange} />
-                    <input type="text" name='street' placeholder='Street' required
-                        className='w-[100%] h-[50px] bg-slate-700 rounded-lg px-[15px] text-white placeholder:text-slate-400'
-                        value={formData.street} onChange={onChange} />
-                    <div className='flex gap-[10px]'>
-                        <input type="text" name='city' placeholder='City' required
-                            className='w-[50%] h-[50px] bg-slate-700 rounded-lg px-[15px] text-white placeholder:text-slate-400'
-                            value={formData.city} onChange={onChange} />
-                        <input type="text" name='state' placeholder='State' required
-                            className='w-[50%] h-[50px] bg-slate-700 rounded-lg px-[15px] text-white placeholder:text-slate-400'
-                            value={formData.state} onChange={onChange} />
-                    </div>
-                    <div className='flex gap-[10px]'>
-                        <input type="text" name='pinCode' placeholder='Pincode' required
-                            className='w-[50%] h-[50px] bg-slate-700 rounded-lg px-[15px] text-white placeholder:text-slate-400'
-                            value={formData.pinCode} onChange={onChange} />
-                        <input type="text" name='country' placeholder='Country' required
-                            className='w-[50%] h-[50px] bg-slate-700 rounded-lg px-[15px] text-white placeholder:text-slate-400'
-                            value={formData.country} onChange={onChange} />
-                    </div>
-                    <input type="text" name='phone' placeholder='Phone number' required
-                        className='w-[100%] h-[50px] bg-slate-700 rounded-lg px-[15px] text-white placeholder:text-slate-400'
-                        value={formData.phone} onChange={onChange} />
+                    {/* delivery form (7 cols) */}
+                    <div className='lg:col-span-7 bg-[#12282e]/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 shadow-xl space-y-5'>
+                        <h3 className='text-lg font-bold text-white tracking-tight border-b border-white/10 pb-3'>
+                            Delivery Address
+                        </h3>
 
-                    {/* payment method */}
-                    <Title text1={'PAYMENT'} text2={'METHOD'} />
-                    <div className='flex gap-[20px] flex-wrap'>
-                        <button type='button' onClick={() => setMethod('razorpay')}
-                            className={`w-[150px] h-[50px] rounded-md overflow-hidden border-[3px] ${method === 'razorpay' ? 'border-blue-500' : 'border-transparent'}`}>
-                            <img src={razorpayImg} className='w-full h-full object-cover' alt="Razorpay" />
+                        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                            <input type="text" name='firstName' placeholder='First name' required
+                                className={inputClasses} value={formData.firstName} onChange={onChange} />
+                            <input type="text" name='lastName' placeholder='Last name' required
+                                className={inputClasses} value={formData.lastName} onChange={onChange} />
+                        </div>
+
+                        <input type="email" name='email' placeholder='Email address' required
+                            className={inputClasses} value={formData.email} onChange={onChange} />
+
+                        <input type="text" name='street' placeholder='Street address' required
+                            className={inputClasses} value={formData.street} onChange={onChange} />
+
+                        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                            <input type="text" name='city' placeholder='City' required
+                                className={inputClasses} value={formData.city} onChange={onChange} />
+                            <input type="text" name='state' placeholder='State' required
+                                className={inputClasses} value={formData.state} onChange={onChange} />
+                        </div>
+
+                        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                            <input type="text" name='pinCode' placeholder='Pincode' required
+                                className={inputClasses} value={formData.pinCode} onChange={onChange} />
+                            <input type="text" name='country' placeholder='Country' required
+                                className={inputClasses} value={formData.country} onChange={onChange} />
+                        </div>
+
+                        <input type="text" name='phone' placeholder='Phone number' required
+                            className={inputClasses} value={formData.phone} onChange={onChange} />
+
+                        {/* payment method */}
+                        <div className='space-y-3 border-t border-white/10 pt-5'>
+                            <h3 className='text-lg font-bold text-white tracking-tight'>
+                                Select Payment Method
+                            </h3>
+                            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                                <button
+                                    type='button'
+                                    onClick={() => setMethod('razorpay')}
+                                    className={`h-14 rounded-xl overflow-hidden border-2 flex items-center justify-center p-2 transition-all ${method === 'razorpay' ? 'border-[#56dbfc] bg-[#56dbfc]/10 shadow-[0_0_15px_rgba(86,219,252,0.3)]' : 'border-white/15 bg-[#0c2025] hover:border-white/30'}`}
+                                >
+                                    <img src={razorpayImg} className='h-8 object-contain rounded' alt="Razorpay" />
+                                </button>
+                                <button
+                                    type='button'
+                                    onClick={() => setMethod('cod')}
+                                    className={`h-14 rounded-xl border-2 font-bold text-xs tracking-wider uppercase transition-all ${method === 'cod' ? 'border-[#56dbfc] bg-[#56dbfc] text-slate-950 shadow-[0_0_15px_rgba(86,219,252,0.3)]' : 'border-white/15 bg-[#0c2025] text-slate-200 hover:border-white/30'}`}
+                                >
+                                    Cash On Delivery
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {/* order summary & submit (5 cols) */}
+                    <div className='lg:col-span-5 bg-[#12282e]/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 shadow-xl space-y-6 sticky top-24'>
+                        <CartTotal />
+
+                        <button 
+                            type='submit'
+                            className='w-full h-12 bg-[#56dbfc] text-slate-950 font-bold text-sm rounded-xl hover:bg-[#7be2fc] active:scale-95 transition-all shadow-[0_0_20px_rgba(86,219,252,0.3)] flex items-center justify-center'
+                        >
+                            {loading ? <Loading /> : "Complete Order"}
                         </button>
-                        <button type='button' onClick={() => setMethod('cod')}
-                            className={`w-[180px] h-[50px] bg-gradient-to-t from-[#95b3f8] to-white text-[13px] px-[15px] rounded-md text-[#332f6f] font-bold border-[3px] ${method === 'cod' ? 'border-blue-500' : 'border-transparent'}`}>
-                            CASH ON DELIVERY
-                        </button>
                     </div>
 
-                    <button type='submit'
-                        className='w-[180px] h-[50px] bg-[#6060f5] text-white rounded-lg text-[16px] font-semibold flex items-center justify-center mt-[10px] hover:bg-[#4a4ad4]'>
-                        {loading ? <Loading /> : "PLACE ORDER"}
-                    </button>
                 </form>
-            </div>
 
-            {/* order summary */}
-            <div className='lg:w-[35%] w-[100%]'>
-                <CartTotal />
             </div>
         </div>
     )
 }
 
 export default PlaceOrder
+

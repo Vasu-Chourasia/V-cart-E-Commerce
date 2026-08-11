@@ -30,17 +30,24 @@ function Nav() {
     }
 
     return (
-        <div className='w-full h-[70px] bg-[#0c2025e0] backdrop-blur-md border-b border-[#ffffff15] z-50 fixed top-0 flex items-center justify-between px-[30px] shadow-lg shadow-black/10'>
+        <header className='w-full h-16 bg-[#0c2025]/90 backdrop-blur-xl border-b border-white/10 z-50 fixed top-0 shadow-md shadow-black/20'>
+            <div className='max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between'>
 
-            {/* logo */}
-            <div className='flex items-center gap-[10px] cursor-pointer hover:opacity-90 transition-opacity' onClick={() => navigate("/")}>
-                <img src={logo} alt="V-Cart" className='w-[32px] h-[32px] object-contain hover:rotate-6 transition-transform duration-300' />
-                <h1 className='text-[24px] text-white font-sans font-bold tracking-wide bg-gradient-to-r from-white via-slate-100 to-[#a5f3fc] bg-clip-text text-transparent'>V-Cart</h1>
-            </div>
+                {/* logo */}
+                <div 
+                    className='flex items-center gap-2.5 cursor-pointer group' 
+                    onClick={() => navigate("/")}
+                >
+                    <div className='p-1 rounded-lg bg-[#56dbfc]/10 border border-[#56dbfc]/20 group-hover:bg-[#56dbfc]/20 transition-all'>
+                        <img src={logo} alt="V-Cart" className='w-6 h-6 object-contain' />
+                    </div>
+                    <span className='text-xl font-bold tracking-tight text-white bg-gradient-to-r from-white via-slate-100 to-[#56dbfc] bg-clip-text text-transparent'>
+                        V-Cart
+                    </span>
+                </div>
 
-            {/* desktop nav links */}
-            <div className='hidden md:flex items-center justify-center flex-1 mx-[40px]'>
-                <ul className='flex items-center gap-[30px]'>
+                {/* desktop nav links */}
+                <nav className='hidden md:flex items-center gap-8'>
                     {[
                         { label: "HOME", path: "/" },
                         { label: "COLLECTIONS", path: "/collection" },
@@ -49,84 +56,109 @@ function Nav() {
                     ].map(({ label, path }) => {
                         const isActive = location.pathname === path;
                         return (
-                            <li key={path}
-                                className={`text-[14px] font-medium tracking-wider cursor-pointer relative py-[6px] transition-colors duration-200 ${isActive ? 'text-[#56dbfc]' : 'text-slate-300 hover:text-white'}`}
-                                onClick={() => navigate(path)}>
+                            <button 
+                                key={path}
+                                className={`text-xs font-semibold tracking-widest relative py-1.5 transition-colors ${isActive ? 'text-[#56dbfc]' : 'text-slate-300 hover:text-white'}`}
+                                onClick={() => navigate(path)}
+                            >
                                 {label}
                                 {isActive && (
                                     <span className='absolute bottom-0 left-0 w-full h-[2px] bg-[#56dbfc] rounded-full shadow-[0_0_8px_rgba(86,219,252,0.8)]'></span>
                                 )}
-                            </li>
+                            </button>
                         );
                     })}
-                </ul>
-            </div>
+                </nav>
 
-            {/* right icons */}
-            <div className='flex items-center gap-[22px]'>
-                {!showSearch
-                    ? <IoSearchCircleOutline className='w-[32px] h-[32px] text-slate-300 hover:text-[#56dbfc] hover:scale-105 transition-all cursor-pointer' onClick={() => { setShowSearch(true); navigate("/collection") }} />
-                    : <IoSearchCircleSharp className='w-[32px] h-[32px] text-[#56dbfc] hover:scale-105 transition-all cursor-pointer' onClick={() => setShowSearch(false)} />
-                }
+                {/* right controls */}
+                <div className='flex items-center gap-5 relative'>
+                    {/* search toggle */}
+                    {!showSearch
+                        ? <IoSearchCircleOutline className='w-7 h-7 text-slate-300 hover:text-[#56dbfc] transition-all cursor-pointer' onClick={() => { setShowSearch(true); navigate("/collection") }} />
+                        : <IoSearchCircleSharp className='w-7 h-7 text-[#56dbfc] transition-all cursor-pointer' onClick={() => setShowSearch(false)} />
+                    }
 
-                {/* user avatar / profile dropdown */}
-                {!userData
-                    ? <FaCircleUser className='w-[26px] h-[26px] text-slate-300 hover:text-[#56dbfc] hover:scale-105 transition-all cursor-pointer' onClick={() => setShowProfile(p => !p)} />
-                    : <div className='w-[30px] h-[30px] bg-[#56dbfc] text-black rounded-full flex items-center justify-center cursor-pointer font-semibold text-[14px] hover:opacity-90 transition-opacity'
-                        onClick={() => setShowProfile(p => !p)}>
-                        {userData.name.slice(0, 1).toUpperCase()}
+                    {/* user avatar / profile dropdown toggle */}
+                    {!userData
+                        ? <FaCircleUser className='w-6 h-6 text-slate-300 hover:text-[#56dbfc] transition-all cursor-pointer' onClick={() => setShowProfile(p => !p)} />
+                        : <div 
+                            className='w-8 h-8 rounded-full bg-gradient-to-br from-[#56dbfc] to-[#25a3c4] text-slate-950 font-bold text-xs flex items-center justify-center cursor-pointer shadow-md hover:scale-105 transition-all border border-[#56dbfc]/50'
+                            onClick={() => setShowProfile(p => !p)}
+                          >
+                            {userData.name.slice(0, 1).toUpperCase()}
+                          </div>
+                    }
+
+                    {/* cart icon + badge */}
+                    <div className='relative hidden md:block cursor-pointer' onClick={() => navigate("/cart")}>
+                        <MdOutlineShoppingCart className='w-6 h-6 text-slate-300 hover:text-[#56dbfc] transition-all' />
+                        {getCartCount() > 0 && (
+                            <span className='absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-[#56dbfc] text-slate-950 font-bold text-[10px] flex items-center justify-center shadow-[0_0_8px_rgba(86,219,252,0.6)]'>
+                                {getCartCount()}
+                            </span>
+                        )}
                     </div>
-                }
 
-                {/* cart icon + badge */}
-                <div className='relative hidden md:block'>
-                    <MdOutlineShoppingCart className='w-[26px] h-[26px] text-slate-300 hover:text-[#56dbfc] hover:scale-105 transition-all cursor-pointer' onClick={() => navigate("/cart")} />
-                    <p className='absolute w-[17px] h-[17px] flex items-center justify-center bg-[#56dbfc] text-black font-bold rounded-full text-[9px] -top-[5px] -right-[5px]'>
-                        {getCartCount()}
-                    </p>
+                    {/* profile dropdown */}
+                    {showProfile && (
+                        <div className='absolute top-12 right-0 w-48 bg-[#0b1d22]/95 border border-[#56dbfc]/20 backdrop-blur-xl rounded-xl shadow-2xl overflow-hidden py-1 z-50 animate-in fade-in slide-in-from-top-2 duration-200'>
+                            <div className='px-4 py-2 border-b border-white/10 text-xs text-slate-400'>
+                                Signed in as <p className='text-white font-medium truncate'>{userData?.name || 'Guest'}</p>
+                            </div>
+                            <ul className='flex flex-col text-sm text-slate-200'>
+                                {!userData ? (
+                                    <li className='px-4 py-2 hover:bg-[#56dbfc]/10 hover:text-[#56dbfc] cursor-pointer transition-colors' onClick={() => { navigate("/login"); setShowProfile(false) }}>Login</li>
+                                ) : (
+                                    <li className='px-4 py-2 hover:bg-[#56dbfc]/10 hover:text-[#56dbfc] cursor-pointer transition-colors' onClick={() => { handleLogout(); setShowProfile(false) }}>Log Out</li>
+                                )}
+                                <li className='px-4 py-2 hover:bg-[#56dbfc]/10 hover:text-[#56dbfc] cursor-pointer transition-colors' onClick={() => { navigate("/order"); setShowProfile(false) }}>My Orders</li>
+                                <li className='px-4 py-2 hover:bg-[#56dbfc]/10 hover:text-[#56dbfc] cursor-pointer transition-colors' onClick={() => { navigate("/about"); setShowProfile(false) }}>About V-Cart</li>
+                            </ul>
+                        </div>
+                    )}
                 </div>
+
             </div>
 
-            {/* search bar dropdown */}
+            {/* search bar overlay */}
             {showSearch && (
-                <div className='w-full h-[80px] bg-[#0c2025e6] border-b border-[#ffffff10] backdrop-blur-md absolute top-[100%] left-0 flex items-center justify-center z-40 transition-all duration-300'>
-                    <input
-                        type="text"
-                        className='lg:w-[50%] w-[80%] h-[55%] bg-[#1a2f34] border border-[#ffffff15] rounded-[30px] px-[25px] placeholder:text-slate-400 text-white text-[16px] focus:outline-none focus:border-[#56dbfc] transition-colors shadow-inner'
-                        placeholder='Search products...'
-                        onChange={(e) => setSearch(e.target.value)}
-                        value={search}
-                    />
-                </div>
-            )}
-
-            {/* profile dropdown */}
-            {showProfile && (
-                <div className='absolute w-[220px] bg-[#000000d7] top-[110%] right-[4%] border border-[#aaa9a9] rounded-[10px] z-10'>
-                    <ul className='flex flex-col text-[17px] py-[10px] text-white'>
-                        {!userData
-                            ? <li className='hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer' onClick={() => { navigate("/login"); setShowProfile(false) }}>Login</li>
-                            : <li className='hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer' onClick={() => { handleLogout(); setShowProfile(false) }}>LogOut</li>
-                        }
-                        <li className='hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer' onClick={() => { navigate("/order"); setShowProfile(false) }}>Orders</li>
-                        <li className='hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer' onClick={() => { navigate("/about"); setShowProfile(false) }}>About</li>
-                    </ul>
+                <div className='w-full py-3 bg-[#0a1b1f]/95 border-b border-[#56dbfc]/20 backdrop-blur-xl absolute top-16 left-0 flex items-center justify-center z-40 shadow-xl'>
+                    <div className='w-full max-w-xl px-4 flex items-center gap-2'>
+                        <input
+                            type="text"
+                            className='w-full h-11 bg-[#13282e] border border-white/15 rounded-full px-5 placeholder:text-slate-400 text-white text-sm focus:outline-none focus:border-[#56dbfc] transition-all shadow-inner'
+                            placeholder='Search products by name...'
+                            onChange={(e) => setSearch(e.target.value)}
+                            value={search}
+                            autoFocus
+                        />
+                    </div>
                 </div>
             )}
 
             {/* mobile bottom tab bar */}
-            <div className='w-full h-[70px] flex items-center justify-between px-[20px] text-[12px] fixed bottom-0 left-0 bg-[#191818] md:hidden'>
-                <button className='text-white flex flex-col items-center gap-[2px]' onClick={() => navigate("/")}><IoMdHome className='w-[28px] h-[28px]' />Home</button>
-                <button className='text-white flex flex-col items-center gap-[2px]' onClick={() => navigate("/collection")}><HiOutlineCollection className='w-[28px] h-[28px]' />Collections</button>
-                <button className='text-white flex flex-col items-center gap-[2px]' onClick={() => navigate("/contact")}><MdContacts className='w-[28px] h-[28px]' />Contact</button>
-                <div className='relative'>
-                    <button className='text-white flex flex-col items-center gap-[2px]' onClick={() => navigate("/cart")}><MdOutlineShoppingCart className='w-[28px] h-[28px]' />Cart</button>
-                    <p className='absolute w-[18px] h-[18px] flex items-center justify-center bg-white text-black font-semibold rounded-full text-[9px] -top-[5px] -right-[5px]'>{getCartCount()}</p>
-                </div>
+            <div className='w-full h-16 flex items-center justify-around px-4 fixed bottom-0 left-0 bg-[#09171b]/95 backdrop-blur-lg border-t border-white/10 md:hidden z-50'>
+                <button className={`flex flex-col items-center gap-0.5 text-[10px] font-medium ${location.pathname === '/' ? 'text-[#56dbfc]' : 'text-slate-400'}`} onClick={() => navigate("/")}>
+                    <IoMdHome className='w-6 h-6' />Home
+                </button>
+                <button className={`flex flex-col items-center gap-0.5 text-[10px] font-medium ${location.pathname === '/collection' ? 'text-[#56dbfc]' : 'text-slate-400'}`} onClick={() => navigate("/collection")}>
+                    <HiOutlineCollection className='w-6 h-6' />Collections
+                </button>
+                <button className={`flex flex-col items-center gap-0.5 text-[10px] font-medium ${location.pathname === '/contact' ? 'text-[#56dbfc]' : 'text-slate-400'}`} onClick={() => navigate("/contact")}>
+                    <MdContacts className='w-6 h-6' />Contact
+                </button>
+                <button className={`relative flex flex-col items-center gap-0.5 text-[10px] font-medium ${location.pathname === '/cart' ? 'text-[#56dbfc]' : 'text-slate-400'}`} onClick={() => navigate("/cart")}>
+                    <MdOutlineShoppingCart className='w-6 h-6' />Cart
+                    {getCartCount() > 0 && (
+                        <span className='absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-[#56dbfc] text-slate-950 font-bold text-[9px] flex items-center justify-center'>
+                            {getCartCount()}
+                        </span>
+                    )}
+                </button>
             </div>
-
-        </div>
+        </header>
     )
 }
 
 export default Nav
+
