@@ -19,20 +19,28 @@ function NewLetterBox() {
                 <p className='text-slate-300 text-sm max-w-md'>
                     Join our VIP list to receive exclusive offers, new collection announcements, and seasonal discounts.
                 </p>
-                <form onSubmit={(e) => e.preventDefault()} className='flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full max-w-md mt-2'>
+                <form onSubmit={(e) => e.preventDefault()} className='flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full max-w-md mt-2 relative'>
                     <input
                         type="email"
+                        name="newsletter_email"
+                        id="newsletter_email_input"
                         placeholder='Enter your email address...'
                         autoComplete="off"
-                        className='w-full sm:flex-1 h-12 bg-[#0c2025] border border-white/15 rounded-xl px-4 text-white text-sm placeholder:text-slate-400 focus:outline-none focus:border-[#56dbfc] transition-all font-normal appearance-none'
+                        spellCheck="false"
+                        data-1p-ignore="true"
+                        data-lpignore="true"
+                        className='w-full sm:flex-1 h-12 bg-[#0c2025] border border-white/15 rounded-lg px-4 text-white text-sm placeholder:text-slate-400 focus:outline-none focus:border-[#56dbfc] transition-all font-normal appearance-none'
                         required
                     />
+
                     <button 
                         type="submit"
-                        className='w-full sm:w-auto h-12 px-6 bg-[#56dbfc] text-slate-950 font-bold text-sm rounded-xl hover:bg-[#7ce2fc] active:scale-95 transition-all shadow-[0_0_15px_rgba(86,219,252,0.3)] flex-shrink-0'
+                        className='w-full sm:w-auto px-6 py-3 bg-[#56dbfc] text-slate-950 font-bold text-sm rounded-lg hover:bg-[#7ce2fc] active:scale-95 transition-all shadow-[0_0_15px_rgba(86,219,252,0.3)] flex-shrink-0'
+                        style={{ padding: '12px 24px', borderRadius: '8px' }}
                     >
                         Subscribe
                     </button>
+
                 </form>
             </div>
         </section>

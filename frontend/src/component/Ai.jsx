@@ -74,15 +74,16 @@ function Ai() {
 
     return (
         <div
-            className='fixed bottom-6 right-6 z-50 cursor-pointer group'
+            className='fixed bottom-[24px] right-[24px] z-50 cursor-pointer group'
+            style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 50 }}
             onClick={handleClick}
             title="Click to activate Voice AI Assistant"
         >
-            <div className={`p-2.5 rounded-full bg-[#0c2025]/90 border border-[#56dbfc]/40 backdrop-blur-xl shadow-[0_0_20px_rgba(86,219,252,0.25)] group-hover:border-[#56dbfc] group-hover:shadow-[0_0_30px_rgba(86,219,252,0.4)] group-hover:scale-110 transition-all duration-300 flex items-center justify-center ${active ? 'ring-4 ring-[#56dbfc]/50 scale-110' : ''}`}>
+            <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#0c2025]/95 border border-[#56dbfc]/50 backdrop-blur-xl shadow-[0_4px_25px_rgba(0,0,0,0.6)] group-hover:border-[#56dbfc] group-hover:shadow-[0_0_30px_rgba(86,219,252,0.5)] group-hover:scale-105 transition-all duration-300 flex items-center justify-center ${active ? 'ring-4 ring-[#56dbfc]/50 scale-105' : ''}`}>
                 <img
                     src={ai}
                     alt="Voice assistant"
-                    className={`w-10 h-10 sm:w-12 sm:h-12 object-contain transition-transform duration-300 ${active ? 'scale-110' : 'scale-100'}`}
+                    className={`w-9 h-9 sm:w-10 sm:h-10 object-contain transition-transform duration-300 ${active ? 'scale-110' : 'scale-100'}`}
                 />
             </div>
         </div>
@@ -90,5 +91,6 @@ function Ai() {
 }
 
 export default Ai
+
 
 

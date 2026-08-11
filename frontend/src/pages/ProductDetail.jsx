@@ -27,7 +27,7 @@ function ProductDetail() {
     const thumbs = [productData.image1, productData.image2, productData.image3, productData.image4].filter(Boolean)
 
     return (
-        <div className='w-full min-h-screen bg-gradient-to-br from-[#141414] via-[#0c2025] to-[#0c2025] pt-24 pb-16'>
+        <div className='w-full min-h-screen bg-gradient-to-br from-[#141414] via-[#0c2025] to-[#0c2025] pt-24 pb-32'>
             <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16'>
                 
                 {/* main product details grid */}
@@ -97,7 +97,7 @@ function ProductDetail() {
                                         <button
                                             key={i}
                                             onClick={() => setSize(s)}
-                                            className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all border ${s === size ? 'bg-[#56dbfc] text-slate-950 border-[#56dbfc] shadow-[0_0_15px_rgba(86,219,252,0.4)] scale-105' : 'bg-slate-800/80 text-white border-white/15 hover:border-[#56dbfc]/50'}`}
+                                            className={`px-4 py-2.5 rounded-lg text-xs font-bold transition-all border ${s === size ? 'bg-[#56dbfc] text-slate-950 border-[#56dbfc] shadow-[0_0_15px_rgba(86,219,252,0.4)] scale-105' : 'bg-slate-800/80 text-white border-white/15 hover:border-[#56dbfc]/50'}`}
                                         >
                                             {s}
                                         </button>
@@ -109,10 +109,12 @@ function ProductDetail() {
                         {/* add to cart action button */}
                         <button
                             onClick={() => addtoCart(productData._id, size)}
-                            className='w-full sm:w-auto px-8 h-12 bg-[#56dbfc] text-slate-950 font-bold text-sm rounded-xl hover:bg-[#7be2fc] active:scale-95 transition-all shadow-[0_0_20px_rgba(86,219,252,0.3)] flex items-center justify-center gap-2 mt-4'
+                            className='w-full sm:w-auto px-6 py-3 bg-[#56dbfc] text-slate-950 font-bold text-sm rounded-lg hover:bg-[#7be2fc] active:scale-95 transition-all shadow-[0_0_20px_rgba(86,219,252,0.3)] flex items-center justify-center gap-2 mt-4'
+                            style={{ padding: '12px 24px', borderRadius: '8px' }}
                         >
                             {loading ? <Loading /> : "Add to Shopping Cart"}
                         </button>
+
 
                         {/* guarantees */}
                         <div className='space-y-2 border-t border-white/10 pt-4 text-xs text-slate-300 font-medium'>

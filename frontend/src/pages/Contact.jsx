@@ -2,57 +2,126 @@ import React from 'react'
 import Title from '../component/Title'
 import NewLetterBox from '../component/NewLetterBox'
 import contact from '../assets/contact.jpg'
+import { FiMapPin, FiPhone, FiMail, FiBriefcase } from "react-icons/fi"
 
 function Contact() {
+    // High-resolution premium modern store image fallback
+    const storeImage = "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop"
+
     return (
-        <div className='w-full min-h-screen bg-gradient-to-br from-[#141414] via-[#0c2025] to-[#0c2025] pt-24 pb-20'>
-            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16'>
+        <div className='w-full min-h-screen bg-gradient-to-br from-[#141414] via-[#0c2025] to-[#0c2025] pt-24 pb-32'>
+            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20'>
                 
                 <div className='border-b border-white/10 pb-4'>
-                    <Title text1={'CONTACT'} text2={'US'} subtext={'Get in touch with our team for inquiries and support'} />
+                    <Title text1={'CONTACT'} text2={'US'} subtext={'Reach out to our dedicated store teams and support specialists'} />
                 </div>
 
-                <div className='grid grid-cols-1 lg:grid-cols-12 gap-10 items-center'>
-                    <div className='lg:col-span-5 flex justify-center'>
-                        <div className='relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl group max-w-md w-full'>
-                            <img src={contact} alt="Contact V-Cart" className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500' />
-                            <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent'></div>
+                <div className='grid grid-cols-1 lg:grid-cols-12 gap-10 items-start'>
+
+                    {/* left column: premium store showcase photo */}
+                    <div className='lg:col-span-5 flex justify-center sticky top-24'>
+                        <div className='relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl group max-w-md w-full aspect-[4/5] bg-[#12282e]'>
+                            <img 
+                                src={contact} 
+                                onError={(e) => { e.target.src = storeImage }}
+                                alt="V-Cart Flagship Store" 
+                                className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-700' 
+                            />
+                            <div className='absolute inset-0 bg-gradient-to-t from-[#0c2025] via-transparent to-transparent opacity-80'></div>
+                            <div className='absolute bottom-6 left-6 right-6 p-4 bg-[#0c2025]/90 backdrop-blur-md rounded-xl border border-white/10'>
+                                <p className='text-xs font-bold uppercase tracking-wider text-[#56dbfc]'>Flagship Location</p>
+                                <p className='text-sm font-semibold text-white mt-0.5'>V-Cart Experience Center</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div className='lg:col-span-7 bg-[#12282e]/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 shadow-xl space-y-6 text-slate-300 text-sm'>
-                        <span className='px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#56dbfc] bg-[#56dbfc]/10 border border-[#56dbfc]/20 rounded-full inline-block'>
-                            Store Information
-                        </span>
-
-                        <div className='space-y-2'>
-                            <h4 className='text-white font-bold text-lg'>V-Cart Headquarters</h4>
-                            <p className='text-slate-400 leading-relaxed'>12345 Station Road, Commerce Tech Park<br />Random City, State, India - 400001</p>
+                    {/* right column: 2-column grid of 4 distinct cards */}
+                    <div className='lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6'>
+                        
+                        {/* Card 1: Store Information */}
+                        <div className='bg-[#0e2328] border border-white/15 rounded-xl p-6 sm:p-7 shadow-xl space-y-4 flex flex-col justify-between hover:border-[#56dbfc]/40 transition-all'>
+                            <div className='space-y-3'>
+                                <div className='w-12 h-12 rounded-lg bg-[#56dbfc]/10 border border-[#56dbfc]/20 flex items-center justify-center text-[#56dbfc]'>
+                                    <FiMapPin className='w-6 h-6' />
+                                </div>
+                                <h3 className='text-base font-bold text-white tracking-tight'>Store Information</h3>
+                                <p className='text-xs text-slate-300 leading-relaxed'>
+                                    12345 Station Road, Commerce Tech Park<br />
+                                    Random City, State, India - 400001
+                                </p>
+                            </div>
+                            <div className='pt-2 border-t border-white/10 text-[11px] text-slate-400'>
+                                Open Mon - Sat: 9:00 AM - 8:00 PM
+                            </div>
                         </div>
 
-                        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 border-y border-white/10 py-4'>
-                            <div>
-                                <span className='text-xs text-slate-400 block font-medium uppercase tracking-wider'>Phone Support</span>
-                                <span className='text-white font-bold text-sm'>+91-9131755102</span>
+                        {/* Card 2: Phone Support */}
+                        <div className='bg-[#0e2328] border border-white/15 rounded-xl p-6 sm:p-7 shadow-xl space-y-4 flex flex-col justify-between hover:border-[#56dbfc]/40 transition-all'>
+                            <div className='space-y-3'>
+                                <div className='w-12 h-12 rounded-lg bg-[#56dbfc]/10 border border-[#56dbfc]/20 flex items-center justify-center text-[#56dbfc]'>
+                                    <FiPhone className='w-6 h-6' />
+                                </div>
+                                <h3 className='text-base font-bold text-white tracking-tight'>Phone Support</h3>
+                                <p className='text-sm font-bold text-[#56dbfc] tracking-tight'>
+                                    +91-9131755102
+                                </p>
+                                <p className='text-xs text-slate-300 leading-relaxed'>
+                                    Direct line for order tracking, payment confirmation, and general assistance.
+                                </p>
                             </div>
-                            <div>
-                                <span className='text-xs text-slate-400 block font-medium uppercase tracking-wider'>Email Inquiry</span>
-                                <span className='text-[#56dbfc] font-bold text-sm'>vdevwork1906@gmail.com</span>
+                            <div className='pt-2 border-t border-white/10 text-[11px] text-slate-400'>
+                                Toll-Free / 24/7 Helpline
                             </div>
                         </div>
 
-                        <div className='space-y-3 pt-2'>
-                            <h4 className='text-white font-bold text-base'>Careers at V-Cart</h4>
-                            <p className='text-xs text-slate-400'>
-                                Interested in joining our team? Learn more about our engineering culture, design philosophy, and current open roles.
+                        {/* Card 3: Email Inquiry */}
+                        <div className='bg-[#0e2328] border border-white/15 rounded-xl p-6 sm:p-7 shadow-xl space-y-4 flex flex-col justify-between hover:border-[#56dbfc]/40 transition-all'>
+                            <div className='space-y-3'>
+                                <div className='w-12 h-12 rounded-lg bg-[#56dbfc]/10 border border-[#56dbfc]/20 flex items-center justify-center text-[#56dbfc]'>
+                                    <FiMail className='w-6 h-6' />
+                                </div>
+                                <h3 className='text-base font-bold text-white tracking-tight'>Email Inquiry</h3>
+                                <p className='text-xs sm:text-sm font-bold text-[#56dbfc] truncate'>
+                                    vdevwork1906@gmail.com
+                                </p>
+                                <p className='text-xs text-slate-300 leading-relaxed'>
+                                    Send us your feedback, commercial queries, or return requests.
+                                </p>
+                            </div>
+                            <div className='pt-2 border-t border-white/10 text-[11px] text-slate-400'>
+                                Average response time: 2 hours
+                            </div>
+                        </div>
+
+                        {/* Card 4: Careers at V-Cart (Spans full width of 2-col grid) */}
+                        <div className='md:col-span-2 bg-[#0e2328] border border-white/15 rounded-xl p-6 sm:p-8 shadow-xl space-y-4 hover:border-[#56dbfc]/40 transition-all'>
+                            <div className='flex items-center gap-3'>
+                                <div className='w-12 h-12 rounded-lg bg-[#56dbfc]/10 border border-[#56dbfc]/20 flex items-center justify-center text-[#56dbfc] flex-shrink-0'>
+                                    <FiBriefcase className='w-6 h-6' />
+                                </div>
+                                <div>
+                                    <h3 className='text-base font-bold text-white tracking-tight'>Careers at V-Cart</h3>
+                                    <p className='text-xs text-slate-400'>Build the future of digital retail with us</p>
+                                </div>
+                            </div>
+                            <p className='text-xs sm:text-sm text-slate-300 leading-relaxed'>
+                                We are always looking for passionate engineers, designers, and e-commerce strategists to join our team. Explore open roles and build modern shopping experiences.
                             </p>
-                            <button className='px-6 py-2.5 bg-white/10 border border-white/15 text-white text-xs font-bold rounded-xl hover:bg-[#56dbfc] hover:text-slate-950 transition-all'>
-                                Explore Jobs & Careers
-                            </button>
+                            <div className='pt-2'>
+                                <button 
+                                    className='px-6 py-3 bg-[#56dbfc] text-slate-950 text-xs font-bold rounded-lg hover:bg-[#7ce2fc] active:scale-95 transition-all shadow-[0_0_15px_rgba(86,219,252,0.3)] inline-flex items-center justify-center'
+                                    style={{ padding: '12px 24px', borderRadius: '8px' }}
+                                >
+                                    Explore Jobs & Careers
+                                </button>
+                            </div>
                         </div>
+
                     </div>
+
                 </div>
 
+                {/* Newsletter banner section */}
                 <NewLetterBox />
 
             </div>
@@ -61,4 +130,5 @@ function Contact() {
 }
 
 export default Contact
+
 

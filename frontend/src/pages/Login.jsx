@@ -80,7 +80,8 @@ function Login() {
                     {/* Google button */}
                     <button
                         type='button'
-                        className='w-full h-11 bg-white/5 border border-white/15 hover:bg-white/10 active:scale-[0.99] rounded-xl flex items-center justify-center gap-3 text-sm font-semibold text-white transition-all shadow-sm'
+                        className='w-full px-6 py-3 bg-white/5 border border-white/15 hover:bg-white/10 active:scale-[0.99] rounded-lg flex items-center justify-center gap-3 text-sm font-semibold text-white transition-all shadow-sm'
+                        style={{ padding: '12px 24px', borderRadius: '8px' }}
                         onClick={googleLogin}
                     >
                         <img src={google} alt="Google" className='w-4 h-4 object-contain' />
@@ -124,10 +125,12 @@ function Login() {
 
                         <button 
                             type='submit'
-                            className='w-full h-12 bg-[#56dbfc] text-slate-950 rounded-xl text-sm font-bold flex items-center justify-center hover:bg-[#7be2fc] active:scale-[0.99] transition-all shadow-[0_0_20px_rgba(86,219,252,0.3)] mt-2'
+                            className='w-full px-6 py-3 bg-[#56dbfc] text-slate-950 rounded-lg text-sm font-bold flex items-center justify-center hover:bg-[#7be2fc] active:scale-[0.99] transition-all shadow-[0_0_20px_rgba(86,219,252,0.3)] mt-2'
+                            style={{ padding: '12px 24px', borderRadius: '8px' }}
                         >
                             {loading ? <Loading /> : "Sign In"}
                         </button>
+
                     </div>
                 </form>
 

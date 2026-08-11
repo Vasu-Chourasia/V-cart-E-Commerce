@@ -4,9 +4,11 @@ import NewLetterBox from '../component/NewLetterBox'
 import about from '../assets/about.jpg'
 
 function About() {
+    const aboutImageFallback = "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=1200&auto=format&fit=crop"
+
     return (
-        <div className='w-full min-h-screen bg-gradient-to-br from-[#141414] via-[#0c2025] to-[#0c2025] pt-24 pb-20'>
-            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16'>
+        <div className='w-full min-h-screen bg-gradient-to-br from-[#141414] via-[#0c2025] to-[#0c2025] pt-24 pb-32'>
+            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20'>
                 
                 <div className='border-b border-white/10 pb-4'>
                     <Title text1={'ABOUT'} text2={'US'} subtext={'Learn more about our store mission and values'} />
@@ -15,11 +17,17 @@ function About() {
                 {/* main story section */}
                 <div className='grid grid-cols-1 lg:grid-cols-12 gap-10 items-center'>
                     <div className='lg:col-span-5 flex justify-center'>
-                        <div className='relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl group max-w-md w-full'>
-                            <img src={about} alt="About V-Cart" className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500' />
-                            <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent'></div>
+                        <div className='relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl group max-w-md w-full aspect-[4/5] bg-[#12282e]'>
+                            <img 
+                                src={about} 
+                                onError={(e) => { e.target.src = aboutImageFallback }}
+                                alt="About V-Cart" 
+                                className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500' 
+                            />
+                            <div className='absolute inset-0 bg-gradient-to-t from-[#0c2025] via-transparent to-transparent opacity-60'></div>
                         </div>
                     </div>
+
 
                     <div className='lg:col-span-7 bg-[#12282e]/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 shadow-xl space-y-5 text-slate-300 text-sm leading-relaxed'>
                         <span className='px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#56dbfc] bg-[#56dbfc]/10 border border-[#56dbfc]/20 rounded-full inline-block'>

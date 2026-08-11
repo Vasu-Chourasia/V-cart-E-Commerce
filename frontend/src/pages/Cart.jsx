@@ -23,7 +23,7 @@ function Cart() {
     }
 
     return (
-        <div className='w-full min-h-screen bg-gradient-to-br from-[#141414] via-[#0c2025] to-[#0c2025] pt-24 pb-20'>
+        <div className='w-full min-h-screen bg-gradient-to-br from-[#141414] via-[#0c2025] to-[#0c2025] pt-24 pb-32'>
             <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8'>
                 
                 <div className='border-b border-white/10 pb-4'>
@@ -40,7 +40,8 @@ function Cart() {
                                 <p className='text-xs text-slate-400'>Discover our latest collections and add your favorite items to cart.</p>
                                 <button
                                     onClick={() => navigate("/collection")}
-                                    className='px-6 py-2.5 bg-[#56dbfc] text-slate-950 text-xs font-bold rounded-xl hover:bg-[#7be2fc] transition-all'
+                                    className='px-6 py-3 bg-[#56dbfc] text-slate-950 text-xs font-bold rounded-lg hover:bg-[#7be2fc] transition-all'
+                                    style={{ padding: '12px 24px', borderRadius: '8px' }}
                                 >
                                     Explore Store
                                 </button>
@@ -99,12 +100,14 @@ function Cart() {
                         {cartEntries.length > 0 && (
                             <button
                                 onClick={() => navigate("/placeorder")}
-                                className='w-full h-12 bg-[#56dbfc] text-slate-950 text-sm font-bold rounded-xl hover:bg-[#7be2fc] active:scale-95 transition-all shadow-[0_0_20px_rgba(86,219,252,0.3)]'
+                                className='w-full px-6 py-3 bg-[#56dbfc] text-slate-950 text-sm font-bold rounded-lg hover:bg-[#7be2fc] active:scale-95 transition-all shadow-[0_0_20px_rgba(86,219,252,0.3)]'
+                                style={{ padding: '12px 24px', borderRadius: '8px' }}
                             >
                                 Proceed to Checkout
                             </button>
                         )}
                     </div>
+
 
                 </div>
 

@@ -155,10 +155,12 @@ function Collections() {
                                 </p>
                                 <button 
                                     onClick={() => { setSelectedCategories([]); setSelectedSubCategories([]) }}
-                                    className='px-6 py-2.5 bg-[#56dbfc] text-slate-950 text-xs font-bold rounded-xl hover:bg-[#7be2fc] transition-all shadow-[0_0_15px_rgba(86,219,252,0.3)] mt-2'
+                                    className='px-6 py-3 bg-[#56dbfc] text-slate-950 text-xs font-bold rounded-lg hover:bg-[#7be2fc] transition-all shadow-[0_0_15px_rgba(86,219,252,0.3)] mt-2'
+                                    style={{ padding: '12px 24px', borderRadius: '8px' }}
                                 >
                                     Clear All Filters
                                 </button>
+
                             </div>
                         )}
 
