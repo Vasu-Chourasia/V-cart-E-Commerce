@@ -11,7 +11,6 @@ function Contact() {
     return (
         <div className='w-full min-h-screen bg-[#0a1520] pt-24 pb-32 py-12 px-4 md:py-24 md:px-6'>
             <div className='max-w-7xl mx-auto space-y-16 md:space-y-24'>
-
                 
                 <div className='border-b border-white/10 pb-4'>
                     <Title text1={'CONTACT'} text2={'US'} subtext={'Reach out to our dedicated store teams and support specialists'} />
@@ -21,15 +20,15 @@ function Contact() {
 
                     {/* left column: premium store showcase photo */}
                     <div className='lg:col-span-5 flex justify-center sticky top-24'>
-                        <div className='relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl group max-w-md w-full aspect-[4/5] bg-[#12282e]'>
+                        <div className='relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl group max-w-md w-full aspect-[4/5] bg-[#0f1e2c]'>
                             <img 
                                 src={contact} 
                                 onError={(e) => { e.target.src = storeImage }}
                                 alt="V-Cart Flagship Store" 
                                 className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-700' 
                             />
-                            <div className='absolute inset-0 bg-gradient-to-t from-[#0c2025] via-transparent to-transparent opacity-80'></div>
-                            <div className='absolute bottom-6 left-6 right-6 p-4 bg-[#0c2025]/90 backdrop-blur-md rounded-xl border border-white/10'>
+                            <div className='absolute inset-0 bg-gradient-to-t from-[#0a1520] via-transparent to-transparent opacity-80'></div>
+                            <div className='absolute bottom-6 left-6 right-6 p-4 bg-[#0f1e2c]/90 backdrop-blur-md rounded-xl border border-white/10'>
                                 <p className='text-xs font-bold uppercase tracking-wider text-[#56dbfc]'>Flagship Location</p>
                                 <p className='text-sm font-semibold text-white mt-0.5'>V-Cart Experience Center</p>
                             </div>
@@ -40,78 +39,90 @@ function Contact() {
                     <div className='lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6'>
                         
                         {/* Card 1: Store Information */}
-                        <div className='bg-[#0e2328] border border-white/15 rounded-xl p-6 sm:p-7 shadow-xl space-y-4 flex flex-col justify-between hover:border-[#56dbfc]/40 transition-all'>
+                        <div 
+                            className='bg-[#0f1e2c] border border-white/15 rounded-2xl shadow-xl space-y-4 flex flex-col justify-between hover:border-[#56dbfc]/40 transition-all'
+                            style={{ padding: '32px' }}
+                        >
                             <div className='space-y-3'>
-                                <div className='w-12 h-12 rounded-lg bg-[#56dbfc]/10 border border-[#56dbfc]/20 flex items-center justify-center text-[#56dbfc]'>
-                                    <FiMapPin className='w-6 h-6' />
+                                <div className='w-14 h-14 rounded-2xl bg-[#56dbfc]/10 border border-[#56dbfc]/20 flex items-center justify-center text-[#56dbfc]'>
+                                    <FiMapPin className='w-7 h-7' />
                                 </div>
-                                <h3 className='text-base font-bold text-white tracking-tight'>Store Information</h3>
-                                <p className='text-xs text-slate-300 leading-relaxed'>
+                                <h3 className='text-lg font-bold text-white tracking-tight'>Store Information</h3>
+                                <p className='text-xs sm:text-sm text-slate-300 leading-relaxed font-normal'>
                                     12345 Station Road, Commerce Tech Park<br />
                                     Random City, State, India - 400001
                                 </p>
                             </div>
-                            <div className='pt-2 border-t border-white/10 text-[11px] text-slate-400'>
+                            <div className='pt-3 border-t border-white/10 text-xs text-slate-400 font-medium'>
                                 Open Mon - Sat: 9:00 AM - 8:00 PM
                             </div>
                         </div>
 
                         {/* Card 2: Phone Support */}
-                        <div className='bg-[#0e2328] border border-white/15 rounded-xl p-6 sm:p-7 shadow-xl space-y-4 flex flex-col justify-between hover:border-[#56dbfc]/40 transition-all'>
+                        <div 
+                            className='bg-[#0f1e2c] border border-white/15 rounded-2xl shadow-xl space-y-4 flex flex-col justify-between hover:border-[#56dbfc]/40 transition-all'
+                            style={{ padding: '32px' }}
+                        >
                             <div className='space-y-3'>
-                                <div className='w-12 h-12 rounded-lg bg-[#56dbfc]/10 border border-[#56dbfc]/20 flex items-center justify-center text-[#56dbfc]'>
-                                    <FiPhone className='w-6 h-6' />
+                                <div className='w-14 h-14 rounded-2xl bg-[#56dbfc]/10 border border-[#56dbfc]/20 flex items-center justify-center text-[#56dbfc]'>
+                                    <FiPhone className='w-7 h-7' />
                                 </div>
-                                <h3 className='text-base font-bold text-white tracking-tight'>Phone Support</h3>
-                                <p className='text-sm font-bold text-[#56dbfc] tracking-tight'>
+                                <h3 className='text-lg font-bold text-white tracking-tight'>Phone Support</h3>
+                                <p className='text-base font-extrabold text-[#56dbfc] tracking-tight'>
                                     +91-9131755102
                                 </p>
-                                <p className='text-xs text-slate-300 leading-relaxed'>
+                                <p className='text-xs sm:text-sm text-slate-300 leading-relaxed font-normal'>
                                     Direct line for order tracking, payment confirmation, and general assistance.
                                 </p>
                             </div>
-                            <div className='pt-2 border-t border-white/10 text-[11px] text-slate-400'>
+                            <div className='pt-3 border-t border-white/10 text-xs text-slate-400 font-medium'>
                                 Toll-Free / 24/7 Helpline
                             </div>
                         </div>
 
                         {/* Card 3: Email Inquiry */}
-                        <div className='bg-[#0e2328] border border-white/15 rounded-xl p-6 sm:p-7 shadow-xl space-y-4 flex flex-col justify-between hover:border-[#56dbfc]/40 transition-all'>
+                        <div 
+                            className='bg-[#0f1e2c] border border-white/15 rounded-2xl shadow-xl space-y-4 flex flex-col justify-between hover:border-[#56dbfc]/40 transition-all'
+                            style={{ padding: '32px' }}
+                        >
                             <div className='space-y-3'>
-                                <div className='w-12 h-12 rounded-lg bg-[#56dbfc]/10 border border-[#56dbfc]/20 flex items-center justify-center text-[#56dbfc]'>
-                                    <FiMail className='w-6 h-6' />
+                                <div className='w-14 h-14 rounded-2xl bg-[#56dbfc]/10 border border-[#56dbfc]/20 flex items-center justify-center text-[#56dbfc]'>
+                                    <FiMail className='w-7 h-7' />
                                 </div>
-                                <h3 className='text-base font-bold text-white tracking-tight'>Email Inquiry</h3>
+                                <h3 className='text-lg font-bold text-white tracking-tight'>Email Inquiry</h3>
                                 <p className='text-xs sm:text-sm font-bold text-[#56dbfc] truncate'>
                                     vdevwork1906@gmail.com
                                 </p>
-                                <p className='text-xs text-slate-300 leading-relaxed'>
+                                <p className='text-xs sm:text-sm text-slate-300 leading-relaxed font-normal'>
                                     Send us your feedback, commercial queries, or return requests.
                                 </p>
                             </div>
-                            <div className='pt-2 border-t border-white/10 text-[11px] text-slate-400'>
+                            <div className='pt-3 border-t border-white/10 text-xs text-slate-400 font-medium'>
                                 Average response time: 2 hours
                             </div>
                         </div>
 
                         {/* Card 4: Careers at V-Cart (Spans full width of 2-col grid) */}
-                        <div className='md:col-span-2 bg-[#0e2328] border border-white/15 rounded-xl p-6 sm:p-8 shadow-xl space-y-4 hover:border-[#56dbfc]/40 transition-all'>
-                            <div className='flex items-center gap-3'>
-                                <div className='w-12 h-12 rounded-lg bg-[#56dbfc]/10 border border-[#56dbfc]/20 flex items-center justify-center text-[#56dbfc] flex-shrink-0'>
-                                    <FiBriefcase className='w-6 h-6' />
+                        <div 
+                            className='md:col-span-2 bg-[#0f1e2c] border border-white/15 rounded-2xl shadow-xl space-y-5 hover:border-[#56dbfc]/40 transition-all'
+                            style={{ padding: '32px' }}
+                        >
+                            <div className='flex items-center gap-4'>
+                                <div className='w-14 h-14 rounded-2xl bg-[#56dbfc]/10 border border-[#56dbfc]/20 flex items-center justify-center text-[#56dbfc] flex-shrink-0'>
+                                    <FiBriefcase className='w-7 h-7' />
                                 </div>
                                 <div>
-                                    <h3 className='text-base font-bold text-white tracking-tight'>Careers at V-Cart</h3>
-                                    <p className='text-xs text-slate-400'>Build the future of digital retail with us</p>
+                                    <h3 className='text-lg font-bold text-white tracking-tight'>Careers at V-Cart</h3>
+                                    <p className='text-xs text-slate-400 font-medium'>Build the future of digital retail with us</p>
                                 </div>
                             </div>
-                            <p className='text-xs sm:text-sm text-slate-300 leading-relaxed'>
+                            <p className='text-xs sm:text-sm text-slate-300 leading-relaxed font-normal'>
                                 We are always looking for passionate engineers, designers, and e-commerce strategists to join our team. Explore open roles and build modern shopping experiences.
                             </p>
                             <div className='pt-2'>
                                 <button 
-                                    className='px-6 py-3 bg-[#56dbfc] text-slate-950 text-xs font-bold rounded-lg hover:bg-[#7ce2fc] active:scale-95 transition-all shadow-[0_0_15px_rgba(86,219,252,0.3)] inline-flex items-center justify-center'
-                                    style={{ padding: '12px 24px', borderRadius: '8px' }}
+                                    className='bg-[#56dbfc] text-slate-950 text-sm font-semibold rounded-lg hover:bg-[#7ce2fc] active:scale-95 transition-all shadow-[0_0_20px_rgba(86,219,252,0.35)] inline-flex items-center justify-center'
+                                    style={{ padding: '14px 32px', borderRadius: '8px', fontWeight: 600 }}
                                 >
                                     Explore Jobs & Careers
                                 </button>
@@ -131,5 +142,6 @@ function Contact() {
 }
 
 export default Contact
+
 
 
