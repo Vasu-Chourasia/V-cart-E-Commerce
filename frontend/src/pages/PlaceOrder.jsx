@@ -106,8 +106,9 @@ function PlaceOrder() {
     const inputClasses = "w-full h-11 bg-[#0c2025] border border-white/15 rounded-xl px-4 text-white text-sm focus:outline-none focus:border-[#56dbfc] transition-all placeholder:text-slate-500 font-normal"
 
     return (
-        <div className='w-full min-h-screen bg-gradient-to-br from-[#141414] via-[#0c2025] to-[#0c2025] pt-24 pb-32'>
-            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8'>
+        <div className='w-full min-h-screen bg-[#0a1520] pt-24 pb-32 py-12 px-4 md:py-24 md:px-6'>
+            <div className='max-w-7xl mx-auto space-y-16 md:space-y-24'>
+
                 
                 <div className='border-b border-white/10 pb-4'>
                     <Title text1={'CHECKOUT'} text2={'PROCESS'} subtext={'Complete your shipping details and choose payment method'} />

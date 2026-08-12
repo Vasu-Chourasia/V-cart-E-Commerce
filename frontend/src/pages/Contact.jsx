@@ -9,8 +9,9 @@ function Contact() {
     const storeImage = "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop"
 
     return (
-        <div className='w-full min-h-screen bg-gradient-to-br from-[#141414] via-[#0c2025] to-[#0c2025] pt-24 pb-32'>
-            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20'>
+        <div className='w-full min-h-screen bg-[#0a1520] pt-24 pb-32 py-12 px-4 md:py-24 md:px-6'>
+            <div className='max-w-7xl mx-auto space-y-16 md:space-y-24'>
+
                 
                 <div className='border-b border-white/10 pb-4'>
                     <Title text1={'CONTACT'} text2={'US'} subtext={'Reach out to our dedicated store teams and support specialists'} />

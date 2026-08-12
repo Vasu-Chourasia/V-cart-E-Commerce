@@ -19,13 +19,14 @@ function Home() {
                 <Hero slideIndex={slideIndex} setSlideIndex={setSlideIndex} />
             </div>
 
-            {/* product & feature alternating sections */}
-            <div className='w-full'>
+            {/* product & feature alternating sections with explicit 64px–96px section gaps */}
+            <div className='w-full space-y-16 md:space-y-24'>
                 <LatestCollection />
                 <BestSeller />
                 <OurPolicy />
                 <NewLetterBox />
             </div>
+
 
             <Footer />
         </div>

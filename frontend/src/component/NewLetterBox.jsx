@@ -3,7 +3,8 @@ import React from 'react'
 // newsletter subscription UI — minimalist glass banner
 function NewLetterBox() {
     return (
-        <section className='w-full bg-[#0f1e2c] border-t border-white/10 py-12 px-4 md:py-24 md:px-6'>
+        <section className='w-full max-w-7xl mx-auto py-16 md:py-24 px-4 md:px-6 my-12 md:my-20'>
+
             <div className='max-w-7xl mx-auto'>
                 <div className='w-full bg-gradient-to-r from-[#122434] via-[#193548] to-[#122434] backdrop-blur-md border border-[#56dbfc]/30 rounded-3xl p-8 md:p-12 shadow-2xl flex flex-col items-center text-center gap-6 relative overflow-hidden'>
                     {/* decorative glow */}

@@ -27,8 +27,9 @@ function ProductDetail() {
     const thumbs = [productData.image1, productData.image2, productData.image3, productData.image4].filter(Boolean)
 
     return (
-        <div className='w-full min-h-screen bg-gradient-to-br from-[#141414] via-[#0c2025] to-[#0c2025] pt-24 pb-32'>
-            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16'>
+        <div className='w-full min-h-screen bg-[#0a1520] pt-24 pb-32 py-12 px-4 md:py-24 md:px-6'>
+            <div className='max-w-7xl mx-auto space-y-16 md:space-y-24'>
+
                 
                 {/* main product details grid */}
                 <div className='grid grid-cols-1 lg:grid-cols-12 gap-10 items-start'>

@@ -49,22 +49,25 @@ function Collections() {
     }, [products, search, showSearch, selectedCategories, selectedSubCategories, sortType])
 
     return (
-        <div className='w-full min-h-screen bg-gradient-to-br from-[#141414] via-[#0c2025] to-[#0c2025] pt-24 pb-24'>
-            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8'>
+        <div className='w-full min-h-screen bg-[#0a1520] pt-24 pb-32 py-12 px-4 md:py-24 md:px-6'>
+            <div className='max-w-7xl mx-auto space-y-10'>
                 
                 <div className='flex flex-col md:flex-row gap-8 items-start'>
 
                     {/* sidebar filter card container */}
-                    <aside className='w-full md:w-64 flex-shrink-0 bg-[#0e2328] border border-white/15 rounded-2xl p-6 shadow-xl space-y-6'>
-                        <div className='flex items-center justify-between border-b border-white/10 pb-3.5'>
-                            <h3 className='text-white font-bold text-sm tracking-wider uppercase flex items-center gap-2'>
+                    <aside 
+                        className='w-full md:w-64 flex-shrink-0 bg-[#0f1e2c] border border-white/15 rounded-2xl shadow-xl space-y-6'
+                        style={{ padding: '32px' }}
+                    >
+                        <div className='flex items-center justify-between border-b border-white/10 pb-4'>
+                            <h3 className='text-white font-extrabold text-sm tracking-wider uppercase flex items-center gap-2'>
                                 <span className='w-2 h-2 rounded-full bg-[#56dbfc]'></span>
                                 Filters
                             </h3>
                             {(selectedCategories.length > 0 || selectedSubCategories.length > 0) && (
                                 <button 
                                     onClick={() => { setSelectedCategories([]); setSelectedSubCategories([]) }}
-                                    className='text-xs text-[#56dbfc] hover:underline font-medium'
+                                    className='text-xs text-[#56dbfc] hover:underline font-semibold'
                                 >
                                     Reset
                                 </button>
@@ -72,16 +75,16 @@ function Collections() {
                         </div>
 
                         {/* category section */}
-                        <div className='space-y-3'>
-                            <h4 className='text-[#56dbfc] font-bold text-xs uppercase tracking-wider'>Category</h4>
-                            <div className='space-y-2.5'>
+                        <div className='space-y-4'>
+                            <h4 className='text-[#56dbfc] font-extrabold text-xs uppercase tracking-wider'>Category</h4>
+                            <div className='space-y-3'>
                                 {CATEGORIES.map(cat => (
                                     <label key={cat} className='flex items-center gap-3 text-slate-200 text-sm cursor-pointer hover:text-white transition-colors group select-none'>
                                         <input
                                             type="checkbox"
                                             checked={selectedCategories.includes(cat)}
                                             onChange={() => toggleFilter(cat, selectedCategories, setSelectedCategories)}
-                                            className='w-4 h-4 rounded border-white/20 bg-[#0c2025] text-[#56dbfc] focus:ring-[#56dbfc] cursor-pointer accent-[#56dbfc]'
+                                            className='w-4 h-4 rounded border-white/20 bg-[#0a1520] text-[#56dbfc] focus:ring-[#56dbfc] cursor-pointer accent-[#56dbfc]'
                                         />
                                         <span className='group-hover:translate-x-0.5 transition-transform font-medium'>{cat}</span>
                                     </label>
@@ -90,16 +93,16 @@ function Collections() {
                         </div>
 
                         {/* sub-category section */}
-                        <div className='space-y-3 border-t border-white/10 pt-4'>
-                            <h4 className='text-[#56dbfc] font-bold text-xs uppercase tracking-wider'>Type</h4>
-                            <div className='space-y-2.5'>
+                        <div className='space-y-4 border-t border-white/10 pt-5'>
+                            <h4 className='text-[#56dbfc] font-extrabold text-xs uppercase tracking-wider'>Type</h4>
+                            <div className='space-y-3'>
                                 {SUB_CATEGORIES.map(sub => (
                                     <label key={sub} className='flex items-center gap-3 text-slate-200 text-sm cursor-pointer hover:text-white transition-colors group select-none'>
                                         <input
                                             type="checkbox"
                                             checked={selectedSubCategories.includes(sub)}
                                             onChange={() => toggleFilter(sub, selectedSubCategories, setSelectedSubCategories)}
-                                            className='w-4 h-4 rounded border-white/20 bg-[#0c2025] text-[#56dbfc] focus:ring-[#56dbfc] cursor-pointer accent-[#56dbfc]'
+                                            className='w-4 h-4 rounded border-white/20 bg-[#0a1520] text-[#56dbfc] focus:ring-[#56dbfc] cursor-pointer accent-[#56dbfc]'
                                         />
                                         <span className='group-hover:translate-x-0.5 transition-transform font-medium'>{sub}</span>
                                     </label>
@@ -109,10 +112,10 @@ function Collections() {
                     </aside>
 
                     {/* main products content */}
-                    <main className='flex-1 w-full space-y-6'>
+                    <main className='flex-1 w-full space-y-8'>
                         
                         {/* top bar */}
-                        <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4'>
+                        <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6'>
                             <Title text1={'ALL'} text2={'COLLECTIONS'} subtext={`Showing ${filtered.length} products`} />
                             
                             <div className='flex items-center gap-3 self-end sm:self-auto'>
@@ -120,7 +123,7 @@ function Collections() {
                                 <select
                                     value={sortType}
                                     onChange={(e) => setSortType(e.target.value)}
-                                    className='bg-[#0e2328] border border-white/15 text-white px-4 py-2 rounded-xl text-xs font-semibold focus:outline-none focus:border-[#56dbfc] transition-all cursor-pointer'
+                                    className='bg-[#0f1e2c] border border-white/15 text-white px-4 py-2.5 rounded-xl text-xs font-semibold focus:outline-none focus:border-[#56dbfc] transition-all cursor-pointer'
                                 >
                                     <option value="relevant">Relevant</option>
                                     <option value="low-high">Price: Low to High</option>
@@ -130,7 +133,7 @@ function Collections() {
                         </div>
 
                         {/* product grid */}
-                        <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6'>
+                        <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6'>
                             {filtered.map(product => (
                                 <Card
                                     key={product._id}
@@ -144,23 +147,25 @@ function Collections() {
 
                         {/* empty state container */}
                         {filtered.length === 0 && (
-                            <div className='w-full min-h-[380px] flex flex-col items-center justify-center text-center bg-[#0e2328]/60 border border-white/10 rounded-2xl p-8 md:p-12 space-y-4 shadow-xl'>
+                            <div className='w-full min-h-[400px] flex flex-col items-center justify-center text-center bg-[#0f1e2c]/90 border border-white/10 rounded-2xl p-8 md:p-12 gap-6 shadow-xl'>
                                 <div className='w-16 h-16 rounded-full bg-[#56dbfc]/10 border border-[#56dbfc]/20 flex items-center justify-center text-[#56dbfc] shadow-[0_0_15px_rgba(86,219,252,0.2)]'>
                                     <HiOutlineSearch className='w-8 h-8' />
                                 </div>
 
-                                <h3 className='text-xl font-bold text-white tracking-tight'>No products matching your criteria</h3>
-                                <p className='text-xs sm:text-sm text-slate-400 max-w-md leading-relaxed'>
-                                    We couldn't find any items matching your current filters or search parameters. Try clearing your filters or searching for something else.
-                                </p>
+                                <div className='space-y-2'>
+                                    <h3 className='text-xl font-bold text-white tracking-tight'>No products matching your criteria</h3>
+                                    <p className='text-sm text-slate-300 max-w-md leading-relaxed'>
+                                        We couldn't find any items matching your current filters or search parameters. Try clearing your filters or searching for something else.
+                                    </p>
+                                </div>
+
                                 <button 
                                     onClick={() => { setSelectedCategories([]); setSelectedSubCategories([]) }}
-                                    className='px-6 py-3 bg-[#56dbfc] text-slate-950 text-xs font-bold rounded-lg hover:bg-[#7be2fc] transition-all shadow-[0_0_15px_rgba(86,219,252,0.3)] mt-2'
-                                    style={{ padding: '12px 24px', borderRadius: '8px' }}
+                                    className='bg-[#56dbfc] text-slate-950 text-sm font-semibold rounded-lg hover:bg-[#7be2fc] transition-all shadow-[0_0_20px_rgba(86,219,252,0.35)]'
+                                    style={{ padding: '14px 32px', borderRadius: '8px', fontWeight: 600 }}
                                 >
                                     Clear All Filters
                                 </button>
-
                             </div>
                         )}
 
@@ -174,5 +179,6 @@ function Collections() {
 }
 
 export default Collections
+
 
 
