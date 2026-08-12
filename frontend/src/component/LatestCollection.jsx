@@ -12,7 +12,7 @@ function LatestCollection() {
         .slice(0, 8)
 
     return (
-        <section className='w-full bg-[#0a1520] py-12 px-4 md:py-24 md:px-6'>
+        <section className='w-full bg-[#091520] py-20 md:py-24 px-4 md:px-8'>
             <div className='max-w-7xl mx-auto flex flex-col items-center'>
                 <Title 
                     text1={'LATEST'} 
@@ -34,6 +34,7 @@ function LatestCollection() {
         </section>
     )
 }
+
 
 
 export default LatestCollection
