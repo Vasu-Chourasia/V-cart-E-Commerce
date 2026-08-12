@@ -45,19 +45,20 @@ function Hero({ slideIndex, setSlideIndex }) {
                 <div className='flex items-center gap-4 mt-2'>
                     <button
                         onClick={() => navigate("/collection")}
-                        className='px-6 py-3 bg-[#56dbfc] text-slate-950 font-bold text-sm rounded-lg hover:bg-[#7be2fc] active:scale-95 transition-all shadow-[0_0_20px_rgba(86,219,252,0.35)] flex items-center gap-2'
-                        style={{ padding: '12px 24px', borderRadius: '8px' }}
+                        className='bg-[#56dbfc] text-slate-950 font-semibold text-sm rounded-lg hover:bg-[#7be2fc] active:scale-95 transition-all shadow-[0_0_20px_rgba(86,219,252,0.35)] flex items-center gap-2'
+                        style={{ padding: '14px 32px', borderRadius: '8px', fontWeight: 600 }}
                     >
                         Explore Collection <FiArrowRight className='w-4 h-4' />
                     </button>
                     <button
                         onClick={() => navigate("/about")}
-                        className='px-6 py-3 bg-white/5 border border-white/15 text-white font-semibold text-sm rounded-lg hover:bg-white/10 transition-all backdrop-blur-md'
-                        style={{ padding: '12px 24px', borderRadius: '8px' }}
+                        className='bg-white/5 border border-white/15 text-white font-semibold text-sm rounded-lg hover:bg-white/10 transition-all backdrop-blur-md'
+                        style={{ padding: '14px 32px', borderRadius: '8px', fontWeight: 600 }}
                     >
                         Learn More
                     </button>
                 </div>
+
 
 
                 {/* dot / pill indicators */}
