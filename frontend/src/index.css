@@ -1,6 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
+@theme {
+  --color-white: #FFFFFF;
+  --color-gray-surface: #F8F9FA;
+  --color-charcoal: #1A1D20;
+  --color-navy: #0F2C59;
+  --color-navy-hover: #0A1E3F;
+  --color-teal: #007A78;
+  --color-teal-hover: #005E5C;
+  
+  /* Semantic Validation & Interactive Tokens */
+  --color-error: #D92D20;
+  --color-error-bg: #FEF2F2;
+  --color-disabled-bg: #E5E7EB;
+  --color-disabled-text: #9CA3AF;
+}
 
 * {
   margin: 0;
@@ -13,22 +28,23 @@ html, body {
   width: 100%;
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   scroll-behavior: smooth;
-  background-color: #0c2025;
-  color: #f8fafc;
+  background-color: #FFFFFF;
+  color: #1A1D20;
 }
 
-/* Custom minimal scrollbar */
+/* Custom minimal scrollbar for light theme */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #09171b;
+  background: #F8F9FA;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e3e46;
+  background: #CBD5E1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #56dbfc;
+  background: #007A78;
 }
+
 

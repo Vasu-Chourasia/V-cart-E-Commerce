@@ -11,7 +11,7 @@ function BestSeller() {
     const displayProducts = bestSellers.length > 0 ? bestSellers : products.slice(0, 4)
 
     return (
-        <section className='w-full bg-[#0e2130] border-y border-white/5 py-20 md:py-24 px-4 md:px-8'>
+        <section className='w-full bg-gray-surface border-y border-gray-200 py-16 md:py-20 px-4 md:px-8'>
             <div className='max-w-7xl mx-auto flex flex-col items-center'>
                 <Title 
                     text1={'BEST'} 

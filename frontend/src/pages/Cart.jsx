@@ -23,11 +23,11 @@ function Cart() {
     }
 
     return (
-        <div className='w-full min-h-screen bg-[#0a1520] pt-24 pb-32 py-12 px-4 md:py-24 md:px-6'>
+        <div className='w-full min-h-screen bg-white pt-24 pb-32 py-12 px-4 md:py-24 md:px-6 text-charcoal'>
             <div className='max-w-7xl mx-auto space-y-16 md:space-y-24'>
 
                 
-                <div className='border-b border-white/10 pb-4'>
+                <div className='border-b border-gray-200 pb-4'>
                     <Title text1={'YOUR'} text2={'CART'} subtext={'Review item details before proceeding to checkout'} />
                 </div>
 
@@ -36,12 +36,12 @@ function Cart() {
                     {/* cart items list (8 cols) */}
                     <div className='lg:col-span-8 space-y-4'>
                         {cartEntries.length === 0 && (
-                            <div className='w-full py-20 flex flex-col items-center justify-center text-center bg-[#12282e]/40 border border-white/10 rounded-2xl p-8 space-y-4'>
-                                <p className='text-lg font-semibold text-slate-200'>Your cart is currently empty</p>
-                                <p className='text-xs text-slate-400'>Discover our latest collections and add your favorite items to cart.</p>
+                            <div className='w-full py-20 flex flex-col items-center justify-center text-center bg-gray-surface border border-gray-200 rounded-2xl p-8 space-y-4 shadow-sm'>
+                                <p className='text-lg font-semibold text-charcoal'>Your cart is currently empty</p>
+                                <p className='text-xs text-gray-500'>Discover our latest collections and add your favorite items to cart.</p>
                                 <button
                                     onClick={() => navigate("/collection")}
-                                    className='px-6 py-3 bg-[#56dbfc] text-slate-950 text-xs font-bold rounded-lg hover:bg-[#7be2fc] transition-all'
+                                    className='px-6 py-3 bg-navy text-white text-xs font-bold rounded-lg hover:bg-navy-hover transition-all shadow-md shadow-navy/20'
                                     style={{ padding: '12px 24px', borderRadius: '8px' }}
                                 >
                                     Explore Store
@@ -52,22 +52,22 @@ function Cart() {
                         {cartEntries.map(({ product, size, quantity }) => (
                             <div 
                                 key={`${product._id}-${size}`}
-                                className='flex items-center gap-4 bg-[#12282e]/60 backdrop-blur-md border border-white/10 hover:border-white/20 rounded-2xl p-4 shadow-md transition-all'
+                                className='flex items-center gap-4 bg-white border border-gray-200 hover:border-gray-300 rounded-2xl p-4 shadow-sm transition-all'
                             >
                                 {/* product thumbnail */}
-                                <div className='w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-[#1a353c] flex-shrink-0 border border-white/10'>
+                                <div className='w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-gray-surface flex-shrink-0 border border-gray-200'>
                                     <img src={product.image1} alt={product.name} className='w-full h-full object-cover' />
                                 </div>
 
                                 {/* product info */}
                                 <div className='flex-1 min-w-0 space-y-1'>
-                                    <h4 className='text-white font-semibold text-sm sm:text-base tracking-tight truncate'>
+                                    <h4 className='text-charcoal font-semibold text-sm sm:text-base tracking-tight truncate'>
                                         {product.name}
                                     </h4>
-                                    <div className='flex items-center gap-2 text-xs text-slate-300'>
-                                        <span>Size: <strong className='text-white font-bold px-2 py-0.5 bg-white/10 rounded border border-white/10'>{size}</strong></span>
+                                    <div className='flex items-center gap-2 text-xs text-gray-600'>
+                                        <span>Size: <strong className='text-charcoal font-bold px-2 py-0.5 bg-gray-surface rounded border border-gray-200'>{size}</strong></span>
                                     </div>
-                                    <p className='text-[#56dbfc] font-bold text-sm sm:text-base'>
+                                    <p className='text-navy font-bold text-sm sm:text-base'>
                                         {currency} {product.price}
                                     </p>
                                 </div>
@@ -79,13 +79,13 @@ function Cart() {
                                         min={1}
                                         value={quantity}
                                         onChange={(e) => updateQuantity(product._id, size, Number(e.target.value))}
-                                        className='w-14 h-10 bg-[#0c2025] text-white text-center text-sm font-semibold rounded-xl border border-white/15 focus:outline-none focus:border-[#56dbfc] transition-all'
+                                        className='w-14 h-10 bg-gray-surface text-charcoal text-center text-sm font-semibold rounded-xl border border-gray-300 focus:outline-none focus:border-teal transition-all'
                                     />
 
                                     {/* remove button */}
                                     <button
                                         onClick={() => updateQuantity(product._id, size, 0)}
-                                        className='p-2 text-slate-400 hover:text-red-400 hover:bg-red-400/10 rounded-xl transition-all'
+                                        className='p-2 text-gray-400 hover:text-error hover:bg-error-bg rounded-xl transition-all'
                                         title="Remove item"
                                     >
                                         <FiTrash2 className='w-5 h-5' />
@@ -96,19 +96,18 @@ function Cart() {
                     </div>
 
                     {/* cart summary side box (4 cols) */}
-                    <div className='lg:col-span-4 bg-[#12282e]/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl space-y-6'>
+                    <div className='lg:col-span-4 bg-gray-surface border border-gray-200 rounded-2xl p-6 shadow-sm space-y-6'>
                         <CartTotal />
                         {cartEntries.length > 0 && (
                             <button
                                 onClick={() => navigate("/placeorder")}
-                                className='w-full px-6 py-3 bg-[#56dbfc] text-slate-950 text-sm font-bold rounded-lg hover:bg-[#7be2fc] active:scale-95 transition-all shadow-[0_0_20px_rgba(86,219,252,0.3)]'
+                                className='w-full px-6 py-3 bg-navy text-white text-sm font-bold rounded-lg hover:bg-navy-hover active:scale-95 transition-all shadow-md shadow-navy/20'
                                 style={{ padding: '12px 24px', borderRadius: '8px' }}
                             >
                                 Proceed to Checkout
                             </button>
                         )}
                     </div>
-
 
                 </div>
 

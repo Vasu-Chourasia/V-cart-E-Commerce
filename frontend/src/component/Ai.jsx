@@ -79,7 +79,7 @@ function Ai() {
             onClick={handleClick}
             title="Click to activate Voice AI Assistant"
         >
-            <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#0c2025]/95 border border-[#56dbfc]/50 backdrop-blur-xl shadow-[0_4px_25px_rgba(0,0,0,0.6)] group-hover:border-[#56dbfc] group-hover:shadow-[0_0_30px_rgba(86,219,252,0.5)] group-hover:scale-105 transition-all duration-300 flex items-center justify-center ${active ? 'ring-4 ring-[#56dbfc]/50 scale-105' : ''}`}>
+            <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-navy border-2 border-teal shadow-[0_8px_30px_rgba(15,44,89,0.35)] group-hover:border-teal group-hover:shadow-[0_12px_35px_rgba(0,122,120,0.45)] group-hover:scale-105 transition-all duration-300 flex items-center justify-center ${active ? 'ring-4 ring-teal/50 scale-105' : ''}`}>
                 <img
                     src={ai}
                     alt="Voice assistant"

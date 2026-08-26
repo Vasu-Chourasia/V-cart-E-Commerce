@@ -103,22 +103,22 @@ function PlaceOrder() {
         }
     }
 
-    const inputClasses = "w-full h-11 bg-[#0c2025] border border-white/15 rounded-xl px-4 text-white text-sm focus:outline-none focus:border-[#56dbfc] transition-all placeholder:text-slate-500 font-normal"
+    const inputClasses = "w-full h-11 bg-white border border-gray-300 rounded-xl px-4 text-charcoal text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-all placeholder:text-gray-400 font-normal shadow-sm"
 
     return (
-        <div className='w-full min-h-screen bg-[#0a1520] pt-24 pb-32 py-12 px-4 md:py-24 md:px-6'>
+        <div className='w-full min-h-screen bg-white pt-24 pb-32 py-12 px-4 md:py-24 md:px-6 text-charcoal'>
             <div className='max-w-7xl mx-auto space-y-16 md:space-y-24'>
 
                 
-                <div className='border-b border-white/10 pb-4'>
+                <div className='border-b border-gray-200 pb-4'>
                     <Title text1={'CHECKOUT'} text2={'PROCESS'} subtext={'Complete your shipping details and choose payment method'} />
                 </div>
 
                 <form onSubmit={onSubmit} className='grid grid-cols-1 lg:grid-cols-12 gap-8 items-start'>
 
                     {/* delivery form (7 cols) */}
-                    <div className='lg:col-span-7 bg-[#12282e]/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 shadow-xl space-y-5'>
-                        <h3 className='text-lg font-bold text-white tracking-tight border-b border-white/10 pb-3'>
+                    <div className='lg:col-span-7 bg-gray-surface border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-5'>
+                        <h3 className='text-lg font-bold text-charcoal tracking-tight border-b border-gray-200 pb-3'>
                             Delivery Address
                         </h3>
 
@@ -153,22 +153,22 @@ function PlaceOrder() {
                             className={inputClasses} value={formData.phone} onChange={onChange} />
 
                         {/* payment method */}
-                        <div className='space-y-3 border-t border-white/10 pt-5'>
-                            <h3 className='text-lg font-bold text-white tracking-tight'>
+                        <div className='space-y-3 border-t border-gray-200 pt-5'>
+                            <h3 className='text-lg font-bold text-charcoal tracking-tight'>
                                 Select Payment Method
                             </h3>
                             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                                 <button
                                     type='button'
                                     onClick={() => setMethod('razorpay')}
-                                    className={`h-14 rounded-xl overflow-hidden border-2 flex items-center justify-center p-2 transition-all ${method === 'razorpay' ? 'border-[#56dbfc] bg-[#56dbfc]/10 shadow-[0_0_15px_rgba(86,219,252,0.3)]' : 'border-white/15 bg-[#0c2025] hover:border-white/30'}`}
+                                    className={`h-14 rounded-xl overflow-hidden border-2 flex items-center justify-center p-2 transition-all cursor-pointer ${method === 'razorpay' ? 'border-navy bg-white shadow-sm' : 'border-gray-300 bg-white hover:border-gray-400'}`}
                                 >
                                     <img src={razorpayImg} className='h-8 object-contain rounded' alt="Razorpay" />
                                 </button>
                                 <button
                                     type='button'
                                     onClick={() => setMethod('cod')}
-                                    className={`h-14 rounded-xl border-2 font-bold text-xs tracking-wider uppercase transition-all ${method === 'cod' ? 'border-[#56dbfc] bg-[#56dbfc] text-slate-950 shadow-[0_0_15px_rgba(86,219,252,0.3)]' : 'border-white/15 bg-[#0c2025] text-slate-200 hover:border-white/30'}`}
+                                    className={`h-14 rounded-xl border-2 font-bold text-xs tracking-wider uppercase transition-all cursor-pointer ${method === 'cod' ? 'border-navy bg-navy text-white shadow-sm' : 'border-gray-300 bg-white text-charcoal hover:border-gray-400'}`}
                                 >
                                     Cash On Delivery
                                 </button>
@@ -178,18 +178,17 @@ function PlaceOrder() {
                     </div>
 
                     {/* order summary & submit (5 cols) */}
-                    <div className='lg:col-span-5 bg-[#12282e]/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 shadow-xl space-y-6 sticky top-24'>
+                    <div className='lg:col-span-5 bg-gray-surface border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 sticky top-24'>
                         <CartTotal />
 
                         <button 
                             type='submit'
-                            className='w-full px-6 py-3 bg-[#56dbfc] text-slate-950 font-bold text-sm rounded-lg hover:bg-[#7be2fc] active:scale-95 transition-all shadow-[0_0_20px_rgba(86,219,252,0.3)] flex items-center justify-center'
+                            className='w-full px-6 py-3 bg-navy text-white font-bold text-sm rounded-lg hover:bg-navy-hover active:scale-95 transition-all shadow-md shadow-navy/20 flex items-center justify-center'
                             style={{ padding: '12px 24px', borderRadius: '8px' }}
                         >
                             {loading ? <Loading /> : "Complete Order"}
                         </button>
                     </div>
-
 
                 </form>
 

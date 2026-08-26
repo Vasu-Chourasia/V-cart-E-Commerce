@@ -4,15 +4,15 @@ import { useNavigate } from 'react-router-dom'
 function NotFound() {
     const navigate = useNavigate()
     return (
-        <div className='w-full min-h-screen bg-gradient-to-l from-[#141414] to-[#0c2025] flex flex-col items-center justify-center gap-[20px] text-white'>
-            <h1 className='text-[80px] font-bold text-[#56dbfc]'>404</h1>
-            <p className='text-[22px]'>Page not found</p>
-            <p className='text-slate-400'>The page you're looking for doesn't exist.</p>
+        <div className='w-full min-h-screen bg-gray-surface flex flex-col items-center justify-center gap-5 text-charcoal p-4'>
+            <h1 className='text-7xl sm:text-8xl font-extrabold text-navy tracking-tight'>404</h1>
+            <p className='text-xl sm:text-2xl font-bold text-charcoal'>Page not found</p>
+            <p className='text-sm text-gray-500 max-w-sm text-center'>The page you are looking for does not exist or has been moved.</p>
             <button
                 onClick={() => navigate("/")}
-                className='mt-[10px] px-[30px] py-[12px] bg-[#6060f5] rounded-lg text-[16px] font-semibold hover:bg-[#4a4ad4]'
+                className='mt-2 px-8 py-3 bg-navy text-white text-sm font-bold rounded-lg hover:bg-navy-hover transition-all shadow-md shadow-navy/20 cursor-pointer'
             >
-                Go Home
+                Back to Home
             </button>
         </div>
     )

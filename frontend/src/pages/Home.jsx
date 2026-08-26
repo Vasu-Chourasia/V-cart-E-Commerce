@@ -11,10 +11,10 @@ function Home() {
     const [slideIndex, setSlideIndex] = useState(0)
 
     return (
-        <div className='w-full min-h-screen bg-[#091520] text-white overflow-hidden pb-32'>
+        <div className='w-full min-h-screen bg-white text-charcoal overflow-hidden pb-32'>
 
             {/* hero banner section */}
-            <div className='w-full h-screen relative flex items-center justify-center overflow-hidden border-b border-white/10'>
+            <div className='w-full h-screen relative flex items-center justify-center overflow-hidden border-b border-gray-200'>
                 <Backgound slideIndex={slideIndex} />
                 <Hero slideIndex={slideIndex} setSlideIndex={setSlideIndex} />
             </div>

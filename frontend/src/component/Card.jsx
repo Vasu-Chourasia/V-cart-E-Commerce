@@ -9,30 +9,29 @@ function Card({ id, image, name, price }) {
 
     return (
         <div
-            className='group w-full cursor-pointer flex flex-col bg-[#13282e]/60 backdrop-blur-md border border-white/10 hover:border-[#56dbfc]/40 rounded-xl p-3 shadow-sm hover:shadow-[0_8px_20px_rgba(86,219,252,0.15)] hover:-translate-y-1.5 transition-all duration-300'
+            className='group w-full cursor-pointer flex flex-col bg-white border border-gray-200 hover:border-teal rounded-xl p-3 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300'
             onClick={() => navigate(`/productdetail/${id}`)}
         >
             {/* thumbnail container */}
-            <div className='w-full aspect-[4/5] overflow-hidden rounded-lg bg-[#1a353c] relative mb-3'>
+            <div className='w-full aspect-[4/5] overflow-hidden rounded-lg bg-gray-surface relative mb-3 border border-gray-100'>
                 <img
                     src={image}
                     alt={name}
                     className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500'
                     loading="lazy"
                 />
-                <div className='absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
             </div>
 
             {/* info */}
             <div className='flex flex-col justify-between flex-1 gap-1 px-1'>
-                <p className='text-slate-100 text-sm font-medium tracking-tight truncate group-hover:text-[#56dbfc] transition-colors'>
+                <p className='text-charcoal text-sm font-medium tracking-tight truncate group-hover:text-teal transition-colors'>
                     {name}
                 </p>
                 <div className='flex items-center justify-between mt-1'>
-                    <p className='text-[#56dbfc] text-sm font-bold tracking-tight'>
+                    <p className='text-navy text-sm font-bold tracking-tight'>
                         {currency} {price}
                     </p>
-                    <span className='text-[11px] text-slate-400 font-medium px-2 py-0.5 rounded-full bg-white/5 border border-white/10 group-hover:bg-[#56dbfc]/10 group-hover:text-[#56dbfc] transition-all'>
+                    <span className='text-[11px] text-gray-500 font-medium px-2.5 py-0.5 rounded-full bg-gray-surface border border-gray-200 group-hover:bg-teal group-hover:text-white group-hover:border-teal transition-all'>
                         View
                     </span>
                 </div>

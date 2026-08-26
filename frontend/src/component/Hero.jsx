@@ -23,21 +23,21 @@ function Hero({ slideIndex, setSlideIndex }) {
 
     return (
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 flex flex-col justify-center h-full pt-16'>
-            <div className='max-w-2xl flex flex-col gap-5 items-start'>
+            <div className='max-w-2xl flex flex-col gap-5 items-start bg-white/85 backdrop-blur-md p-8 sm:p-10 md:p-12 rounded-3xl border border-white/60 shadow-2xl'>
                 
                 {/* badge */}
-                <div className='inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#56dbfc]/10 border border-[#56dbfc]/30 backdrop-blur-md'>
-                    <span className='w-2 h-2 rounded-full bg-[#56dbfc] animate-ping'></span>
-                    <span className='text-[#56dbfc] text-xs font-bold tracking-widest uppercase'>V-Cart Exclusive</span>
+                <div className='inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-navy/10 border border-navy/20'>
+                    <span className='w-2 h-2 rounded-full bg-teal animate-ping'></span>
+                    <span className='text-navy text-xs font-bold tracking-widest uppercase'>V-Cart Exclusive</span>
                 </div>
 
                 {/* main headline */}
-                <h1 className='text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15] min-h-[120px] md:min-h-[140px]'>
+                <h1 className='text-4xl sm:text-5xl lg:text-6xl font-extrabold text-charcoal tracking-tight leading-[1.15] min-h-[110px] md:min-h-[130px]'>
                     {slides[slideIndex].heading}
                 </h1>
 
                 {/* subtitle */}
-                <p className='text-slate-300 text-base md:text-lg max-w-lg leading-relaxed font-normal min-h-[50px]'>
+                <p className='text-gray-600 text-base md:text-lg max-w-lg leading-relaxed font-normal min-h-[45px]'>
                     {slides[slideIndex].sub}
                 </p>
 
@@ -45,30 +45,28 @@ function Hero({ slideIndex, setSlideIndex }) {
                 <div className='flex items-center gap-4 mt-2'>
                     <button
                         onClick={() => navigate("/collection")}
-                        className='bg-[#56dbfc] text-slate-950 font-semibold text-sm rounded-lg hover:bg-[#7be2fc] active:scale-95 transition-all shadow-[0_0_20px_rgba(86,219,252,0.35)] flex items-center gap-2'
+                        className='bg-navy text-white font-semibold text-sm rounded-lg hover:bg-navy-hover active:scale-95 transition-all shadow-md shadow-navy/20 flex items-center gap-2'
                         style={{ padding: '14px 32px', borderRadius: '8px', fontWeight: 600 }}
                     >
                         Explore Collection <FiArrowRight className='w-4 h-4' />
                     </button>
                     <button
                         onClick={() => navigate("/about")}
-                        className='bg-white/5 border border-white/15 text-white font-semibold text-sm rounded-lg hover:bg-white/10 transition-all backdrop-blur-md'
+                        className='bg-white border border-gray-300 text-charcoal font-semibold text-sm rounded-lg hover:bg-gray-surface transition-all shadow-sm'
                         style={{ padding: '14px 32px', borderRadius: '8px', fontWeight: 600 }}
                     >
                         Learn More
                     </button>
                 </div>
 
-
-
                 {/* dot / pill indicators */}
-                <div className='flex items-center gap-2 mt-6'>
+                <div className='flex items-center gap-2 mt-4'>
                     {slides.map((_, i) => (
                         <button
                             key={i}
                             onClick={() => setSlideIndex(i)}
                             aria-label={`Go to slide ${i + 1}`}
-                            className={`h-2 rounded-full transition-all duration-300 ${i === slideIndex ? 'bg-[#56dbfc] w-8' : 'bg-slate-600 hover:bg-slate-400 w-2'}`}
+                            className={`h-2 rounded-full transition-all duration-300 ${i === slideIndex ? 'bg-navy w-8' : 'bg-gray-300 hover:bg-gray-400 w-2'}`}
                         />
                     ))}
                 </div>
