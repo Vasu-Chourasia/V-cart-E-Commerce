@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>V-Cart - Product Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#ffffff",
+                      "surface-container": "#eceef2",
+                      "on-tertiary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-surface": "#191c1f",
+                      "inverse-primary": "#aec7fd",
+                      "on-surface-variant": "#44474f",
+                      "tertiary": "#2c1100",
+                      "error": "#ba1a1a",
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed": "#97f2ef",
+                      "outline-variant": "#c4c6d0",
+                      "primary-fixed-dim": "#aec7fd",
+                      "on-primary-fixed-variant": "#2d4674",
+                      "surface-variant": "#e1e2e6",
+                      "on-secondary-fixed-variant": "#00504e",
+                      "tertiary-fixed": "#ffdcc6",
+                      "inverse-on-surface": "#eff1f5",
+                      "tertiary-container": "#4b2200",
+                      "on-tertiary-container": "#c5875a",
+                      "secondary": "#006a68",
+                      "on-primary-fixed": "#001a41",
+                      "on-error-container": "#93000a",
+                      "surface-bright": "#f8f9fd",
+                      "surface-dim": "#d8dade",
+                      "surface-container-low": "#f2f3f8",
+                      "on-secondary-fixed": "#00201f",
+                      "inverse-surface": "#2e3134",
+                      "surface-container-highest": "#e1e2e6",
+                      "surface-tint": "#465e8e",
+                      "primary-fixed": "#d8e2ff",
+                      "secondary-container": "#94efec",
+                      "outline": "#747780",
+                      "background": "#f8f9fd",
+                      "tertiary-fixed-dim": "#fdb787",
+                      "on-primary-container": "#7c94c8",
+                      "error-container": "#ffdad6",
+                      "surface": "#f8f9fd",
+                      "on-tertiary-fixed-variant": "#6a3b15",
+                      "primary": "#00173b",
+                      "on-secondary-container": "#006e6d",
+                      "primary-container": "#0f2c59",
+                      "surface-container-high": "#e7e8ec",
+                      "on-tertiary-fixed": "#301400",
+                      "secondary-fixed-dim": "#7ad6d3",
+                      "on-background": "#191c1f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xl": "48px",
+                      "container-max": "1280px",
+                      "sm": "8px",
+                      "md": "16px",
+                      "xs": "4px",
+                      "unit": "4px",
+                      "lg": "24px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "label-caps": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "display-lg-mobile": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-primary text-on-primary shadow-md docked full-width top-0 z-50">
+<div class="flex justify-between items-center w-full px-gutter py-md max-w-container-max mx-auto">
+<div class="text-headline-md font-display-lg text-on-primary">V-Cart</div>
+<nav class="hidden md:flex space-x-lg">
+<a class="text-surface-variant hover:text-on-primary transition-colors text-label-caps font-label-caps" href="#">Home</a>
+<a class="text-secondary-fixed font-bold border-b-2 border-secondary-fixed pb-1 text-label-caps font-label-caps" href="#">Collections</a>
+<a class="text-surface-variant hover:text-on-primary transition-colors text-label-caps font-label-caps" href="#">About</a>
+<a class="text-surface-variant hover:text-on-primary transition-colors text-label-caps font-label-caps" href="#">Contact</a>
+</nav>
+<div class="flex space-x-md">
+<button class="hover:opacity-80 transition-all active:scale-95 text-on-primary">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="hover:opacity-80 transition-all active:scale-95 text-on-primary">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="hover:opacity-80 transition-all active:scale-95 text-on-primary">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-xl pb-xl px-gutter max-w-container-max mx-auto w-full">
+<!-- Product Detail Section -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-lg lg:gap-xl mb-xl">
+<!-- Image Gallery (Left/Bottom Thumbnails) -->
+<div class="lg:col-span-7 flex flex-col md:flex-row gap-md">
+<!-- Thumbnails -->
+<div class="flex md:flex-col gap-sm overflow-x-auto md:overflow-visible order-2 md:order-1 w-full md:w-24 shrink-0">
+<button class="w-20 h-24 md:w-24 md:h-32 border border-outline-variant rounded hover:border-secondary transition-colors overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close up shot of the fabric texture of a high-end, minimalist winter coat. The lighting highlights the premium weave and subtle dark charcoal tones. The setting is clean, well-lit, emphasizing a modern retail aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEQ6mOg5Flde2z9fnjXyYCsm7Bt98hJWkco6_QUUejoR_sxCvpUiQOkjwP5kWz_zxBNkQx0OVXf6hUX4bjwPd7gsyqR-JpNemzRzzizq6P-CjkNkfICPfVzl7YiVBA--hP0QbykJgLE16ltKdDVtHpNrT-gMtJKvczIDLpswlJIhojCaot5S1M9ZeDLupltcMFhmfKgoCZahdxjo-VEy72Rv1bgfdBvM_7J_PcEQbtNXf69pYaMjwATw"/>
+</button>
+<button class="w-20 h-24 md:w-24 md:h-32 border border-outline-variant rounded hover:border-secondary transition-colors overflow-hidden flex-shrink-0 opacity-60 hover:opacity-100">
+<img class="w-full h-full object-cover" data-alt="Side profile view of a high-end winter coat displayed on a minimal mannequin. High-key lighting accents the structural integrity and spatial discipline of the design. Deep blacks and pristine whites dominate the palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1XRgDKLUH2rNX3eaqcCJ0xap_KXLlnFUGp4kwQLfkBpu1CsJfnVdtOQX6UobIMyH4riGpdMBbiVFJfMJqI2eXuyDSZzzqlnjIps3lyxZ8d5ibN8-WXHAuvv7g5jDYlTCGNNxQZ99Mjx-hGtWLfZh3huCzYZ9l4Y3SDHgIxaS1JkaIDCsaKAlrLSVuEE75QqyoGZEjvR3xwdV7VUvvA3lafAMTvQPUq5nJBoEDP4ncN6zXHxcRrZ1taQ"/>
+</button>
+<button class="w-20 h-24 md:w-24 md:h-32 border border-outline-variant rounded hover:border-secondary transition-colors overflow-hidden flex-shrink-0 opacity-60 hover:opacity-100">
+<img class="w-full h-full object-cover" data-alt="Detail shot of the modern, secure zipper and minimalist button closures on a premium fashion garment. The lighting is crisp and precise, reflecting a sleek, editorial retail environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5q9lj_6wt7mUnDmAC8M8s_OKEwcq9_ZJKsXG5w_Y8M-9Ss5pe9Cqdi3zJFWKIkWkf5YeraNfXJ2X_a_4jCqwrOjvHRO1Y-uYVAuk8O9Z2he8qIgjECQOIQytjGSagIskaj478wjvn3JbHdTD6WSn5IbHPnVeAGDCOXSjGhN8Mkyy4no_QFIF2xsglIE4Lwft1TcsBnPpq1MG8PUREAUDJe7tiOCFQDkX9VxhJaH4gC-beIp1EwZ00qw"/>
+</button>
+</div>
+<!-- Main Image -->
+<div class="order-1 md:order-2 flex-grow aspect-[3/4] md:aspect-auto md:h-[600px] bg-surface-container rounded border border-outline-variant shadow-[0px_4px_20px_rgba(0,23,59,0.04)] overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Full length editorial shot of a model wearing a sophisticated, minimalist deep charcoal winter coat. The background is stark white with subtle ambient shadows, emphasizing spatial discipline and modern luxury fashion retail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA60aBNOAHhFFxSshu1qvGcHzqJrLkLofA-eetbo793j01qY5Vyyl7Q_bNgdoZG4iEr_FiOGmrU3LnqevjKhMOekKlo6dBWZHs_Ak2Q55G_HnjiKjQCeft-gFSLltfjd5DIMGs5VA8puiP3P3N9WzWIOM92ZCT1x9P2iNIWFVwsPAS6K4Hv_kWXzv59rAmtmKDy6CIcUqkLJkhr76YmFzhlEi7oCVFyk47dBcgCo1PWakeEgRxR7Osobw"/>
+<div class="absolute top-md left-md bg-secondary text-on-secondary px-sm py-xs rounded font-label-caps text-label-caps uppercase tracking-wider">
+                        New Arrival
+                    </div>
+</div>
+</div>
+<!-- Product Info -->
+<div class="lg:col-span-5 flex flex-col pt-md lg:pt-0">
+<nav class="flex text-surface-variant text-label-caps font-label-caps mb-md space-x-2">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span>/</span>
+<a class="hover:text-primary transition-colors" href="#">Men</a>
+<span>/</span>
+<a class="hover:text-primary transition-colors" href="#">Outerwear</a>
+</nav>
+<h1 class="text-display-lg-mobile md:text-display-lg font-display-lg-mobile md:font-display-lg text-on-surface mb-xs">
+                    The Obsidian Trench
+                </h1>
+<p class="text-headline-md font-headline-md text-surface-tint mb-lg">$895.00</p>
+<p class="text-body-md font-body-md text-on-surface-variant mb-xl leading-relaxed">
+                    A masterclass in modern minimalism and structural integrity. Crafted from a proprietary blend of weather-resistant gabardine, this trench coat offers institutional clarity in its silhouette while providing bank-grade protection against the elements.
+                </p>
+<div class="mb-lg">
+<div class="flex justify-between items-end mb-sm">
+<span class="text-label-caps font-label-caps text-on-surface">Size</span>
+<button class="text-label-caps font-label-caps text-secondary underline hover:text-on-secondary-container">Size Guide</button>
+</div>
+<div class="flex flex-wrap gap-sm">
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center text-body-md font-body-md text-on-surface hover:border-secondary hover:text-secondary transition-colors">S</button>
+<button class="w-12 h-12 rounded-full border-2 border-primary bg-primary text-on-primary flex items-center justify-center text-body-md font-body-md transition-colors">M</button>
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center text-body-md font-body-md text-on-surface hover:border-secondary hover:text-secondary transition-colors">L</button>
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center text-body-md font-body-md text-on-surface hover:border-secondary hover:text-secondary transition-colors">XL</button>
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center text-body-md font-body-md text-surface-variant cursor-not-allowed">XXL</button>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-md rounded hover:bg-primary-container transition-colors duration-200 text-body-lg font-body-lg font-semibold shadow-md active:scale-[0.98] flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+                    Add to Cart
+                </button>
+<div class="mt-lg flex items-center gap-sm text-on-surface-variant text-label-caps font-label-caps bg-surface-container-low p-sm rounded">
+<span class="material-symbols-outlined text-secondary" data-icon="verified_user">verified_user</span>
+                    Secure Checkout &amp; Free Returns within 30 days.
+                </div>
+</div>
+</section>
+<!-- Related Products Grid -->
+<section class="mt-xl">
+<h2 class="text-headline-md font-headline-md text-on-surface mb-lg border-b border-outline-variant pb-sm">Related Pieces</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md md:gap-lg">
+<!-- Card 1 -->
+<div class="group flex flex-col border border-outline-variant rounded shadow-[0px_4px_20px_rgba(0,23,59,0.04)] bg-surface hover:shadow-lg transition-shadow duration-300">
+<div class="aspect-[3/4] bg-surface-container overflow-hidden rounded-t relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Minimalist long sleeve knit sweater in a pristine white setting. The ambient lighting casts soft shadows, emphasizing the premium quality and modern aesthetic. The scene implies a secure, high-end retail experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8R-mFVhvn3SJnpBlUnbeLW0-7N01WZm3HGNlB90yNqchK8ts2mfJ_GJ4AP2JIPTxjaD-dxbcUhXW_Nh18nfD1hJrFPdbNlGw9bJ1I9ApEv0Ycl1We0V3NJBXApE_GU9QRabm3Bv9duEsL-rutEDu4JT3DxEV7eqSwEB-J-LhJes8ciOVWQNNnPUyFC-je2XGJ702bQyCwluuIuHFxY39ljgdZviR5_HNEfCRX-o7NdVzrdtcjE1Unmg"/>
+<button class="absolute bottom-sm left-sm right-sm bg-primary text-on-primary py-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-label-caps font-label-caps">Quick Add</button>
+</div>
+<div class="p-sm md:p-md">
+<h3 class="text-body-md font-body-md text-on-surface truncate">Merino Turtleneck</h3>
+<p class="text-body-md font-body-md font-semibold text-on-surface-variant mt-xs">$245.00</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group flex flex-col border border-outline-variant rounded shadow-[0px_4px_20px_rgba(0,23,59,0.04)] bg-surface hover:shadow-lg transition-shadow duration-300">
+<div class="aspect-[3/4] bg-surface-container overflow-hidden rounded-t relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Tailored charcoal dress trousers displayed on a flat surface. Bright, high-key lighting creates a sense of editorial clarity. The deep navy accents in the background reinforce the high-fashion retail environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPazswmhc_UsdXJtnIJcgMmmyiH9891v0Vjml95CPtw9zhxYPcSRld6nKjJGMdojRdH0Rg8jnoZAEJzCc4R_8JNWy3B4Ajfq6ustCaYRj_lsxZB_fNgtB1bJHJkzHWkMH2VaXnUjr209ESObP1S83ColZVaBTB0wEyhxIgF_ppqWaLiz6J2mzvfLLDy22tkektNxPRIHIpvH0cPpr46Rqy3k1dUn3NunZUufVl8oE_EW2GOtDBiDv7Bg"/>
+<button class="absolute bottom-sm left-sm right-sm bg-primary text-on-primary py-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-label-caps font-label-caps">Quick Add</button>
+</div>
+<div class="p-sm md:p-md">
+<h3 class="text-body-md font-body-md text-on-surface truncate">Tailored Wool Trouser</h3>
+<p class="text-body-md font-body-md font-semibold text-on-surface-variant mt-xs">$320.00</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group flex flex-col border border-outline-variant rounded shadow-[0px_4px_20px_rgba(0,23,59,0.04)] bg-surface hover:shadow-lg transition-shadow duration-300">
+<div class="aspect-[3/4] bg-surface-container overflow-hidden rounded-t relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Sleek leather Chelsea boots positioned on a minimalist concrete block. The lighting is dramatic yet clear, showcasing spatial discipline and the luxurious texture of the footwear in a bank-grade retail space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7NtEhW3NKisBvb4ipWv0NmC2bDTnSUmFNvGykPboJ6B8iGpEtR6LAc8J7J_PZUi4VvOa7fe__B7D2wVKOs3Ax4yFhdblmKHjNc4VeAQ4kcsInMZ9M33pUOUG76mBbAPw-NDipmS1Y_-AdJUBCcex9Uu1wcHkkWLzX5PQUpnj2dZhoEDLV1pOhvWW3pGLddf4pDjfSK8jeO9W7TZd2mWJRDRX6YtZiE3prkpjc3dVANcKjap2Dk5FVHQ"/>
+<button class="absolute bottom-sm left-sm right-sm bg-primary text-on-primary py-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-label-caps font-label-caps">Quick Add</button>
+</div>
+<div class="p-sm md:p-md">
+<h3 class="text-body-md font-body-md text-on-surface truncate">Leather Chelsea Boot</h3>
+<p class="text-body-md font-body-md font-semibold text-on-surface-variant mt-xs">$450.00</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group flex flex-col border border-outline-variant rounded shadow-[0px_4px_20px_rgba(0,23,59,0.04)] bg-surface hover:shadow-lg transition-shadow duration-300">
+<div class="aspect-[3/4] bg-surface-container overflow-hidden rounded-t relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A premium leather briefcase with minimalist hardware, shot against a vast white background. The image evokes a sense of reliability, modern styling, and high-end security appropriate for discerning consumers." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD84DDCEAE0QwUHwEPZMJShadZfBOI9y-A8zqFrOHmbqk2V_kFTXwYvCMOkNhLv9f0eaRjxLTFg-rGd_g4vZ0cPCXxH9RO7CQsih0V9VjAgUfQve65pysaQNp1ndH4CIIlniTqsDwAd6jn2M7Zm5TTPXJ0Hlxn3ZulQAb-MarK6U4iUyuPAKgTZqFbm4tcjII9g5SydzXbrq2WwYvSxCiaS3xVZ-b5oGDMnFQN3fm0ccZpr0jFw2bxJpQ"/>
+<button class="absolute bottom-sm left-sm right-sm bg-primary text-on-primary py-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-label-caps font-label-caps">Quick Add</button>
+</div>
+<div class="p-sm md:p-md">
+<h3 class="text-body-md font-body-md text-on-surface truncate">Structured Briefcase</h3>
+<p class="text-body-md font-body-md font-semibold text-on-surface-variant mt-xs">$680.00</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating AI Assistant -->
+<button aria-label="AI Shopping Assistant" class="fixed bottom-xl right-lg bg-primary w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-on-primary hover:bg-primary-container transition-all hover:scale-110 z-40 md:bottom-lg">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+</button>
+<!-- BottomNavBar (Mobile) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center py-sm md:hidden border-t border-outline-variant bg-surface shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low p-xs rounded transition-colors w-16" href="#">
+<span class="material-symbols-outlined mb-xs" data-icon="home">home</span>
+<span class="text-label-caps font-label-caps">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary font-bold hover:bg-surface-container-low p-xs rounded transition-colors w-16" href="#">
+<span class="material-symbols-outlined mb-xs" data-icon="grid_view" data-weight="fill" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="text-label-caps font-label-caps">Collections</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low p-xs rounded transition-colors w-16" href="#">
+<span class="material-symbols-outlined mb-xs" data-icon="mail">mail</span>
+<span class="text-label-caps font-label-caps">Contact</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low p-xs rounded transition-colors w-16 relative" href="#">
+<span class="material-symbols-outlined mb-xs" data-icon="shopping_cart">shopping_cart</span>
+<span class="text-label-caps font-label-caps">Cart</span>
+<span class="absolute top-0 right-2 w-2 h-2 bg-error rounded-full"></span>
+</a>
+</nav>
+<!-- Footer -->
+<footer class="bg-primary text-on-primary w-full py-xl px-gutter flex flex-col items-center space-y-md text-center mt-auto pb-24 md:pb-xl">
+<div class="text-headline-md font-display-lg text-on-primary mb-sm">V-Cart</div>
+<nav class="flex flex-wrap justify-center gap-md mb-sm">
+<a class="text-surface-variant hover:text-on-primary text-label-caps font-label-caps transition-colors" href="#">Privacy Policy</a>
+<a class="text-surface-variant hover:text-on-primary text-label-caps font-label-caps transition-colors" href="#">Terms of Service</a>
+<a class="text-surface-variant hover:text-on-primary text-label-caps font-label-caps transition-colors" href="#">Shipping Info</a>
+<a class="text-surface-variant hover:text-on-primary text-label-caps font-label-caps transition-colors" href="#">Returns</a>
+</nav>
+<p class="text-body-md font-body-md text-surface-variant opacity-80">© 2024 V-Cart E-commerce. Secure &amp; Certified.</p>
+</footer>
+</body></html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>V-Cart - Mobile Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "surface-container": "#eceef2",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#191c1f",
+                        "inverse-primary": "#aec7fd",
+                        "on-surface-variant": "#44474f",
+                        "tertiary": "#2c1100",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#97f2ef",
+                        "outline-variant": "#c4c6d0",
+                        "primary-fixed-dim": "#aec7fd",
+                        "on-primary-fixed-variant": "#2d4674",
+                        "surface-variant": "#e1e2e6",
+                        "on-secondary-fixed-variant": "#00504e",
+                        "tertiary-fixed": "#ffdcc6",
+                        "inverse-on-surface": "#eff1f5",
+                        "tertiary-container": "#4b2200",
+                        "on-tertiary-container": "#c5875a",
+                        "secondary": "#006a68",
+                        "on-primary-fixed": "#001a41",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f8f9fd",
+                        "surface-dim": "#d8dade",
+                        "surface-container-low": "#f2f3f8",
+                        "on-secondary-fixed": "#00201f",
+                        "inverse-surface": "#2e3134",
+                        "surface-container-highest": "#e1e2e6",
+                        "surface-tint": "#465e8e",
+                        "primary-fixed": "#d8e2ff",
+                        "secondary-container": "#94efec",
+                        "outline": "#747780",
+                        "background": "#f8f9fd",
+                        "tertiary-fixed-dim": "#fdb787",
+                        "on-primary-container": "#7c94c8",
+                        "error-container": "#ffdad6",
+                        "surface": "#f8f9fd",
+                        "on-tertiary-fixed-variant": "#6a3b15",
+                        "primary": "#00173b",
+                        "on-secondary-container": "#006e6d",
+                        "primary-container": "#0f2c59",
+                        "surface-container-high": "#e7e8ec",
+                        "on-tertiary-fixed": "#301400",
+                        "secondary-fixed-dim": "#7ad6d3",
+                        "on-background": "#191c1f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "48px",
+                        "container-max": "1280px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "unit": "4px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "mobile-gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-md-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md-mobile": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .premium-shadow { box-shadow: 0px 4px 20px rgba(0, 23, 59, 0.04); }
+        .fab-shadow { box-shadow: 0px 8px 24px rgba(0, 23, 59, 0.12); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body-md antialiased pb-24">
+<!-- TopNavBar (Web Hidden on Mobile per rules, but showing mobile variant as Header) -->
+<header class="sticky top-0 z-40 bg-surface-container-lowest/90 backdrop-blur-md">
+<div class="flex justify-between items-center w-full px-mobile-gutter py-md max-w-container-max mx-auto border-b border-surface-variant">
+<span class="text-headline-md-mobile font-display-lg-mobile text-primary tracking-tight">V-Cart</span>
+<div class="flex items-center space-x-md text-primary">
+<span class="material-symbols-outlined cursor-pointer hover:opacity-80 transition-all">search</span>
+</div>
+</div>
+</header>
+<main class="w-full max-w-[768px] mx-auto px-mobile-gutter py-md space-y-xl">
+<!-- Mobile Hero Carousel -->
+<section class="relative w-full h-[400px] rounded-lg overflow-hidden premium-shadow bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A high-end editorial fashion shot featuring a female model in a minimalist beige trench coat, standing against a stark white architectural background. The lighting is crisp, bright, and directional, creating strong shadows. The mood is modern, sophisticated, and slightly avant-garde, emphasizing texture and form within a clean, light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJjIUmqzbp2dO7MpgZOhivtoBoppccTLogK4p84tPOkP1RahQ8AL9dhGKvmoM0MB0AjH-1AcJf82Q6WTnCyY9a9AxbDPtCAG0jPE4hBuIGSUWw-KogSTw8f_84DI-3etVd_cgnrjD-aJsJSCQ5LUnTV6OVcy7jKUTzBJkS5p-iaBQeOOzHCiHeA-I93zXDEcsstdQXHUdHq8A1u1R3pFPcDaib2yP6OrS1oX7YTOg1k8PM4lvQKWSF0g"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex flex-col justify-end p-md">
+<span class="text-label-caps font-label-caps text-secondary-fixed mb-sm uppercase tracking-wider">New Arrival</span>
+<h2 class="text-display-lg-mobile font-display-lg-mobile text-on-primary mb-sm leading-tight">The Sculpted Edit</h2>
+<button class="bg-on-primary text-primary px-lg py-sm rounded text-label-caps font-label-caps w-fit hover:bg-surface-container-low transition-colors">Shop Collection</button>
+</div>
+</section>
+<!-- Trust Badges -->
+<section class="flex justify-around items-center py-md border-y border-surface-variant text-label-caps font-label-caps text-secondary">
+<div class="flex items-center space-x-xs"><span class="material-symbols-outlined text-[16px]">verified</span><span>Verified</span></div>
+<div class="flex items-center space-x-xs"><span class="material-symbols-outlined text-[16px]">lock</span><span>Secure</span></div>
+</section>
+<!-- 2x2 Product Grid (Latest Collection) -->
+<section>
+<div class="flex justify-between items-end mb-md">
+<h3 class="text-headline-md-mobile font-headline-md text-primary">Latest Collection</h3>
+<span class="text-label-caps font-label-caps text-secondary underline cursor-pointer">View All</span>
+</div>
+<div class="grid grid-cols-2 gap-sm">
+<!-- Product 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded premium-shadow overflow-hidden group">
+<div class="relative aspect-[3/4] bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A close-up studio shot of a minimalist black leather structured handbag resting on a pristine white marble plinth. Soft, diffused overhead lighting highlights the subtle grain of the premium leather and polished silver hardware. The aesthetic is extremely clean, high-end retail, and perfectly suited for a light-mode layout." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBx5tlLZi8OqOWMMprZJ9eR1UZAFi4uosNUCahwb5joeT5ZCqAZ0vushsGYcdzQzMksKBlGkqNYwdq8MDiKOcbkB7ohsWrSvXws2ldoJXn67MQ0no8TxgD4ZZ1e21UyMu7GMQbUogXc5flAUYt_D_2bwDl-PfHfBccV0wRQKR6ahJ2oQPCe8BC8_Kc05pnxcf_VpqDR4Hj3cPGuoxQn2JNu8J2s1TLyPlyG31IXgC2efCIL4VN-DFBXw"/>
+</div>
+<div class="p-sm flex flex-col justify-between">
+<span class="text-body-md font-body-md text-on-surface truncate">Structured Mini Tote</span>
+<span class="text-body-lg font-body-lg text-primary font-bold mt-xs">$395</span>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded premium-shadow overflow-hidden group">
+<div class="relative aspect-[3/4] bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A sleek, modern silver wrist watch with a minimalist white dial, photographed straight-on against a light grey seamless background. The lighting is sharp, creating crisp reflections on the metallic surfaces. The styling is editorial and precise, communicating luxury and bank-grade attention to detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9qVqk_fHKSrlMBZqc-EEquf6G277uWjIE-reNyu12DLpfGj5RI2itBhouO6INTjkKUzU6FR4CipzuZQ23ZlN7_mklvUBF2NyJk4tK9b7YbGZLnedyQ6YeKy5dLe_VsvzpNiJgWSZiMF6YAGOV5R72DpGdkh1Y7km7DjDg_qYl69zAaGhRYpmbEIdGxPSfrisgm7SvwKaROpBxsabm-vpG9K0EQlnpi80msKttlviI8H2HqaT8PTePsA"/>
+<span class="absolute top-sm left-sm bg-primary text-on-primary text-[10px] font-label-caps px-2 py-1 rounded uppercase tracking-widest">Limited</span>
+</div>
+<div class="p-sm flex flex-col justify-between">
+<span class="text-body-md font-body-md text-on-surface truncate">Precision Timepiece</span>
+<span class="text-body-lg font-body-lg text-primary font-bold mt-xs">$850</span>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded premium-shadow overflow-hidden group">
+<div class="relative aspect-[3/4] bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A pair of elegant, sharp-toed black suede ankle boots photographed from a slight angle on a stark white background. Soft, ambient shadow anchors the boots to the floor. The image conveys modern minimalism and premium quality, fitting seamlessly into a high-fashion, light-mode e-commerce interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxmUYuWuFLSreEVAYK0T43AakLcY6aZgcyOBVag6XS8wwpIGiTr1LwUFj-_St5viyA3l4SVvutaQozLlXFaIBdTsZPzjhq9D5wHrmRddxqUQclRtRzjT78ovRE5WBQERMyBm9Ea0lKb7rLSw2CQAy9E8Gh7bHd2Cez8YIvRTDlF3YFUawR9BiHij2mVQh74XsoELDBdQ-nWs9yw0YBIWfCBtVxqt4YieSh_Km2cH5QOfbrTsQBILOxyQ"/>
+</div>
+<div class="p-sm flex flex-col justify-between">
+<span class="text-body-md font-body-md text-on-surface truncate">Suede Ankle Boot</span>
+<span class="text-body-lg font-body-lg text-primary font-bold mt-xs">$420</span>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded premium-shadow overflow-hidden group">
+<div class="relative aspect-[3/4] bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A meticulously folded stack of fine white linen dress shirts resting on a light oak wood surface. The lighting is natural and bright, creating a clean, crisp, and inviting atmosphere. The focus is on the texture of the premium fabric, embodying a sophisticated, editorial retail aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsbQD9ZAaUP8x47TA0i9gQFydC65_RakSa0Li2qlEQlooSsoUzZLlRfApoP4NzXuUsa7tYvHBUm-BWRMsf1XoOWwRQEitYN_GvWWFvJWwyaGoJADPTP_5blfnywhmF3a7mR8iba7TqoYXqBXvTVCwBHaaPYtd7_KtheKLLGtOlxODimrdoVaAsT0IHT0VfYRJfnTh_15Ub6ndKpY4Y0fWlr7cW-c9ctw9u3W6I0ODcsnbrWHoD6SahCQ"/>
+</div>
+<div class="p-sm flex flex-col justify-between">
+<span class="text-body-md font-body-md text-on-surface truncate">Linen Resort Shirt</span>
+<span class="text-body-lg font-body-lg text-primary font-bold mt-xs">$185</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating AI Assistant Button -->
+<button class="fixed bottom-28 right-mobile-gutter w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center fab-shadow z-40 hover:bg-primary-container transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</button>
+<!-- BottomNavBar (Shared Component JSON Execution) -->
+<!-- Applying exact style_ keys for BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center py-sm md:hidden bg-surface dark:bg-inverse-surface border-t border-outline-variant shadow-lg pb-safe">
+<!-- Home (Active State matched by intent: Mobile Home screen) -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-bold tap:scale-90 duration-100 hover:bg-surface-container-low p-2 rounded" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="text-label-caps font-label-caps">Home</span>
+</a>
+<!-- Collections (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant tap:scale-90 duration-100 hover:bg-surface-container-low p-2 rounded" href="#">
+<span class="material-symbols-outlined mb-1">grid_view</span>
+<span class="text-label-caps font-label-caps">Collections</span>
+</a>
+<!-- Contact (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant tap:scale-90 duration-100 hover:bg-surface-container-low p-2 rounded" href="#">
+<span class="material-symbols-outlined mb-1">mail</span>
+<span class="text-label-caps font-label-caps">Contact</span>
+</a>
+<!-- Cart (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant tap:scale-90 duration-100 hover:bg-surface-container-low p-2 rounded" href="#">
+<span class="material-symbols-outlined mb-1">shopping_cart</span>
+<span class="text-label-caps font-label-caps">Cart</span>
+</a>
+</nav>
+<!-- Safe area padding for newer mobile devices -->
+<style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 16px); }
+    </style>
+</body></html>

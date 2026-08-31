@@ -8,8 +8,8 @@ import { authDataContext } from '../context/authContext'
 import { userDataContext } from '../context/UserContext'
 import { toast } from 'react-toastify'
 import Loading from '../component/Loading'
-import google from '../assets/google.png'
-import Logo from '../assets/logo.png'
+import Nav from '../component/Nav'
+import Footer from '../component/Footer'
 
 function Registration() {
     const [show, setShow] = useState(false)
@@ -52,109 +52,123 @@ function Registration() {
     }
 
     return (
-        <div className='w-full min-h-screen bg-gray-surface text-charcoal flex flex-col items-center justify-center p-4 py-12'>
+        <div className="bg-surface-container-lowest min-h-screen flex flex-col justify-between antialiased text-on-surface">
+            <Nav />
 
-            {/* header / logo */}
-            <div 
-                className='flex items-center gap-2.5 cursor-pointer mb-8 group' 
-                onClick={() => navigate("/")}
-            >
-                <div className='p-1.5 rounded-xl bg-teal/10 border border-teal/20 group-hover:bg-teal/20 transition-all'>
-                    <img className='w-8 h-8 object-contain' src={Logo} alt="V-Cart logo" />
-                </div>
-                <h1 className='text-2xl font-bold tracking-tight text-navy'>
-                    V-Cart
-                </h1>
-            </div>
-
-            {/* form card */}
-            <div className='max-w-md w-full bg-white border border-gray-200 rounded-2xl shadow-xl p-6 sm:p-8 space-y-6'>
-                <div className='text-center space-y-1.5'>
-                    <h2 className='text-2xl font-bold text-charcoal tracking-tight'>Create Account</h2>
-                    <p className='text-xs text-gray-500'>Join V-Cart today for seamless shopping experience</p>
-                </div>
-
-                <form onSubmit={handleSignup} className='space-y-4'>
-
-                    {/* Google button */}
-                    <button
-                        type='button'
-                        className='w-full px-6 py-3 bg-white border border-gray-300 hover:bg-gray-surface active:scale-[0.99] rounded-lg flex items-center justify-center gap-3 text-sm font-semibold text-charcoal transition-all shadow-sm cursor-pointer'
-                        style={{ padding: '12px 24px', borderRadius: '8px' }}
-                        onClick={googleSignup}
-                    >
-                        <img src={google} alt="Google" className='w-4 h-4 object-contain' />
-                        Sign up with Google
-                    </button>
-
-                    <div className='flex items-center gap-3 py-1'>
-                        <div className='flex-1 h-px bg-gray-200'></div>
-                        <span className='text-[11px] font-bold text-gray-400 uppercase tracking-widest'>or email</span>
-                        <div className='flex-1 h-px bg-gray-200'></div>
+            <main className="flex-grow flex items-center justify-center py-xl px-gutter">
+                <div className="w-full max-w-md bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-md p-xl overflow-hidden relative">
+                    
+                    <div className="text-center mb-lg">
+                        <h1 className="text-display-lg-mobile text-on-surface mb-sm">Create Account</h1>
+                        <p className="text-body-md text-on-surface-variant">Join V-Cart today for a seamless shopping experience</p>
                     </div>
 
-                    {/* inputs */}
-                    <div className='space-y-3.5'>
+                    <form onSubmit={handleSignup} className="space-y-md">
                         <div>
-                            <label className='text-xs font-semibold text-gray-700 block mb-1'>Full Name</label>
+                            <label className="block text-label-caps text-on-surface mb-xs" htmlFor="name">
+                                Full Name
+                            </label>
                             <input
-                                type="text" placeholder='John Doe' required
-                                className='w-full h-11 bg-white border border-gray-300 rounded-xl px-4 text-charcoal text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-all placeholder:text-gray-400'
-                                onChange={(e) => setName(e.target.value)} value={name}
+                                id="name"
+                                type="text"
+                                placeholder="John Doe"
+                                required
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant/80 rounded focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all outline-none text-body-md text-on-surface"
                             />
                         </div>
 
                         <div>
-                            <label className='text-xs font-semibold text-gray-700 block mb-1'>Email Address</label>
+                            <label className="block text-label-caps text-on-surface mb-xs" htmlFor="email">
+                                Email Address
+                            </label>
                             <input
-                                type="email" placeholder='name@example.com' required
-                                className='w-full h-11 bg-white border border-gray-300 rounded-xl px-4 text-charcoal text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-all placeholder:text-gray-400'
-                                onChange={(e) => setEmail(e.target.value)} value={email}
+                                id="email"
+                                type="email"
+                                placeholder="you@example.com"
+                                required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant/80 rounded focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all outline-none text-body-md text-on-surface"
                             />
                         </div>
 
                         <div>
-                            <label className='text-xs font-semibold text-gray-700 block mb-1'>Password</label>
-                            <div className='relative'>
+                            <label className="block text-label-caps text-on-surface mb-xs" htmlFor="password">
+                                Password
+                            </label>
+                            <div className="relative">
                                 <input
-                                    type={show ? "text" : "password"} placeholder='At least 8 characters' required
-                                    className='w-full h-11 bg-white border border-gray-300 rounded-xl px-4 text-charcoal text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-all placeholder:text-gray-400 pr-10'
-                                    onChange={(e) => setPassword(e.target.value)} value={password}
+                                    id="password"
+                                    type={show ? "text" : "password"}
+                                    placeholder="At least 8 characters"
+                                    required
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant/80 rounded focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all outline-none text-body-md text-on-surface pr-10"
                                 />
                                 <button
-                                    type='button'
-                                    className='absolute right-3 top-3 text-gray-400 hover:text-charcoal transition-colors'
+                                    type="button"
                                     onClick={() => setShow(!show)}
+                                    className="absolute right-3 top-3 text-outline hover:text-on-surface cursor-pointer"
                                 >
-                                    {!show ? <IoEyeOutline className='w-5 h-5' /> : <IoEye className='w-5 h-5' />}
+                                    {show ? <IoEye className="w-5 h-5" /> : <IoEyeOutline className="w-5 h-5" />}
                                 </button>
                             </div>
                         </div>
 
-                        <button 
-                            type='submit'
-                            className='w-full px-6 py-3 bg-navy text-white rounded-lg text-sm font-bold flex items-center justify-center hover:bg-navy-hover active:scale-[0.99] transition-all shadow-md shadow-navy/20 mt-2 cursor-pointer'
-                            style={{ padding: '12px 24px', borderRadius: '8px' }}
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="w-full bg-primary hover:bg-primary/90 text-on-primary py-md rounded text-label-caps transition-colors shadow-sm cursor-pointer flex items-center justify-center"
                         >
                             {loading ? <Loading /> : "Create Account"}
                         </button>
+                    </form>
 
+                    <div className="mt-lg relative">
+                        <div className="absolute inset-0 flex items-center">
+                            <div className="w-full border-t border-outline-variant/50"></div>
+                        </div>
+                        <div className="relative flex justify-center text-label-caps">
+                            <span className="bg-surface-container-lowest px-md text-on-surface-variant">Or continue with</span>
+                        </div>
                     </div>
-                </form>
 
-                <div className='border-t border-gray-200 pt-4 text-center text-xs text-gray-500'>
-                    Already have an account?{' '}
-                    <button 
-                        className='text-teal font-bold hover:underline ml-1 cursor-pointer'
-                        onClick={() => navigate("/login")}
-                    >
-                        Sign in
-                    </button>
+                    <div className="mt-lg">
+                        <button
+                            type="button"
+                            onClick={googleSignup}
+                            className="w-full flex items-center justify-center px-md py-sm border border-outline-variant rounded hover:bg-surface-container-low transition-colors text-body-md text-on-surface shadow-sm cursor-pointer"
+                        >
+                            <svg className="h-5 w-5 mr-sm" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+                                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+                                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+                                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+                            </svg>
+                            Continue with Google
+                        </button>
+                    </div>
+
+                    <div className="mt-xl text-center text-body-md text-on-surface-variant">
+                        Already have an account?{" "}
+                        <button
+                            type="button"
+                            onClick={() => navigate("/login")}
+                            className="text-secondary font-semibold hover:underline cursor-pointer ml-1"
+                        >
+                            Sign in
+                        </button>
+                    </div>
+
                 </div>
-            </div>
+            </main>
+
+            <Footer />
         </div>
     )
 }
 
 export default Registration
-

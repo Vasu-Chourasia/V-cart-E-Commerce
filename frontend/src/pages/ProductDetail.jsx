@@ -1,13 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { FaStar, FaStarHalfAlt } from "react-icons/fa"
+import { useParams, Link } from 'react-router-dom'
 import { shopDataContext } from '../context/ShopContext'
 import RelatedProduct from '../component/RelatedProduct'
-import Loading from '../component/Loading'
+import Nav from '../component/Nav'
+import Footer from '../component/Footer'
+import { toast } from 'react-toastify'
+
+const ALL_SIZES = ["S", "M", "L", "XL", "XXL"]
 
 function ProductDetail() {
     const { productId } = useParams()
-    const { products, currency, addtoCart, loading } = useContext(shopDataContext)
+    const { products, currency, addToCart } = useContext(shopDataContext)
 
     const [productData, setProductData] = useState(null)
     const [mainImage, setMainImage] = useState('')
@@ -18,151 +21,167 @@ function ProductDetail() {
         if (found) {
             setProductData(found)
             setMainImage(found.image1)
-            setSize('') // reset size on product change
+            setSize('')
         }
     }, [productId, products])
 
-    if (!productData) return <div className='opacity-0'></div>
+    if (!productData) {
+        return (
+            <div className="bg-surface-container-lowest min-h-screen flex flex-col justify-between">
+                <div className="flex-grow flex items-center justify-center">
+                    <p className="text-body-md text-on-surface-variant">Loading product details...</p>
+                </div>
+                <Footer />
+            </div>
+        )
+    }
 
     const thumbs = [productData.image1, productData.image2, productData.image3, productData.image4].filter(Boolean)
+    const availableSizes = productData.sizes || []
+
+    const handleAddToCart = () => {
+        if (!size) {
+            toast.error("Please select a size first")
+            return
+        }
+        addToCart(productData._id, size)
+        toast.success(`Added ${productData.name} (${size}) to cart!`)
+    }
 
     return (
-        <div className='w-full min-h-screen bg-white pt-24 pb-32 py-12 px-4 md:py-24 md:px-6 text-charcoal'>
-            <div className='max-w-7xl mx-auto space-y-16 md:space-y-24'>
+        <div className="bg-surface-container-lowest min-h-screen flex flex-col justify-between antialiased text-on-surface">
 
+            <main className="flex-grow pt-xl pb-xl px-gutter max-w-container-max mx-auto w-full">
                 
-                {/* main product details grid */}
-                <div className='grid grid-cols-1 lg:grid-cols-12 gap-10 items-start'>
-
-                    {/* image gallery (5 cols in large screen) */}
-                    <div className='lg:col-span-6 flex flex-col-reverse sm:flex-row gap-4'>
-                        {/* thumbnails */}
-                        <div className='flex sm:flex-col gap-3 justify-center sm:justify-start overflow-x-auto sm:overflow-visible py-1'>
+                {/* Product Detail Section */}
+                <section className="grid grid-cols-1 lg:grid-cols-12 gap-lg lg:gap-xl mb-xl">
+                    
+                    {/* Left Column: Image Gallery */}
+                    <div className="lg:col-span-7 flex flex-col md:flex-row gap-md">
+                        {/* Thumbnails list */}
+                        <div className="flex md:flex-col gap-sm overflow-x-auto md:overflow-visible order-2 md:order-1 w-full md:w-24 shrink-0">
                             {thumbs.map((img, i) => (
                                 <button
                                     key={i}
                                     onClick={() => setMainImage(img)}
-                                    className={`w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border-2 transition-all flex-shrink-0 bg-gray-surface ${mainImage === img ? 'border-teal shadow-md scale-105' : 'border-gray-200 opacity-70 hover:opacity-100'}`}
+                                    className={`w-20 h-24 md:w-24 md:h-32 border rounded overflow-hidden flex-shrink-0 transition-colors cursor-pointer ${mainImage === img ? 'border-secondary' : 'border-outline-variant opacity-60 hover:opacity-100'}`}
                                 >
-                                    <img src={img} alt="" className='w-full h-full object-cover' />
+                                    <img src={img} alt="" className="w-full h-full object-cover" />
                                 </button>
                             ))}
                         </div>
-                        {/* main image */}
-                        <div className='flex-1 aspect-square sm:aspect-[4/5] bg-gray-surface border border-gray-200 rounded-2xl overflow-hidden shadow-sm relative group'>
-                            <img src={mainImage} alt={productData.name} className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500' />
+
+                        {/* Main Display Image */}
+                        <div className="order-1 md:order-2 flex-grow aspect-[3/4] md:aspect-auto md:h-[600px] bg-surface-container rounded border border-outline-variant shadow-sm overflow-hidden relative">
+                            <img src={mainImage} alt={productData.name} className="w-full h-full object-cover" />
+                            {productData.bestseller ? (
+                                <div className="absolute top-md left-md bg-secondary text-on-secondary px-sm py-xs rounded text-label-caps uppercase tracking-wider font-bold">
+                                    Bestseller
+                                </div>
+                            ) : (
+                                <div className="absolute top-md left-md bg-primary text-on-primary px-sm py-xs rounded text-label-caps uppercase tracking-wider font-bold">
+                                    New Arrival
+                                </div>
+                            )}
                         </div>
                     </div>
 
-                    {/* product details (7 cols in large screen) */}
-                    <div className='lg:col-span-6 space-y-6 bg-gray-surface border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm'>
-                        <div>
-                            <span className='px-3 py-1 text-[11px] font-bold tracking-widest uppercase text-teal bg-teal/10 border border-teal/20 rounded-full inline-block mb-3'>
-                                {productData.category} / {productData.subCategory}
-                            </span>
-                            <h1 className='text-2xl sm:text-3xl font-extrabold text-charcoal tracking-tight'>
-                                {productData.name}
-                            </h1>
-                        </div>
+                    {/* Right Column: Product Details */}
+                    <div className="lg:col-span-5 flex flex-col pt-md lg:pt-0">
+                        {/* Breadcrumbs */}
+                        <nav className="flex text-on-surface-variant text-label-caps mb-md space-x-2">
+                            <Link to="/" className="hover:text-primary transition-colors">Home</Link>
+                            <span>/</span>
+                            <Link to="/collection" className="hover:text-primary transition-colors">{productData.category}</Link>
+                            <span>/</span>
+                            <span className="text-on-surface font-semibold">{productData.subCategory}</span>
+                        </nav>
 
-                        {/* rating */}
-                        <div className='flex items-center gap-2 text-sm'>
-                            <div className='flex items-center gap-1 text-amber-500'>
-                                {[...Array(4)].map((_, i) => <FaStar key={i} />)}
-                                <FaStarHalfAlt />
-                            </div>
-                            <span className='text-gray-500 text-xs font-medium'>(124 customer reviews)</span>
-                        </div>
+                        <h1 className="text-display-lg-mobile md:text-display-lg font-bold text-on-surface mb-xs">
+                            {productData.name}
+                        </h1>
 
-                        {/* price */}
-                        <div className='flex items-baseline gap-3 border-y border-gray-200 py-4'>
-                            <span className='text-3xl font-extrabold text-navy tracking-tight'>
-                                {currency} {productData.price}
-                            </span>
-                            <span className='text-xs text-emerald-700 font-semibold px-2 py-0.5 bg-emerald-50 rounded-md border border-emerald-200'>
-                                In Stock
-                            </span>
-                        </div>
+                        <p className="text-headline-md font-bold text-surface-tint mb-lg">
+                            {currency} {productData.price}
+                        </p>
 
-                        {/* description snippet */}
-                        <p className='text-gray-600 text-sm leading-relaxed font-normal'>
+                        <p className="text-body-md text-on-surface-variant mb-xl leading-relaxed">
                             {productData.description}
                         </p>
 
-                        {/* size selector */}
-                        {productData.sizes && productData.sizes.length > 0 && (
-                            <div className='space-y-3 pt-2'>
-                                <label className='text-charcoal font-semibold text-xs uppercase tracking-wider block'>Select Size</label>
-                                <div className='flex flex-wrap gap-2.5'>
-                                    {productData.sizes.map((s, i) => (
+                        {/* Size Selector */}
+                        <div className="mb-lg">
+                            <div className="flex justify-between items-end mb-sm">
+                                <span className="text-label-caps text-on-surface font-bold">Select Size</span>
+                                <button
+                                    type="button"
+                                    onClick={() => toast.info("Size Guide coming soon!")}
+                                    className="text-label-caps text-secondary underline hover:text-on-secondary-container cursor-pointer"
+                                >
+                                    Size Guide
+                                </button>
+                            </div>
+                            <div className="flex flex-wrap gap-sm">
+                                {ALL_SIZES.map((s) => {
+                                    const isAvailable = availableSizes.includes(s)
+                                    const isSelected = size === s
+
+                                    if (!isAvailable) {
+                                        return (
+                                            <button
+                                                key={s}
+                                                disabled
+                                                className="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center text-body-md text-surface-variant cursor-not-allowed opacity-50"
+                                            >
+                                                {s}
+                                            </button>
+                                        )
+                                    }
+
+                                    return (
                                         <button
-                                            key={i}
+                                            key={s}
+                                            type="button"
                                             onClick={() => setSize(s)}
-                                            className={`px-4 py-2.5 rounded-lg text-xs font-bold transition-all border ${s === size ? 'bg-navy text-white border-navy shadow-md scale-105' : 'bg-white text-charcoal border-gray-300 hover:border-teal'}`}
+                                            className={`w-12 h-12 rounded-full border flex items-center justify-center text-body-md transition-all cursor-pointer ${
+                                                isSelected
+                                                    ? 'border-2 border-primary bg-primary text-on-primary font-bold shadow-sm'
+                                                    : 'border-outline-variant text-on-surface hover:border-secondary hover:text-secondary'
+                                            }`}
                                         >
                                             {s}
                                         </button>
-                                    ))}
-                                </div>
+                                    )
+                                })}
                             </div>
-                        )}
-
-                        {/* add to cart action button — styled with disabled token when size is missing */}
-                        <button
-                            onClick={() => addtoCart(productData._id, size)}
-                            disabled={!size}
-                            className={`w-full sm:w-auto px-6 py-3 font-bold text-sm rounded-lg transition-all flex items-center justify-center gap-2 mt-4 ${
-                                size 
-                                    ? 'bg-navy text-white hover:bg-navy-hover active:scale-95 shadow-md shadow-navy/20 cursor-pointer' 
-                                    : 'bg-disabled-bg text-disabled-text border border-gray-300 cursor-not-allowed opacity-70 shadow-none'
-                            }`}
-                            style={{ padding: '12px 24px', borderRadius: '8px' }}
-                        >
-                            {loading ? <Loading /> : (size ? "Add to Shopping Cart" : "Please Select a Size")}
-                        </button>
-
-                        {/* guarantees */}
-                        <div className='space-y-2 border-t border-gray-200 pt-4 text-xs text-gray-600 font-medium'>
-                            <p className='flex items-center gap-2'>
-                                <span className='text-teal font-bold'>✓</span> 100% Guaranteed Original Product
-                            </p>
-                            <p className='flex items-center gap-2'>
-                                <span className='text-teal font-bold'>✓</span> Cash on delivery available
-                            </p>
-                            <p className='flex items-center gap-2'>
-                                <span className='text-teal font-bold'>✓</span> Easy return and exchange within 7 days
-                            </p>
                         </div>
 
-                    </div>
-
-                </div>
-
-                {/* extra details tab */}
-                <div className='bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm'>
-                    <div className='flex border-b border-gray-200 bg-gray-surface'>
-                        <button className='px-6 py-3.5 text-xs font-bold tracking-wider text-teal border-b-2 border-teal bg-white'>
-                            DESCRIPTION
+                        {/* Add to Cart CTA */}
+                        <button
+                            type="button"
+                            onClick={handleAddToCart}
+                            className="w-full bg-primary hover:bg-primary/90 text-on-primary py-md rounded transition-colors duration-200 text-body-lg font-semibold shadow-md active:scale-[0.98] flex items-center justify-center gap-sm cursor-pointer"
+                        >
+                            <span className="material-symbols-outlined">shopping_bag</span>
+                            Add to Cart
                         </button>
-                        <button className='px-6 py-3.5 text-xs font-bold tracking-wider text-gray-500 hover:text-charcoal transition-colors'>
-                            REVIEWS (124)
-                        </button>
-                    </div>
-                    <div className='p-6 sm:p-8 text-gray-600 text-sm leading-relaxed space-y-3'>
-                        <p>{productData.description}</p>
-                        <p className='text-xs text-gray-400'>
-                            Crafted from premium quality materials, this item combines elegance with durability. Engineered for everyday functionality and lasting performance.
-                        </p>
-                    </div>
-                </div>
 
-                {/* related products */}
+                        <div className="mt-lg flex items-center gap-sm text-on-surface-variant text-label-caps bg-surface-container-low p-sm rounded">
+                            <span className="material-symbols-outlined text-secondary">verified_user</span>
+                            Secure Checkout & Free Returns within 30 days.
+                        </div>
+                    </div>
+
+                </section>
+
+                {/* Related Products */}
                 <RelatedProduct category={productData.category} subCategory={productData.subCategory} currentProductId={productData._id} />
 
-            </div>
+            </main>
+
+            <Footer />
         </div>
     )
 }
 
 export default ProductDetail
-

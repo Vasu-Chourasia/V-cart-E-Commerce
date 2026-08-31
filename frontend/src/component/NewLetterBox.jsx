@@ -1,38 +1,35 @@
 import React from 'react'
+import { toast } from 'react-toastify'
 
-// newsletter subscription UI — minimalist glass banner
 function NewLetterBox() {
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        toast.success("Thank you for subscribing!")
+    }
+
     return (
-        <section className='w-full bg-gray-surface border-t border-gray-200 py-16 md:py-20 px-4 md:px-8'>
-            <div className='max-w-7xl mx-auto'>
-                <div className='w-full bg-white border border-gray-200 rounded-3xl p-8 md:p-14 shadow-sm flex flex-col items-center text-center gap-6 relative overflow-hidden'>
-                    <span className='text-teal text-xs font-extrabold uppercase tracking-widest'>
-                        SPECIAL OFFER
+        <section className="py-xl px-gutter bg-surface-container-low border-t border-surface-container-high">
+            <div className="max-w-container-max mx-auto">
+                <div className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-lg md:p-xl shadow-sm flex flex-col items-center text-center gap-md">
+                    <span className="text-secondary text-label-caps uppercase tracking-widest">
+                        Exclusive Access
                     </span>
-                    <h3 className='text-3xl md:text-5xl font-extrabold text-charcoal tracking-tight max-w-2xl leading-tight'>
-                        Subscribe to get 20% off your first order
+                    <h3 className="text-display-lg-mobile md:text-headline-md font-bold text-on-surface tracking-tight max-w-2xl">
+                        Subscribe for 20% Off Your First Purchase
                     </h3>
-                    <p className='text-gray-600 text-sm md:text-base max-w-md leading-relaxed font-normal'>
-                        Join our VIP list for exclusive offers and new arrivals.
+                    <p className="text-body-md text-on-surface-variant max-w-md">
+                        Join our curated mailing list to receive exclusive seasonal previews, private sale invitations, and design insights.
                     </p>
-                    <form onSubmit={(e) => e.preventDefault()} className='flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full max-w-md mt-4 relative'>
+                    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-sm w-full max-w-md mt-sm">
                         <input
                             type="email"
-                            name="newsletter_email"
-                            id="newsletter_email_input"
-                            placeholder='Enter your email address...'
-                            autoComplete="off"
-                            spellCheck="false"
-                            data-1p-ignore="true"
-                            data-lpignore="true"
-                            className='w-full sm:flex-1 h-12 bg-gray-surface border border-gray-300 rounded-lg px-4 text-charcoal text-sm placeholder:text-gray-400 focus:outline-none focus:border-teal transition-all font-normal appearance-none'
+                            placeholder="Enter your email address..."
                             required
+                            className="w-full sm:flex-1 h-11 bg-surface-container-lowest border border-outline-variant rounded px-md text-body-md text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:border-secondary transition-all"
                         />
-
-                        <button 
+                        <button
                             type="submit"
-                            className='w-full sm:w-auto bg-navy text-white text-sm rounded-lg hover:bg-navy-hover active:scale-95 transition-all shadow-md shadow-navy/20 flex-shrink-0'
-                            style={{ padding: '14px 32px', borderRadius: '8px', fontWeight: 600 }}
+                            className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-on-primary rounded text-label-caps uppercase px-lg py-md transition-colors shadow-sm cursor-pointer whitespace-nowrap"
                         >
                             Subscribe
                         </button>
@@ -43,8 +40,4 @@ function NewLetterBox() {
     )
 }
 
-
-
 export default NewLetterBox
-
-

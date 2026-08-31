@@ -1,61 +1,33 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../assets/logo.png'
+import { toast } from 'react-toastify'
 
 function Footer() {
     return (
-        <footer className='w-full bg-navy border-t border-navy-hover text-white pt-16 pb-32 mt-16'>
-
-            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-12'>
-                
-                {/* Brand info */}
-                <div className='md:col-span-2 flex flex-col gap-4'>
-                    <div className='flex items-center gap-2.5 cursor-pointer'>
-                        <img src={logo} alt="V-Cart" className='w-8 h-8 object-contain' />
-                        <span className='text-2xl font-bold text-white tracking-wide'>
-                            V-Cart
-                        </span>
-                    </div>
-                    <p className='text-sm text-gray-300 max-w-md leading-relaxed'>
-                        V-Cart is your premier online shopping destination, offering high-quality fashion, modern lifestyle essentials, fast delivery, and standard customer support.
-                    </p>
-                </div>
-
-                {/* Quick links */}
-                <div className='flex flex-col gap-3'>
-                    <h4 className='font-semibold tracking-wider uppercase text-xs text-teal'>
-                        Navigation
-                    </h4>
-                    <ul className='flex flex-col gap-2 text-sm text-gray-300'>
-                        <li><Link to="/" className='hover:text-white transition-colors'>Home</Link></li>
-                        <li><Link to="/collection" className='hover:text-white transition-colors'>Collections</Link></li>
-                        <li><Link to="/about" className='hover:text-white transition-colors'>About Us</Link></li>
-                        <li><Link to="/contact" className='hover:text-white transition-colors'>Contact</Link></li>
-                    </ul>
-                </div>
-
-                {/* Contact info */}
-                <div className='flex flex-col gap-3'>
-                    <h4 className='font-semibold tracking-wider uppercase text-xs text-teal'>
-                        Get In Touch
-                    </h4>
-                    <ul className='flex flex-col gap-2 text-sm text-gray-300'>
-                        <li>Phone: +91-9131755102</li>
-                        <li>Email: vdevwork1906@gmail.com</li>
-                        <li>Location: Random City, State, India</li>
-                    </ul>
-                </div>
-
-            </div>
-
-            {/* Copyright divider line */}
-            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400'>
-                <p>Copyright {new Date().getFullYear()} © V-Cart — All Rights Reserved</p>
-                <p className='text-gray-300 font-medium'>Designed for Modern Commerce</p>
-            </div>
+        <footer className="bg-primary text-on-primary w-full py-xl px-gutter flex flex-col items-center space-y-md text-center mt-auto">
+            <div className="text-headline-md text-on-primary mb-md font-bold">V-Cart</div>
+            <nav className="flex flex-wrap justify-center gap-md mb-md">
+                <Link to="/about" className="text-surface-variant hover:text-on-primary hover:text-secondary-fixed transition-colors text-label-caps">
+                    About Us
+                </Link>
+                <Link to="/contact" className="text-surface-variant hover:text-on-primary hover:text-secondary-fixed transition-colors text-label-caps">
+                    Contact Us
+                </Link>
+                <Link to="/collection" className="text-surface-variant hover:text-on-primary hover:text-secondary-fixed transition-colors text-label-caps">
+                    Collections
+                </Link>
+                <button
+                    onClick={() => toast.info("Privacy Policy coming soon!")}
+                    className="text-surface-variant hover:text-on-primary hover:text-secondary-fixed transition-colors text-label-caps cursor-pointer"
+                >
+                    Privacy Policy
+                </button>
+            </nav>
+            <p className="text-body-md text-on-primary/60">
+                © {new Date().getFullYear()} V-Cart E-commerce. Secure & Certified.
+            </p>
         </footer>
     )
 }
 
 export default Footer
-

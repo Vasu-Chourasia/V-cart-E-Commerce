@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>V-Cart - Collections Catalog</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "surface-container": "#eceef2",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#191c1f",
+                        "inverse-primary": "#aec7fd",
+                        "on-surface-variant": "#44474f",
+                        "tertiary": "#2c1100",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#97f2ef",
+                        "outline-variant": "#c4c6d0",
+                        "primary-fixed-dim": "#aec7fd",
+                        "on-primary-fixed-variant": "#2d4674",
+                        "surface-variant": "#e1e2e6",
+                        "on-secondary-fixed-variant": "#00504e",
+                        "tertiary-fixed": "#ffdcc6",
+                        "inverse-on-surface": "#eff1f5",
+                        "tertiary-container": "#4b2200",
+                        "on-tertiary-container": "#c5875a",
+                        "secondary": "#006a68",
+                        "on-primary-fixed": "#001a41",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f8f9fd",
+                        "surface-dim": "#d8dade",
+                        "surface-container-low": "#f2f3f8",
+                        "on-secondary-fixed": "#00201f",
+                        "inverse-surface": "#2e3134",
+                        "surface-container-highest": "#e1e2e6",
+                        "surface-tint": "#465e8e",
+                        "primary-fixed": "#d8e2ff",
+                        "secondary-container": "#94efec",
+                        "outline": "#747780",
+                        "background": "#f8f9fd",
+                        "tertiary-fixed-dim": "#fdb787",
+                        "on-primary-container": "#7c94c8",
+                        "error-container": "#ffdad6",
+                        "surface": "#f8f9fd",
+                        "on-tertiary-fixed-variant": "#6a3b15",
+                        "primary": "#00173b",
+                        "on-secondary-container": "#006e6d",
+                        "primary-container": "#0f2c59",
+                        "surface-container-high": "#e7e8ec",
+                        "on-tertiary-fixed": "#301400",
+                        "secondary-fixed-dim": "#7ad6d3",
+                        "on-background": "#191c1f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "48px",
+                        "container-max": "1280px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "unit": "4px",
+                        "lg": "24px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filter-checkbox:checked {
+            background-color: theme('colors.secondary');
+            border-color: theme('colors.secondary');
+        }
+        .filter-checkbox:focus {
+            --tw-ring-color: theme('colors.secondary');
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-primary text-on-primary docked full-width top-0 shadow-md z-40 hidden md:block">
+<div class="flex justify-between items-center w-full px-gutter py-md max-w-container-max mx-auto">
+<div class="text-headline-md font-display-lg text-on-primary">V-Cart</div>
+<nav class="flex space-x-lg">
+<a class="text-surface-variant hover:text-on-primary transition-colors text-label-caps font-label-caps hover:opacity-80 transition-all" href="#">Home</a>
+<a class="text-secondary-fixed font-bold border-b-2 border-secondary-fixed pb-1 text-label-caps font-label-caps hover:opacity-80 transition-all transform scale-95 transition-transform" href="#">Collections</a>
+<a class="text-surface-variant hover:text-on-primary transition-colors text-label-caps font-label-caps hover:opacity-80 transition-all" href="#">About</a>
+<a class="text-surface-variant hover:text-on-primary transition-colors text-label-caps font-label-caps hover:opacity-80 transition-all" href="#">Contact</a>
+</nav>
+<div class="flex space-x-md">
+<button class="hover:opacity-80 transition-all"><span class="material-symbols-outlined" data-icon="search">search</span></button>
+<button class="hover:opacity-80 transition-all"><span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span></button>
+<button class="hover:opacity-80 transition-all"><span class="material-symbols-outlined" data-icon="account_circle">account_circle</span></button>
+</div>
+</div>
+</header>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="border-t border-outline-variant bg-surface docked full-width bottom-0 z-50 shadow-lg fixed bottom-0 left-0 w-full flex justify-around items-center py-sm md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span>Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary font-bold hover:bg-surface-container-low text-label-caps font-label-caps transform scale-90 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span>Collections</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span>Contact</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span>Cart</span>
+</a>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-md md:px-gutter py-xl">
+<!-- Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-xl border-b border-surface-dim pb-md">
+<div>
+<h1 class="text-display-lg-mobile md:text-display-lg font-display-lg-mobile md:font-display-lg mb-xs">Collections</h1>
+<p class="text-on-surface-variant text-body-md font-body-md">Showing 1-12 of 145 products</p>
+</div>
+<div class="mt-md md:mt-0 flex items-center space-x-md">
+<button class="md:hidden flex items-center space-x-xs border border-outline-variant rounded-lg px-md py-sm text-body-md font-body-md hover:bg-surface-container-low">
+<span class="material-symbols-outlined">filter_list</span>
+<span>Filters</span>
+</button>
+<div class="relative">
+<select class="appearance-none bg-surface border border-outline-variant rounded-lg pl-md pr-xl py-sm text-body-md font-body-md focus:border-secondary focus:ring-1 focus:ring-secondary outline-none cursor-pointer">
+<option>Sort by: Featured</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+<option>Newest Arrivals</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 transform -translate-y-1/2 pointer-events-none text-outline">expand_more</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-lg">
+<!-- Left Sidebar Filters (Desktop) -->
+<aside class="hidden md:block w-64 flex-shrink-0 space-y-lg pr-md border-r border-surface-dim">
+<!-- Category Filter -->
+<div class="border-b border-surface-dim pb-lg">
+<h3 class="text-headline-md font-headline-md mb-md text-primary-container">Category</h3>
+<div class="space-y-sm">
+<label class="flex items-center cursor-pointer group">
+<input class="filter-checkbox rounded-DEFAULT border-outline-variant text-secondary focus:ring-secondary w-5 h-5 cursor-pointer" type="checkbox"/>
+<span class="ml-sm text-body-md font-body-md text-on-surface group-hover:text-primary-container transition-colors">Men</span>
+</label>
+<label class="flex items-center cursor-pointer group">
+<input checked="" class="filter-checkbox rounded-DEFAULT border-outline-variant text-secondary focus:ring-secondary w-5 h-5 cursor-pointer" type="checkbox"/>
+<span class="ml-sm text-body-md font-body-md text-on-surface group-hover:text-primary-container transition-colors font-bold">Women</span>
+</label>
+<label class="flex items-center cursor-pointer group">
+<input class="filter-checkbox rounded-DEFAULT border-outline-variant text-secondary focus:ring-secondary w-5 h-5 cursor-pointer" type="checkbox"/>
+<span class="ml-sm text-body-md font-body-md text-on-surface group-hover:text-primary-container transition-colors">Kids</span>
+</label>
+</div>
+</div>
+<!-- Type Filter -->
+<div class="border-b border-surface-dim pb-lg">
+<h3 class="text-headline-md font-headline-md mb-md text-primary-container">Type</h3>
+<div class="space-y-sm">
+<label class="flex items-center cursor-pointer group">
+<input class="filter-checkbox rounded-DEFAULT border-outline-variant text-secondary focus:ring-secondary w-5 h-5 cursor-pointer" type="checkbox"/>
+<span class="ml-sm text-body-md font-body-md text-on-surface group-hover:text-primary-container transition-colors">TopWear</span>
+</label>
+<label class="flex items-center cursor-pointer group">
+<input checked="" class="filter-checkbox rounded-DEFAULT border-outline-variant text-secondary focus:ring-secondary w-5 h-5 cursor-pointer" type="checkbox"/>
+<span class="ml-sm text-body-md font-body-md text-on-surface group-hover:text-primary-container transition-colors font-bold">BottomWear</span>
+</label>
+<label class="flex items-center cursor-pointer group">
+<input class="filter-checkbox rounded-DEFAULT border-outline-variant text-secondary focus:ring-secondary w-5 h-5 cursor-pointer" type="checkbox"/>
+<span class="ml-sm text-body-md font-body-md text-on-surface group-hover:text-primary-container transition-colors">WinterWear</span>
+</label>
+</div>
+</div>
+<!-- Price Filter (Bonus) -->
+<div>
+<h3 class="text-headline-md font-headline-md mb-md text-primary-container">Price Range</h3>
+<input class="w-full h-1 bg-surface-dim rounded-lg appearance-none cursor-pointer accent-secondary" type="range"/>
+<div class="flex justify-between mt-xs text-label-caps font-label-caps text-on-surface-variant">
+<span>$0</span>
+<span>$500+</span>
+</div>
+</div>
+</aside>
+<!-- Product Grid -->
+<div class="flex-grow">
+<!-- Active Filters Tags -->
+<div class="flex flex-wrap gap-sm mb-lg">
+<span class="inline-flex items-center px-md py-xs rounded-full bg-surface-container-low text-label-caps font-label-caps border border-outline-variant">
+                        Women
+                        <button class="ml-xs hover:text-error transition-colors"><span class="material-symbols-outlined text-[16px]">close</span></button>
+</span>
+<span class="inline-flex items-center px-md py-xs rounded-full bg-surface-container-low text-label-caps font-label-caps border border-outline-variant">
+                        BottomWear
+                        <button class="ml-xs hover:text-error transition-colors"><span class="material-symbols-outlined text-[16px]">close</span></button>
+</span>
+<button class="text-label-caps font-label-caps text-on-surface-variant hover:text-secondary underline underline-offset-2 ml-sm">Clear All</button>
+</div>
+<!-- Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-lg">
+<!-- Product Card 1 -->
+<div class="group relative bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col hover:shadow-[0_4px_20px_rgba(0,23,59,0.04)] transition-shadow duration-300">
+<div class="relative aspect-[3/4] bg-surface-container-low overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A high-fashion studio shot of a model wearing tailored, wide-leg charcoal trousers. The lighting is crisp, cool, and bright, illuminating the texture of the premium fabric. The background is pure white, creating a modern, minimalist light-mode aesthetic suitable for a luxury e-commerce catalog." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBT_lvFt8h0NaWuVLtlVu5kUf1XVavXOE4b1_Jp-NEpjGTCCLsub6YFWHgPMsDzh2oIqqXDCKppH7V3a5m8MoFh73VIUo3bKPjC0sN769NLre2bRICtOlBZfY78HzhEK4zgr2xXd762uNISJ1MUXYxqcTHMigd-zlSHWy6DsWSfl5OskLxiqdh_2ml3P4LOwR8ZevurfpZ08IjTNKvtJo166R-0CsyhrJW16pIcVa02fdekxpCp9VBVeA"/>
+<div class="absolute top-sm left-sm bg-surface-container-lowest px-sm py-xs text-label-caps font-label-caps border border-outline-variant text-on-surface">New</div>
+<button class="absolute top-sm right-sm w-8 h-8 bg-surface-container-lowest rounded-full flex items-center justify-center border border-outline-variant text-on-surface-variant hover:text-error transition-colors opacity-0 group-hover:opacity-100 duration-300 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<!-- Quick Add Overlay -->
+<div class="absolute bottom-0 left-0 w-full p-sm translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
+<button class="w-full bg-primary text-on-primary py-sm rounded-DEFAULT text-label-caps font-label-caps hover:bg-primary-container transition-colors flex items-center justify-center space-x-xs">
+<span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
+<span>Quick Add</span>
+</button>
+</div>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-xs">
+<h4 class="text-body-md font-body-md text-primary-container truncate pr-md">Tailored Wide-Leg Trousers</h4>
+<span class="text-body-md font-body-md font-bold text-on-surface">$185</span>
+</div>
+<p class="text-label-caps font-label-caps text-on-surface-variant mb-sm">Women • BottomWear</p>
+<div class="flex space-x-xs mt-auto">
+<div class="w-4 h-4 rounded-full bg-[#333333] border border-outline-variant cursor-pointer"></div>
+<div class="w-4 h-4 rounded-full bg-[#D2B48C] border border-outline-variant cursor-pointer"></div>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group relative bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col hover:shadow-[0_4px_20px_rgba(0,23,59,0.04)] transition-shadow duration-300">
+<div class="relative aspect-[3/4] bg-surface-container-low overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A clean, minimalist e-commerce product shot of a women's pleated midi skirt in a soft beige tone. The skirt is displayed on a pure white background with bright, even studio lighting that highlights the pleat details. The overall mood is elegant, modern, and aligned with a premium light-mode retail aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXt-vWLt1wew72QMRfkCVfAEn3ZmjlyOXtO7wmNIO1d8M58HhUwYMwBVTYx1pdIo0XEsFL1UelF90EU8ytldAw8zC2iJkYNX6bGDflTjyRnRRlHkwRzeUNEbh1hKDtbLuvDb5r9uqwcHv_ICF4ws7dK-_2hGLJEElosg0F0FyzjxI1KIjh-L1_u33DFiZd4cmkwKbo4Yfj4BvuYucm-KLsTJoSWrzIBcZ2PeGdAOVOv37mLBahWpBbDQ"/>
+<button class="absolute top-sm right-sm w-8 h-8 bg-surface-container-lowest rounded-full flex items-center justify-center border border-outline-variant text-on-surface-variant hover:text-error transition-colors opacity-0 group-hover:opacity-100 duration-300 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<!-- Quick Add Overlay -->
+<div class="absolute bottom-0 left-0 w-full p-sm translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
+<button class="w-full bg-primary text-on-primary py-sm rounded-DEFAULT text-label-caps font-label-caps hover:bg-primary-container transition-colors flex items-center justify-center space-x-xs">
+<span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
+<span>Quick Add</span>
+</button>
+</div>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-xs">
+<h4 class="text-body-md font-body-md text-primary-container truncate pr-md">Pleated Midi Skirt</h4>
+<span class="text-body-md font-body-md font-bold text-on-surface">$145</span>
+</div>
+<p class="text-label-caps font-label-caps text-on-surface-variant mb-sm">Women • BottomWear</p>
+<div class="flex space-x-xs mt-auto">
+<div class="w-4 h-4 rounded-full bg-[#F5F5DC] border border-outline-variant cursor-pointer"></div>
+<div class="w-4 h-4 rounded-full bg-[#00173b] border border-outline-variant cursor-pointer"></div>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group relative bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col hover:shadow-[0_4px_20px_rgba(0,23,59,0.04)] transition-shadow duration-300">
+<div class="relative aspect-[3/4] bg-surface-container-low overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A modern, high-key studio photograph of women's straight-leg denim jeans in a classic indigo wash. The jeans are styled neatly against a pristine white background. The lighting is bright and crisp, emphasizing the denim texture and stitching, fitting a clean, minimalist e-commerce design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKLPBYNOQuWCUjphRTDtFNCsCJ5l1QPWnUyfLR0u_gGRCv9p0kv0V4gZrFxz76XuYvrI330pGuBkA3V9jPIosnZ396SKcSnff4NUzcc3NvquogHV93Wy9keWND0_dnAaR7vQMa2m95Jt168czBQFixufJLcgm4kOjMGSLXcC9bnkUnD51JIxLlkw_YE56e1-sreNHMdgNs6P-ZPyb5g8sxfkfnP3tRjKiRex-37UHwuKlu2PW64ABTfQ"/>
+<button class="absolute top-sm right-sm w-8 h-8 bg-surface-container-lowest rounded-full flex items-center justify-center border border-outline-variant text-on-surface-variant hover:text-error transition-colors opacity-0 group-hover:opacity-100 duration-300 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<!-- Quick Add Overlay -->
+<div class="absolute bottom-0 left-0 w-full p-sm translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
+<button class="w-full bg-primary text-on-primary py-sm rounded-DEFAULT text-label-caps font-label-caps hover:bg-primary-container transition-colors flex items-center justify-center space-x-xs">
+<span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
+<span>Quick Add</span>
+</button>
+</div>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-xs">
+<h4 class="text-body-md font-body-md text-primary-container truncate pr-md">Classic Straight Denim</h4>
+<span class="text-body-md font-body-md font-bold text-on-surface">$120</span>
+</div>
+<p class="text-label-caps font-label-caps text-on-surface-variant mb-sm">Women • BottomWear</p>
+<div class="flex space-x-xs mt-auto">
+<div class="w-4 h-4 rounded-full bg-[#1e3a8a] border border-outline-variant cursor-pointer"></div>
+<div class="w-4 h-4 rounded-full bg-[#60a5fa] border border-outline-variant cursor-pointer"></div>
+<div class="w-4 h-4 rounded-full bg-[#111827] border border-outline-variant cursor-pointer"></div>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group relative bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col hover:shadow-[0_4px_20px_rgba(0,23,59,0.04)] transition-shadow duration-300">
+<div class="relative aspect-[3/4] bg-surface-container-low overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A professional e-commerce shot of a sleek, black silk slip skirt for women. The fabric catches the bright studio light with a subtle sheen. The background is stark white, ensuring the focus remains on the product, maintaining a luxurious, minimalist light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0ZLcklN31Cen3alIIeT3vaU2rbbWotoFMripEKa4PnoCleT3k5gNVQ_1IiiqdvS-6t1_kTKjuy469wLfJ4YiW2NHC-dL-tO6YHRIOSrOSr1KuVo41eYihk51VYIVjUtjQJYeHXG6H_Y1pvaA9L5mFImzG3sQFtlKIMTn7txoGxkIA86_vT5eAGN3mxkM3mJbxboCSND6W-x8PqgAMz02xYM0TQTppZ-w9ryHVWI5yxHEP_AHnTjvmHQ"/>
+<button class="absolute top-sm right-sm w-8 h-8 bg-surface-container-lowest rounded-full flex items-center justify-center border border-outline-variant text-on-surface-variant hover:text-error transition-colors opacity-0 group-hover:opacity-100 duration-300 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<!-- Quick Add Overlay -->
+<div class="absolute bottom-0 left-0 w-full p-sm translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
+<button class="w-full bg-primary text-on-primary py-sm rounded-DEFAULT text-label-caps font-label-caps hover:bg-primary-container transition-colors flex items-center justify-center space-x-xs">
+<span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
+<span>Quick Add</span>
+</button>
+</div>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-xs">
+<h4 class="text-body-md font-body-md text-primary-container truncate pr-md">Silk Slip Skirt</h4>
+<span class="text-body-md font-body-md font-bold text-on-surface">$210</span>
+</div>
+<p class="text-label-caps font-label-caps text-on-surface-variant mb-sm">Women • BottomWear</p>
+<div class="flex space-x-xs mt-auto">
+<div class="w-4 h-4 rounded-full bg-[#000000] border border-outline-variant cursor-pointer"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex justify-center mt-xl pt-lg border-t border-surface-dim">
+<nav class="flex items-center space-x-sm">
+<button class="p-sm text-outline hover:text-primary-container transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full bg-primary text-on-primary text-label-caps font-label-caps">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low text-label-caps font-label-caps transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low text-label-caps font-label-caps transition-colors">3</button>
+<span class="text-on-surface-variant">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low text-label-caps font-label-caps transition-colors">12</button>
+<button class="p-sm text-outline hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</nav>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating AI Assistant -->
+<button class="fixed bottom-xl right-md md:right-xl w-14 h-14 bg-primary text-on-primary rounded-full shadow-[0_4px_20px_rgba(0,23,59,0.12)] flex items-center justify-center hover:bg-primary-container transition-colors z-50 mb-xl md:mb-0">
+<span class="material-symbols-outlined">smart_toy</span>
+</button>
+<!-- Footer -->
+<footer class="bg-primary text-on-primary full-width mt-auto mb-16 md:mb-0 pb-md md:pb-0">
+<div class="w-full py-xl px-gutter flex flex-col items-center space-y-md text-center">
+<div class="text-headline-md font-display-lg text-on-primary mb-sm">V-Cart</div>
+<div class="flex flex-wrap justify-center gap-md">
+<a class="text-surface-variant hover:text-on-primary hover:text-secondary-fixed transition-colors text-label-caps font-label-caps" href="#">Privacy Policy</a>
+<a class="text-surface-variant hover:text-on-primary hover:text-secondary-fixed transition-colors text-label-caps font-label-caps" href="#">Terms of Service</a>
+<a class="text-surface-variant hover:text-on-primary hover:text-secondary-fixed transition-colors text-label-caps font-label-caps" href="#">Shipping Info</a>
+<a class="text-surface-variant hover:text-on-primary hover:text-secondary-fixed transition-colors text-label-caps font-label-caps" href="#">Returns</a>
+</div>
+<p class="text-body-md font-body-md text-surface-variant mt-lg">© 2024 V-Cart E-commerce. Secure &amp; Certified.</p>
+</div>
+</footer>
+</body></html>

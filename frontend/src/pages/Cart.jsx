@@ -1,15 +1,14 @@
 import React, { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { shopDataContext } from '../context/ShopContext'
-import Title from '../component/Title'
 import CartTotal from '../component/CartTotal'
-import { FiTrash2 } from "react-icons/fi"
+import Nav from '../component/Nav'
+import Footer from '../component/Footer'
 
 function Cart() {
     const { products, cartItem, updateQuantity, currency } = useContext(shopDataContext)
     const navigate = useNavigate()
 
-    // build a flat list of cart entries for rendering
     const cartEntries = []
     for (const itemId in cartItem) {
         for (const size in cartItem[itemId]) {
@@ -23,98 +22,118 @@ function Cart() {
     }
 
     return (
-        <div className='w-full min-h-screen bg-white pt-24 pb-32 py-12 px-4 md:py-24 md:px-6 text-charcoal'>
-            <div className='max-w-7xl mx-auto space-y-16 md:space-y-24'>
+        <div className="bg-surface-container-lowest min-h-screen flex flex-col justify-between antialiased text-on-surface">
 
+            <main className="flex-grow w-full max-w-container-max mx-auto px-gutter py-xl md:grid md:grid-cols-12 md:gap-gutter">
                 
-                <div className='border-b border-gray-200 pb-4'>
-                    <Title text1={'YOUR'} text2={'CART'} subtext={'Review item details before proceeding to checkout'} />
-                </div>
+                {/* Left Column: Cart Items List */}
+                <section className="md:col-span-8 space-y-md">
+                    <h1 className="text-display-lg-mobile md:text-display-lg font-bold text-on-surface mb-lg">
+                        Your Cart
+                    </h1>
 
-                <div className='grid grid-cols-1 lg:grid-cols-12 gap-8 items-start'>
-
-                    {/* cart items list (8 cols) */}
-                    <div className='lg:col-span-8 space-y-4'>
-                        {cartEntries.length === 0 && (
-                            <div className='w-full py-20 flex flex-col items-center justify-center text-center bg-gray-surface border border-gray-200 rounded-2xl p-8 space-y-4 shadow-sm'>
-                                <p className='text-lg font-semibold text-charcoal'>Your cart is currently empty</p>
-                                <p className='text-xs text-gray-500'>Discover our latest collections and add your favorite items to cart.</p>
-                                <button
-                                    onClick={() => navigate("/collection")}
-                                    className='px-6 py-3 bg-navy text-white text-xs font-bold rounded-lg hover:bg-navy-hover transition-all shadow-md shadow-navy/20'
-                                    style={{ padding: '12px 24px', borderRadius: '8px' }}
-                                >
-                                    Explore Store
-                                </button>
-                            </div>
-                        )}
-
-                        {cartEntries.map(({ product, size, quantity }) => (
-                            <div 
-                                key={`${product._id}-${size}`}
-                                className='flex items-center gap-4 bg-white border border-gray-200 hover:border-gray-300 rounded-2xl p-4 shadow-sm transition-all'
-                            >
-                                {/* product thumbnail */}
-                                <div className='w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-gray-surface flex-shrink-0 border border-gray-200'>
-                                    <img src={product.image1} alt={product.name} className='w-full h-full object-cover' />
-                                </div>
-
-                                {/* product info */}
-                                <div className='flex-1 min-w-0 space-y-1'>
-                                    <h4 className='text-charcoal font-semibold text-sm sm:text-base tracking-tight truncate'>
-                                        {product.name}
-                                    </h4>
-                                    <div className='flex items-center gap-2 text-xs text-gray-600'>
-                                        <span>Size: <strong className='text-charcoal font-bold px-2 py-0.5 bg-gray-surface rounded border border-gray-200'>{size}</strong></span>
-                                    </div>
-                                    <p className='text-navy font-bold text-sm sm:text-base'>
-                                        {currency} {product.price}
-                                    </p>
-                                </div>
-
-                                {/* quantity modifier input */}
-                                <div className='flex items-center gap-3'>
-                                    <input
-                                        type="number"
-                                        min={1}
-                                        value={quantity}
-                                        onChange={(e) => updateQuantity(product._id, size, Number(e.target.value))}
-                                        className='w-14 h-10 bg-gray-surface text-charcoal text-center text-sm font-semibold rounded-xl border border-gray-300 focus:outline-none focus:border-teal transition-all'
-                                    />
-
-                                    {/* remove button */}
-                                    <button
-                                        onClick={() => updateQuantity(product._id, size, 0)}
-                                        className='p-2 text-gray-400 hover:text-error hover:bg-error-bg rounded-xl transition-all'
-                                        title="Remove item"
-                                    >
-                                        <FiTrash2 className='w-5 h-5' />
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* cart summary side box (4 cols) */}
-                    <div className='lg:col-span-4 bg-gray-surface border border-gray-200 rounded-2xl p-6 shadow-sm space-y-6'>
-                        <CartTotal />
-                        {cartEntries.length > 0 && (
+                    {cartEntries.length === 0 ? (
+                        <div className="w-full py-xl flex flex-col items-center justify-center text-center bg-surface-container-low border border-outline-variant/30 rounded-xl p-xl gap-md shadow-sm">
+                            <span className="material-symbols-outlined text-4xl text-outline">shopping_cart_off</span>
+                            <h3 className="text-headline-md font-bold text-on-surface">Your cart is currently empty</h3>
+                            <p className="text-body-md text-on-surface-variant max-w-md">
+                                Discover our latest collections and add your favorite items to your cart.
+                            </p>
                             <button
-                                onClick={() => navigate("/placeorder")}
-                                className='w-full px-6 py-3 bg-navy text-white text-sm font-bold rounded-lg hover:bg-navy-hover active:scale-95 transition-all shadow-md shadow-navy/20'
-                                style={{ padding: '12px 24px', borderRadius: '8px' }}
+                                onClick={() => navigate("/collection")}
+                                className="bg-primary hover:bg-primary/90 text-on-primary rounded text-label-caps uppercase px-lg py-md transition-colors shadow-sm cursor-pointer"
                             >
-                                Proceed to Checkout
+                                Explore Store
                             </button>
-                        )}
+                        </div>
+                    ) : (
+                        <div className="border-t border-outline-variant/30 py-md">
+                            {cartEntries.map(({ product, size, quantity }) => (
+                                <div
+                                    key={`${product._id}-${size}`}
+                                    className="flex items-start gap-md py-md border-b border-outline-variant/30"
+                                >
+                                    <div
+                                        onClick={() => navigate(`/productdetail/${product._id}`)}
+                                        className="w-24 h-32 md:w-32 md:h-40 shrink-0 bg-surface-container rounded-lg overflow-hidden border border-outline-variant/30 cursor-pointer"
+                                    >
+                                        <img src={product.image1} alt={product.name} className="w-full h-full object-cover" />
+                                    </div>
+
+                                    <div className="flex-grow flex flex-col justify-between h-32 md:h-40">
+                                        <div>
+                                            <div className="flex justify-between items-start">
+                                                <div>
+                                                    <h3
+                                                        onClick={() => navigate(`/productdetail/${product._id}`)}
+                                                        className="text-body-lg font-semibold text-on-surface hover:text-secondary cursor-pointer transition-colors"
+                                                    >
+                                                        {product.name}
+                                                    </h3>
+                                                    <p className="text-on-surface-variant text-body-md mt-xs">
+                                                        Size: {size}
+                                                    </p>
+                                                </div>
+                                                <span className="text-body-lg font-bold text-on-surface">
+                                                    {currency} {product.price}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex justify-between items-center mt-auto">
+                                            {/* Quantity Stepper */}
+                                            <div className="flex items-center border border-outline-variant rounded-md h-10 w-32 bg-surface-container-lowest">
+                                                <button
+                                                    onClick={() => updateQuantity(product._id, size, quantity - 1)}
+                                                    className="w-10 h-full flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer"
+                                                >
+                                                    <span className="material-symbols-outlined text-sm">remove</span>
+                                                </button>
+                                                <input
+                                                    className="w-12 h-full text-center border-none p-0 text-body-md text-on-surface bg-transparent focus:ring-0 font-medium"
+                                                    readOnly
+                                                    type="text"
+                                                    value={quantity}
+                                                />
+                                                <button
+                                                    onClick={() => updateQuantity(product._id, size, quantity + 1)}
+                                                    className="w-10 h-full flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer"
+                                                >
+                                                    <span className="material-symbols-outlined text-sm">add</span>
+                                                </button>
+                                            </div>
+
+                                            {/* Remove Button */}
+                                            <button
+                                                onClick={() => updateQuantity(product._id, size, 0)}
+                                                className="text-on-surface-variant hover:text-error transition-colors flex items-center gap-xs cursor-pointer"
+                                            >
+                                                <span className="material-symbols-outlined">delete</span>
+                                                <span className="hidden md:inline text-label-caps uppercase font-bold">Remove</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+
+                    <div className="pt-md">
+                        <Link to="/collection" className="text-secondary text-label-caps uppercase font-bold hover:underline flex items-center gap-xs">
+                            <span className="material-symbols-outlined text-sm">arrow_back</span>
+                            Continue Shopping
+                        </Link>
                     </div>
+                </section>
 
-                </div>
+                {/* Right Column: Order Summary Panel */}
+                <CartTotal />
 
-            </div>
+            </main>
+
+            <Footer />
         </div>
     )
 }
 
 export default Cart
-

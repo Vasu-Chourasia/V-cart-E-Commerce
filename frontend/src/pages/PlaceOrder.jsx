@@ -1,32 +1,45 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { shopDataContext } from '../context/ShopContext'
 import { authDataContext } from '../context/authContext'
-import Title from '../component/Title'
-import CartTotal from '../component/CartTotal'
+import { userDataContext } from '../context/UserContext'
 import Loading from '../component/Loading'
+import Nav from '../component/Nav'
+import Footer from '../component/Footer'
 import razorpayImg from '../assets/Razorpay.jpg'
 
 function PlaceOrder() {
-    const { cartItem, setCartItem, getCartAmount, delivery_fee, products } = useContext(shopDataContext)
+    const { cartItem, setCartItem, getCartAmount, delivery_fee, products, currency } = useContext(shopDataContext)
     const { serverUrl } = useContext(authDataContext)
+    const { userData } = useContext(userDataContext)
     const navigate = useNavigate()
     const [method, setMethod] = useState('cod')
     const [loading, setLoading] = useState(false)
 
     const [formData, setFormData] = useState({
-        firstName: '', lastName: '', email: '',
-        street: '', city: '', state: '',
-        pinCode: '', country: '', phone: ''
+        firstName: '',
+        lastName: '',
+        email: '',
+        street: '',
+        city: '',
+        state: '',
+        pinCode: '',
+        country: 'United States',
+        phone: ''
     })
+
+    useEffect(() => {
+        if (userData && userData.email) {
+            setFormData(prev => ({ ...prev, email: userData.email }))
+        }
+    }, [userData])
 
     const onChange = (e) => {
         setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
-    // open Razorpay checkout modal
     const initPay = (order) => {
         const options = {
             key: import.meta.env.VITE_RAZORPAY_KEY_ID,
@@ -61,7 +74,6 @@ function PlaceOrder() {
         e.preventDefault()
         setLoading(true)
 
-        // build order items array from cart
         const orderItems = []
         for (const itemId in cartItem) {
             for (const size in cartItem[itemId]) {
@@ -76,6 +88,12 @@ function PlaceOrder() {
             }
         }
 
+        if (orderItems.length === 0) {
+            toast.error("Your cart is empty")
+            setLoading(false)
+            return
+        }
+
         const orderData = {
             address: formData,
             items: orderItems,
@@ -88,12 +106,13 @@ function PlaceOrder() {
                 setCartItem({})
                 toast.success("Order placed successfully")
                 navigate("/order")
-
             } else if (method === 'razorpay') {
                 const result = await axios.post(serverUrl + "/api/order/razorpay", orderData, { withCredentials: true })
                 if (result.data) {
                     initPay(result.data)
                 }
+            } else if (method === 'stripe') {
+                toast.info("Stripe payment gateway integration coming soon!")
             }
         } catch (error) {
             console.log(error)
@@ -103,99 +122,294 @@ function PlaceOrder() {
         }
     }
 
-    const inputClasses = "w-full h-11 bg-white border border-gray-300 rounded-xl px-4 text-charcoal text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-all placeholder:text-gray-400 font-normal shadow-sm"
+    const subtotal = getCartAmount()
+    const total = subtotal === 0 ? 0 : subtotal + delivery_fee
 
     return (
-        <div className='w-full min-h-screen bg-white pt-24 pb-32 py-12 px-4 md:py-24 md:px-6 text-charcoal'>
-            <div className='max-w-7xl mx-auto space-y-16 md:space-y-24'>
+        <div className="bg-surface-container-lowest min-h-screen flex flex-col justify-between antialiased text-on-surface">
 
-                
-                <div className='border-b border-gray-200 pb-4'>
-                    <Title text1={'CHECKOUT'} text2={'PROCESS'} subtext={'Complete your shipping details and choose payment method'} />
+            <main className="flex-grow pt-xl pb-xl px-gutter md:px-lg max-w-container-max mx-auto w-full">
+                <div className="mb-xl text-center md:text-left">
+                    <h1 className="text-display-lg-mobile md:text-display-lg font-bold text-primary">
+                        Secure Checkout
+                    </h1>
+                    <p className="text-body-md text-on-surface-variant mt-xs">
+                        Complete your order details below.
+                    </p>
                 </div>
 
-                <form onSubmit={onSubmit} className='grid grid-cols-1 lg:grid-cols-12 gap-8 items-start'>
+                <form onSubmit={onSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-xl">
+                    
+                    {/* Left Column: Delivery Address Form */}
+                    <div className="lg:col-span-7 space-y-lg">
+                        <section className="bg-surface-container-lowest p-lg border border-outline-variant/30 rounded-xl shadow-sm">
+                            <h2 className="text-headline-md font-bold text-primary mb-md flex items-center gap-sm">
+                                <span className="material-symbols-outlined text-secondary">local_shipping</span>
+                                Delivery Address
+                            </h2>
 
-                    {/* delivery form (7 cols) */}
-                    <div className='lg:col-span-7 bg-gray-surface border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-5'>
-                        <h3 className='text-lg font-bold text-charcoal tracking-tight border-b border-gray-200 pb-3'>
-                            Delivery Address
-                        </h3>
+                            <div className="space-y-md">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
+                                    <div>
+                                        <label className="block text-label-caps text-on-surface-variant mb-xs" htmlFor="firstName">
+                                            First Name
+                                        </label>
+                                        <input
+                                            id="firstName"
+                                            name="firstName"
+                                            type="text"
+                                            placeholder="Jane"
+                                            required
+                                            value={formData.firstName}
+                                            onChange={onChange}
+                                            className="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded focus:border-secondary focus:ring-1 focus:ring-secondary transition-all outline-none text-body-md text-on-surface"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-label-caps text-on-surface-variant mb-xs" htmlFor="lastName">
+                                            Last Name
+                                        </label>
+                                        <input
+                                            id="lastName"
+                                            name="lastName"
+                                            type="text"
+                                            placeholder="Doe"
+                                            required
+                                            value={formData.lastName}
+                                            onChange={onChange}
+                                            className="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded focus:border-secondary focus:ring-1 focus:ring-secondary transition-all outline-none text-body-md text-on-surface"
+                                        />
+                                    </div>
+                                </div>
 
-                        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-                            <input type="text" name='firstName' placeholder='First name' required
-                                className={inputClasses} value={formData.firstName} onChange={onChange} />
-                            <input type="text" name='lastName' placeholder='Last name' required
-                                className={inputClasses} value={formData.lastName} onChange={onChange} />
-                        </div>
+                                <div>
+                                    <label className="block text-label-caps text-on-surface-variant mb-xs" htmlFor="email">
+                                        Email Address
+                                    </label>
+                                    <input
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        placeholder="jane@example.com"
+                                        required
+                                        value={formData.email}
+                                        onChange={onChange}
+                                        className="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded focus:border-secondary focus:ring-1 focus:ring-secondary transition-all outline-none text-body-md text-on-surface"
+                                    />
+                                </div>
 
-                        <input type="email" name='email' placeholder='Email address' required
-                            className={inputClasses} value={formData.email} onChange={onChange} />
+                                <div>
+                                    <label className="block text-label-caps text-on-surface-variant mb-xs" htmlFor="street">
+                                        Street Address
+                                    </label>
+                                    <input
+                                        id="street"
+                                        name="street"
+                                        type="text"
+                                        placeholder="123 Luxury Ave, Suite 400"
+                                        required
+                                        value={formData.street}
+                                        onChange={onChange}
+                                        className="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded focus:border-secondary focus:ring-1 focus:ring-secondary transition-all outline-none text-body-md text-on-surface"
+                                    />
+                                </div>
 
-                        <input type="text" name='street' placeholder='Street address' required
-                            className={inputClasses} value={formData.street} onChange={onChange} />
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-md">
+                                    <div>
+                                        <label className="block text-label-caps text-on-surface-variant mb-xs" htmlFor="city">
+                                            City
+                                        </label>
+                                        <input
+                                            id="city"
+                                            name="city"
+                                            type="text"
+                                            placeholder="New York"
+                                            required
+                                            value={formData.city}
+                                            onChange={onChange}
+                                            className="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded focus:border-secondary focus:ring-1 focus:ring-secondary transition-all outline-none text-body-md text-on-surface"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-label-caps text-on-surface-variant mb-xs" htmlFor="state">
+                                            State / Province
+                                        </label>
+                                        <input
+                                            id="state"
+                                            name="state"
+                                            type="text"
+                                            placeholder="NY"
+                                            required
+                                            value={formData.state}
+                                            onChange={onChange}
+                                            className="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded focus:border-secondary focus:ring-1 focus:ring-secondary transition-all outline-none text-body-md text-on-surface"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-label-caps text-on-surface-variant mb-xs" htmlFor="pinCode">
+                                            Zip Code
+                                        </label>
+                                        <input
+                                            id="pinCode"
+                                            name="pinCode"
+                                            type="text"
+                                            placeholder="10001"
+                                            required
+                                            value={formData.pinCode}
+                                            onChange={onChange}
+                                            className="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded focus:border-secondary focus:ring-1 focus:ring-secondary transition-all outline-none text-body-md text-on-surface"
+                                        />
+                                    </div>
+                                </div>
 
-                        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-                            <input type="text" name='city' placeholder='City' required
-                                className={inputClasses} value={formData.city} onChange={onChange} />
-                            <input type="text" name='state' placeholder='State' required
-                                className={inputClasses} value={formData.state} onChange={onChange} />
-                        </div>
-
-                        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-                            <input type="text" name='pinCode' placeholder='Pincode' required
-                                className={inputClasses} value={formData.pinCode} onChange={onChange} />
-                            <input type="text" name='country' placeholder='Country' required
-                                className={inputClasses} value={formData.country} onChange={onChange} />
-                        </div>
-
-                        <input type="text" name='phone' placeholder='Phone number' required
-                            className={inputClasses} value={formData.phone} onChange={onChange} />
-
-                        {/* payment method */}
-                        <div className='space-y-3 border-t border-gray-200 pt-5'>
-                            <h3 className='text-lg font-bold text-charcoal tracking-tight'>
-                                Select Payment Method
-                            </h3>
-                            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-                                <button
-                                    type='button'
-                                    onClick={() => setMethod('razorpay')}
-                                    className={`h-14 rounded-xl overflow-hidden border-2 flex items-center justify-center p-2 transition-all cursor-pointer ${method === 'razorpay' ? 'border-navy bg-white shadow-sm' : 'border-gray-300 bg-white hover:border-gray-400'}`}
-                                >
-                                    <img src={razorpayImg} className='h-8 object-contain rounded' alt="Razorpay" />
-                                </button>
-                                <button
-                                    type='button'
-                                    onClick={() => setMethod('cod')}
-                                    className={`h-14 rounded-xl border-2 font-bold text-xs tracking-wider uppercase transition-all cursor-pointer ${method === 'cod' ? 'border-navy bg-navy text-white shadow-sm' : 'border-gray-300 bg-white text-charcoal hover:border-gray-400'}`}
-                                >
-                                    Cash On Delivery
-                                </button>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
+                                    <div>
+                                        <label className="block text-label-caps text-on-surface-variant mb-xs" htmlFor="country">
+                                            Country
+                                        </label>
+                                        <input
+                                            id="country"
+                                            name="country"
+                                            type="text"
+                                            placeholder="United States"
+                                            required
+                                            value={formData.country}
+                                            onChange={onChange}
+                                            className="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded focus:border-secondary focus:ring-1 focus:ring-secondary transition-all outline-none text-body-md text-on-surface"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-label-caps text-on-surface-variant mb-xs" htmlFor="phone">
+                                            Phone Number
+                                        </label>
+                                        <input
+                                            id="phone"
+                                            name="phone"
+                                            type="tel"
+                                            placeholder="+1 (555) 000-0000"
+                                            required
+                                            value={formData.phone}
+                                            onChange={onChange}
+                                            className="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded focus:border-secondary focus:ring-1 focus:ring-secondary transition-all outline-none text-body-md text-on-surface"
+                                        />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-
+                        </section>
                     </div>
 
-                    {/* order summary & submit (5 cols) */}
-                    <div className='lg:col-span-5 bg-gray-surface border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 sticky top-24'>
-                        <CartTotal />
+                    {/* Right Column: Order Summary & Payment */}
+                    <div className="lg:col-span-5 space-y-lg">
+                        
+                        {/* Summary & Payment Card */}
+                        <section className="bg-surface-container-lowest p-lg border border-outline-variant/30 rounded-xl shadow-sm space-y-lg sticky top-28">
+                            <div>
+                                <h2 className="text-headline-md font-bold text-primary mb-md pb-xs border-b border-outline-variant/30">
+                                    Payment Method
+                                </h2>
+                                <div className="space-y-sm mb-lg">
+                                    
+                                    {/* Stripe Option */}
+                                    <label
+                                        onClick={() => setMethod('stripe')}
+                                        className={`flex items-center justify-between p-md border rounded-xl cursor-pointer transition-all ${
+                                            method === 'stripe'
+                                                ? 'border-2 border-primary bg-primary-container/10 font-bold shadow-xs'
+                                                : 'border-outline-variant/60 hover:bg-surface-container-low'
+                                        }`}
+                                    >
+                                        <div className="flex items-center gap-md">
+                                            <input
+                                                type="radio"
+                                                name="payment"
+                                                checked={method === 'stripe'}
+                                                onChange={() => setMethod('stripe')}
+                                                className="accent-primary"
+                                            />
+                                            <span className="text-body-md text-on-surface">Credit / Debit Card (Stripe)</span>
+                                        </div>
+                                        <span className="material-symbols-outlined text-outline">credit_card</span>
+                                    </label>
 
-                        <button 
-                            type='submit'
-                            className='w-full px-6 py-3 bg-navy text-white font-bold text-sm rounded-lg hover:bg-navy-hover active:scale-95 transition-all shadow-md shadow-navy/20 flex items-center justify-center'
-                            style={{ padding: '12px 24px', borderRadius: '8px' }}
-                        >
-                            {loading ? <Loading /> : "Complete Order"}
-                        </button>
+                                    {/* Razorpay Option */}
+                                    <label
+                                        onClick={() => setMethod('razorpay')}
+                                        className={`flex items-center justify-between p-md border rounded-xl cursor-pointer transition-all ${
+                                            method === 'razorpay'
+                                                ? 'border-2 border-primary bg-primary-container/10 font-bold shadow-xs'
+                                                : 'border-outline-variant/60 hover:bg-surface-container-low'
+                                        }`}
+                                    >
+                                        <div className="flex items-center gap-md">
+                                            <input
+                                                type="radio"
+                                                name="payment"
+                                                checked={method === 'razorpay'}
+                                                onChange={() => setMethod('razorpay')}
+                                                className="accent-primary"
+                                            />
+                                            <span className="text-body-md text-on-surface">Razorpay Payment</span>
+                                        </div>
+                                        <img src={razorpayImg} alt="Razorpay" className="h-6 object-contain rounded" />
+                                    </label>
+
+                                    {/* COD Option */}
+                                    <label
+                                        onClick={() => setMethod('cod')}
+                                        className={`flex items-center justify-between p-md border rounded-xl cursor-pointer transition-all ${
+                                            method === 'cod'
+                                                ? 'border-2 border-primary bg-primary-container/10 font-bold shadow-xs'
+                                                : 'border-outline-variant/60 hover:bg-surface-container-low'
+                                        }`}
+                                    >
+                                        <div className="flex items-center gap-md">
+                                            <input
+                                                type="radio"
+                                                name="payment"
+                                                checked={method === 'cod'}
+                                                onChange={() => setMethod('cod')}
+                                                className="accent-primary"
+                                            />
+                                            <span className="text-body-md text-on-surface">Cash on Delivery</span>
+                                        </div>
+                                        <span className="material-symbols-outlined text-outline">local_atm</span>
+                                    </label>
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    disabled={loading || total === 0}
+                                    className="w-full bg-primary hover:bg-primary/90 text-on-primary py-md rounded font-label-caps uppercase transition-colors shadow-md flex justify-center items-center gap-sm cursor-pointer disabled:opacity-50 font-bold"
+                                >
+                                    {loading ? <Loading /> : (
+                                        <>
+                                            <span className="material-symbols-outlined text-sm">lock</span>
+                                            Place Order • {currency} {total}
+                                        </>
+                                    )}
+                                </button>
+                            </div>
+
+                            <div className="pt-md border-t border-outline-variant/30 flex justify-center items-center gap-lg">
+                                <div className="flex flex-col items-center text-secondary">
+                                    <span className="material-symbols-outlined text-2xl">verified_user</span>
+                                    <span className="text-label-caps text-xs mt-xs font-semibold">Secure SSL</span>
+                                </div>
+                                <div className="flex flex-col items-center text-primary-container">
+                                    <span className="material-symbols-outlined text-2xl">gpp_good</span>
+                                    <span className="text-label-caps text-xs mt-xs font-semibold">Buyer Protection</span>
+                                </div>
+                            </div>
+                        </section>
+
                     </div>
 
                 </form>
+            </main>
 
-            </div>
+            <Footer />
         </div>
     )
 }
 
 export default PlaceOrder
-

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About &amp; Contact - V-Cart</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "surface-container": "#eceef2",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#191c1f",
+                        "inverse-primary": "#aec7fd",
+                        "on-surface-variant": "#44474f",
+                        "tertiary": "#2c1100",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#97f2ef",
+                        "outline-variant": "#c4c6d0",
+                        "primary-fixed-dim": "#aec7fd",
+                        "on-primary-fixed-variant": "#2d4674",
+                        "surface-variant": "#e1e2e6",
+                        "on-secondary-fixed-variant": "#00504e",
+                        "tertiary-fixed": "#ffdcc6",
+                        "inverse-on-surface": "#eff1f5",
+                        "tertiary-container": "#4b2200",
+                        "on-tertiary-container": "#c5875a",
+                        "secondary": "#006a68",
+                        "on-primary-fixed": "#001a41",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f8f9fd",
+                        "surface-dim": "#d8dade",
+                        "surface-container-low": "#f2f3f8",
+                        "on-secondary-fixed": "#00201f",
+                        "inverse-surface": "#2e3134",
+                        "surface-container-highest": "#e1e2e6",
+                        "surface-tint": "#465e8e",
+                        "primary-fixed": "#d8e2ff",
+                        "secondary-container": "#94efec",
+                        "outline": "#747780",
+                        "background": "#f8f9fd",
+                        "tertiary-fixed-dim": "#fdb787",
+                        "on-primary-container": "#7c94c8",
+                        "error-container": "#ffdad6",
+                        "surface": "#f8f9fd",
+                        "on-tertiary-fixed-variant": "#6a3b15",
+                        "primary": "#00173b",
+                        "on-secondary-container": "#006e6d",
+                        "primary-container": "#0f2c59",
+                        "surface-container-high": "#e7e8ec",
+                        "on-tertiary-fixed": "#301400",
+                        "secondary-fixed-dim": "#7ad6d3",
+                        "on-background": "#191c1f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "48px",
+                        "container-max": "1280px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "unit": "4px",
+                        "lg": "24px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .shadow-ambient {
+            box-shadow: 0px 4px 20px rgba(0, 23, 59, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col antialiased selection:bg-secondary selection:text-on-secondary pb-[80px] md:pb-0">
+<!-- TopNavBar -->
+<header class="bg-primary dark:bg-primary shadow-md sticky top-0 z-40">
+<div class="flex justify-between items-center w-full px-gutter py-md max-w-container-max mx-auto">
+<a class="text-headline-md font-display-lg text-on-primary" href="#">V-Cart</a>
+<nav class="hidden md:flex gap-lg items-center">
+<a class="text-label-caps font-label-caps text-surface-variant hover:text-on-primary transition-colors" href="#">Home</a>
+<a class="text-label-caps font-label-caps text-surface-variant hover:text-on-primary transition-colors" href="#">Collections</a>
+<a class="text-label-caps font-label-caps text-secondary-fixed font-bold border-b-2 border-secondary-fixed pb-1" href="#">About</a>
+<a class="text-label-caps font-label-caps text-surface-variant hover:text-on-primary transition-colors" href="#">Contact</a>
+</nav>
+<div class="flex items-center gap-sm">
+<button aria-label="search" class="text-on-primary hover:opacity-80 transition-all p-sm">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button aria-label="shopping_cart" class="text-on-primary hover:opacity-80 transition-all p-sm">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<button aria-label="account_circle" class="text-on-primary hover:opacity-80 transition-all p-sm">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow">
+<!-- Hero: Story/Mission -->
+<section class="bg-surface-container-lowest py-xl px-gutter">
+<div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 gap-xl items-center">
+<div>
+<h1 class="text-display-lg-mobile md:text-display-lg font-display-lg-mobile md:font-display-lg text-primary mb-md">Our Story &amp; Mission</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant mb-lg max-w-prose">
+                        At V-Cart, we believe that premium quality and uncompromising security should seamlessly coexist. Born from a desire to redefine modern commerce, our platform curates exceptional fashion while ensuring your data remains locked behind bank-grade protocols. We exist to provide a sanctuary for discerning shoppers who value both aesthetic brilliance and digital peace of mind.
+                    </p>
+</div>
+<div class="rounded-xl overflow-hidden shadow-ambient border border-outline-variant/30 h-[400px]">
+<img alt="V-Cart Office" class="w-full h-full object-cover" data-alt="A bright, minimalist modern office or fashion studio space. Natural light streams through large windows, illuminating clean architectural lines and premium materials. The scene conveys a sense of professional, high-end retail operation with a focus on organization and clarity. The color palette is predominantly white and light gray, with subtle accents of deep navy and teal to match the brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD82k-VvW2xu_1PozFOEuY88pXQIcWee5Or5WE8WsQXB8E5c9TaFgKAnpzjEL_c3tmyRlMnfjm5DAIS95fLy3CqqFhfPyuZkIFzsPvw_XQUqbHyHfnSD25AbWVCDiFghFemesCOVXHlERqZASbPNLBJon5uVicHNyBgkOR0J-Xp2VrXs236NuDEDItwB8Tnhw3rlKg8Mkv4TVDJuDD4KaTf7uZwJzarAwo422CKJ4-GRvICXFV3_lvGCA"/>
+</div>
+</div>
+</section>
+<!-- Why Choose Us -->
+<section class="py-xl px-gutter bg-surface">
+<div class="max-w-container-max mx-auto">
+<h2 class="text-headline-md font-headline-md text-primary text-center mb-xl">Why Choose Us</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Feature 1 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant/50 shadow-ambient flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-secondary-fixed/20 flex items-center justify-center mb-md text-secondary">
+<span class="material-symbols-outlined fill text-[32px]">verified</span>
+</div>
+<h3 class="text-body-lg font-bold text-primary mb-sm">Premium Quality</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Every item in our collection is rigorously vetted to ensure it meets our exacting standards for craftsmanship and durability.</p>
+</div>
+<!-- Feature 2 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant/50 shadow-ambient flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-secondary-fixed/20 flex items-center justify-center mb-md text-secondary">
+<span class="material-symbols-outlined fill text-[32px]">local_shipping</span>
+</div>
+<h3 class="text-body-lg font-bold text-primary mb-sm">Seamless Convenience</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Experience a frictionless journey from discovery to delivery, with intuitive navigation and rapid, reliable shipping options.</p>
+</div>
+<!-- Feature 3 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant/50 shadow-ambient flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-secondary-fixed/20 flex items-center justify-center mb-md text-secondary">
+<span class="material-symbols-outlined fill text-[32px]">support_agent</span>
+</div>
+<h3 class="text-body-lg font-bold text-primary mb-sm">Dedicated Support</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Our concierges are available around the clock to assist you, ensuring your shopping experience is nothing short of exceptional.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-xl px-gutter bg-surface-container-lowest border-t border-outline-variant/20">
+<div class="max-w-container-max mx-auto">
+<h2 class="text-headline-md font-headline-md text-primary text-center mb-xl">Get in Touch</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Address Card -->
+<div class="p-lg rounded-xl border border-outline-variant shadow-ambient hover:border-secondary transition-colors duration-300">
+<div class="flex items-center gap-md mb-md">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+<h3 class="text-body-lg font-bold text-primary">Store Information</h3>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-sm">123 Fashion Avenue<br/>Suite 400<br/>New York, NY 10001</p>
+<p class="text-body-md font-body-md text-on-surface-variant text-sm mt-md">Hours: Mon-Fri, 9am - 6pm EST</p>
+</div>
+<!-- Phone Card -->
+<div class="p-lg rounded-xl border border-outline-variant shadow-ambient hover:border-secondary transition-colors duration-300">
+<div class="flex items-center gap-md mb-md">
+<span class="material-symbols-outlined text-secondary">call</span>
+<h3 class="text-body-lg font-bold text-primary">Phone Support</h3>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-md">Speak directly with our dedicated concierge team for immediate assistance.</p>
+<a class="text-body-lg font-bold text-secondary hover:text-primary transition-colors" href="tel:+18005550199">+1 (800) 555-0199</a>
+</div>
+<!-- Email Card -->
+<div class="p-lg rounded-xl border border-outline-variant shadow-ambient hover:border-secondary transition-colors duration-300">
+<div class="flex items-center gap-md mb-md">
+<span class="material-symbols-outlined text-secondary">mail</span>
+<h3 class="text-body-lg font-bold text-primary">Email Inquiry</h3>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-md">Send us a detailed message and we will respond within 24 hours.</p>
+<a class="text-body-lg font-bold text-secondary hover:text-primary transition-colors" href="mailto:support@v-cart.com">support@v-cart.com</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary dark:bg-primary-container w-full py-xl px-gutter flex flex-col items-center space-y-md text-center">
+<div class="text-headline-md font-display-lg text-on-primary mb-md">V-Cart</div>
+<div class="flex flex-wrap justify-center gap-lg mb-md">
+<a class="text-label-caps font-label-caps text-surface-variant hover:text-on-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-label-caps font-label-caps text-surface-variant hover:text-on-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-label-caps font-label-caps text-surface-variant hover:text-on-primary transition-colors" href="#">Shipping Info</a>
+<a class="text-label-caps font-label-caps text-surface-variant hover:text-on-primary transition-colors" href="#">Returns</a>
+</div>
+<p class="text-body-md font-body-md text-on-primary/70">© 2024 V-Cart E-commerce. Secure &amp; Certified.</p>
+</footer>
+<!-- BottomNavBar (Mobile) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center py-sm md:hidden border-t border-outline-variant bg-surface dark:bg-inverse-surface shadow-lg pb-[env(safe-area-inset-bottom)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="text-label-caps font-label-caps">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">grid_view</span>
+<span class="text-label-caps font-label-caps">Collections</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-bold hover:bg-surface-container-low p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined fill mb-1">mail</span>
+<span class="text-label-caps font-label-caps">Contact</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">shopping_cart</span>
+<span class="text-label-caps font-label-caps">Cart</span>
+</a>
+</nav>
+<!-- AI Assistant FAB -->
+<button aria-label="AI Assistant" class="fixed bottom-24 md:bottom-8 right-8 w-14 h-14 bg-primary rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform z-40 group border border-outline-variant/20">
+<span class="material-symbols-outlined text-on-primary">smart_toy</span>
+<span class="absolute right-full mr-4 bg-surface text-primary px-3 py-1 rounded-lg text-label-caps font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none border border-outline-variant/30">Need Help?</span>
+</button>
+</body></html>

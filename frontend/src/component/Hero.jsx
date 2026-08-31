@@ -1,78 +1,65 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { FiArrowRight } from "react-icons/fi"
+import Backgound from './Backgound'
 
 const slides = [
-    { heading: "New Season Arrivals", sub: "Discover the latest trends in modern fashion and lifestyle essentials." },
-    { heading: "Curated Best Sellers", sub: "Shop our most highly rated products loved by thousands." },
-    { heading: "Exclusive Digital Deals", sub: "Unbeatable seasonal offers on premium collections." },
-    { heading: "Lightning Fast Delivery", sub: "Dispatched direct to your doorstep in 2-3 business days." },
+    { heading: "Elevate Your Style", sub: "Discover the new standard in structural minimalism and uncompromising quality." },
+    { heading: "Modern Textures", sub: "Clean lines, natural fabrics, and lightweight premium layers designed for everyday utility." },
+    { heading: "Stitch Essentials", sub: "An entry point to a refined capsule wardrobe. Uncompromised tailoring for the modern creative." },
+    { heading: "Minimalist Comfort", sub: "Technical materials meet refined casual silhouettes. High versatility across seasons." }
 ]
 
-// auto-rotating hero text overlay — synced with Background component via slideIndex
 function Hero({ slideIndex, setSlideIndex }) {
     const navigate = useNavigate()
 
-    // auto-advance every 4 seconds
     useEffect(() => {
         const timer = setInterval(() => {
             setSlideIndex(prev => (prev + 1) % slides.length)
-        }, 4000)
+        }, 5000)
         return () => clearInterval(timer)
     }, [setSlideIndex])
 
     return (
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 flex flex-col justify-center h-full pt-16'>
-            <div className='max-w-2xl flex flex-col gap-5 items-start bg-white/85 backdrop-blur-md p-8 sm:p-10 md:p-12 rounded-3xl border border-white/60 shadow-2xl'>
+        <section className="relative w-full h-[70vh] md:h-[80vh] flex items-center overflow-hidden">
+            <Backgound slideIndex={slideIndex} />
+
+            {/* Container for alignment */}
+            <div className="relative z-10 w-full max-w-container-max mx-auto px-gutter flex justify-start items-center">
                 
-                {/* badge */}
-                <div className='inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-navy/10 border border-navy/20'>
-                    <span className='w-2 h-2 rounded-full bg-teal animate-ping'></span>
-                    <span className='text-navy text-xs font-bold tracking-widest uppercase'>V-Cart Exclusive</span>
-                </div>
+                {/* Minimal top-left styled card */}
+                <div className="bg-surface-container-lowest/90 backdrop-blur-md p-lg md:p-xl rounded-xl border border-outline-variant/30 shadow-lg max-w-md flex flex-col items-start text-left">
 
-                {/* main headline */}
-                <h1 className='text-4xl sm:text-5xl lg:text-6xl font-extrabold text-charcoal tracking-tight leading-[1.15] min-h-[110px] md:min-h-[130px]'>
-                    {slides[slideIndex].heading}
-                </h1>
+                    
+                    <h1 className="text-headline-md font-bold text-on-surface mb-sm leading-snug">
+                        {slides[slideIndex].heading}
+                    </h1>
+                    
+                    <p className="text-body-md text-on-surface-variant mb-md leading-relaxed">
+                        {slides[slideIndex].sub}
+                    </p>
 
-                {/* subtitle */}
-                <p className='text-gray-600 text-base md:text-lg max-w-lg leading-relaxed font-normal min-h-[45px]'>
-                    {slides[slideIndex].sub}
-                </p>
-
-                {/* action buttons */}
-                <div className='flex items-center gap-4 mt-2'>
                     <button
                         onClick={() => navigate("/collection")}
-                        className='bg-navy text-white font-semibold text-sm rounded-lg hover:bg-navy-hover active:scale-95 transition-all shadow-md shadow-navy/20 flex items-center gap-2'
-                        style={{ padding: '14px 32px', borderRadius: '8px', fontWeight: 600 }}
+                        className="bg-primary hover:bg-primary/90 text-on-primary rounded text-label-caps uppercase px-md py-sm transition-colors tracking-wider shadow-md cursor-pointer font-bold mb-md"
                     >
-                        Explore Collection <FiArrowRight className='w-4 h-4' />
+                        Shop Collection
                     </button>
-                    <button
-                        onClick={() => navigate("/about")}
-                        className='bg-white border border-gray-300 text-charcoal font-semibold text-sm rounded-lg hover:bg-gray-surface transition-all shadow-sm'
-                        style={{ padding: '14px 32px', borderRadius: '8px', fontWeight: 600 }}
-                    >
-                        Learn More
-                    </button>
-                </div>
 
-                {/* dot / pill indicators */}
-                <div className='flex items-center gap-2 mt-4'>
-                    {slides.map((_, i) => (
-                        <button
-                            key={i}
-                            onClick={() => setSlideIndex(i)}
-                            aria-label={`Go to slide ${i + 1}`}
-                            className={`h-2 rounded-full transition-all duration-300 ${i === slideIndex ? 'bg-navy w-8' : 'bg-gray-300 hover:bg-gray-400 w-2'}`}
-                        />
-                    ))}
+                    {/* Carousel Dots inside the card */}
+                    <div className="flex items-center gap-xs">
+                        {slides.map((_, i) => (
+                            <button
+                                key={i}
+                                onClick={() => setSlideIndex(i)}
+                                aria-label={`Go to slide ${i + 1}`}
+                                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${i === slideIndex ? 'bg-primary w-6' : 'bg-outline/30 w-1.5'}`}
+                            />
+                        ))}
+                    </div>
                 </div>
-
+                
             </div>
-        </div>
+        </section>
     )
 }
 

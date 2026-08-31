@@ -1,10 +1,11 @@
 import React from 'react'
-import back1 from '../assets/back1.jpg'
-import back2 from '../assets/back2.jpg'
-import back3 from '../assets/back3.jpg'
-import back4 from '../assets/back4.jpg'
 
-const images = [back1, back2, back3, back4]
+const images = [
+    "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&q=80&w=1600",
+    "https://images.unsplash.com/photo-1486308512493-ae6a1c5abfb5?auto=format&fit=crop&q=80&w=1600",
+    "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=1600",
+    "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=1600"
+]
 
 // background image that switches in sync with Hero slideIndex
 function Backgound({ slideIndex }) {
@@ -18,12 +19,13 @@ function Backgound({ slideIndex }) {
                     className={`w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-1000 ${i === slideIndex ? 'opacity-100 scale-105' : 'opacity-0 scale-100'} transition-transform duration-[4000ms]`}
                 />
             ))}
-            {/* light subtle gradient overlay so images stay vibrant */}
-            <div className='absolute inset-0 bg-gradient-to-r from-white/70 via-white/30 to-transparent'></div>
-            <div className='absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white'></div>
+            {/* premium subtle dimming overlay */}
+            <div className='absolute inset-0 bg-black/15'></div>
+            <div className='absolute inset-0 bg-gradient-to-r from-black/10 to-transparent'></div>
         </div>
     )
 }
 
 export default Backgound
+
 

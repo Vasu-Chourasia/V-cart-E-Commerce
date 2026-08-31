@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
+import Nav from '../component/Nav'
 import Hero from '../component/Hero'
-import Backgound from '../component/Backgound'
+import OurPolicy from '../component/OurPolicy'
 import LatestCollection from '../component/LatestCollection'
 import BestSeller from '../component/BestSeller'
-import OurPolicy from '../component/OurPolicy'
 import NewLetterBox from '../component/NewLetterBox'
 import Footer from '../component/Footer'
 
@@ -11,28 +11,19 @@ function Home() {
     const [slideIndex, setSlideIndex] = useState(0)
 
     return (
-        <div className='w-full min-h-screen bg-white text-charcoal overflow-hidden pb-32'>
+        <div className="bg-surface-container-lowest min-h-screen flex flex-col justify-between antialiased text-on-surface">
 
-            {/* hero banner section */}
-            <div className='w-full h-screen relative flex items-center justify-center overflow-hidden border-b border-gray-200'>
-                <Backgound slideIndex={slideIndex} />
+            <main className="flex-grow">
                 <Hero slideIndex={slideIndex} setSlideIndex={setSlideIndex} />
-            </div>
-
-            {/* full-width alternating background section blocks matching mockup 100% */}
-            <div className='w-full'>
+                <OurPolicy />
                 <LatestCollection />
                 <BestSeller />
-                <OurPolicy />
                 <NewLetterBox />
-            </div>
+            </main>
 
             <Footer />
         </div>
     )
 }
 
-
-
 export default Home
-

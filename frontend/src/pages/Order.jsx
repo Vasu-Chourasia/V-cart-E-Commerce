@@ -2,12 +2,46 @@ import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { authDataContext } from '../context/authContext'
 import { shopDataContext } from '../context/ShopContext'
-import Title from '../component/Title'
+import { useNavigate } from 'react-router-dom'
+import Nav from '../component/Nav'
+import Footer from '../component/Footer'
+
+const STAGES = [
+    { key: 'Order Placed', label: 'Placed', width: 20 },
+    { key: 'Packing', label: 'Packing', width: 40 },
+    { key: 'Shipped', label: 'Shipped', width: 60 },
+    { key: 'Out for delivery', label: 'Out for Delivery', width: 80 },
+    { key: 'Delivered', label: 'Delivered', width: 100 }
+]
+
+function getStageProgress(status) {
+    const stageIndex = STAGES.findIndex(s => s.key.toLowerCase() === (status || '').toLowerCase())
+    if (stageIndex !== -1) {
+        return { percent: STAGES[stageIndex].width, activeIndex: stageIndex }
+    }
+    return { percent: 20, activeIndex: 0 }
+}
+
+function getBadgeClass(status) {
+    switch (status) {
+        case 'Order Placed':
+        case 'Packing':
+            return 'bg-surface-container-high text-on-surface-variant border border-outline-variant/40'
+        case 'Shipped':
+        case 'Out for delivery':
+            return 'bg-secondary text-on-secondary font-bold'
+        case 'Delivered':
+            return 'bg-primary text-on-primary font-bold'
+        default:
+            return 'bg-secondary text-on-secondary'
+    }
+}
 
 function Order() {
     const { serverUrl } = useContext(authDataContext)
     const { currency } = useContext(shopDataContext)
     const [orders, setOrders] = useState([])
+    const navigate = useNavigate()
 
     const fetchOrders = async () => {
         try {
@@ -16,8 +50,9 @@ function Order() {
                 {},
                 { withCredentials: true }
             )
-            // show newest orders first
-            setOrders(result.data.reverse())
+            if (result.data) {
+                setOrders(result.data.reverse())
+            }
         } catch (error) {
             console.log("fetchOrders error", error)
         }
@@ -27,103 +62,114 @@ function Order() {
         fetchOrders()
     }, [])
 
-    const getStatusBadgeClass = (status) => {
-        switch (status) {
-            case 'Order Placed':
-                return 'bg-gray-100 text-gray-700 border-gray-300 font-medium'
-            case 'Packing':
-                return 'bg-navy/10 text-navy border-navy/20 font-medium'
-            case 'Shipped':
-                return 'bg-teal/15 text-teal border-teal/30 font-semibold'
-            case 'Out for Delivery':
-                return 'bg-teal text-white border-teal font-bold shadow-sm'
-            case 'Delivered':
-                return 'bg-emerald-100 text-emerald-800 border-emerald-300 font-bold'
-            default:
-                return 'bg-teal/10 text-teal border-teal/20 font-semibold'
-        }
-    }
-
     return (
-        <div className='w-full min-h-screen bg-white pt-24 pb-32 py-12 px-4 md:py-24 md:px-6 text-charcoal'>
-            <div className='max-w-7xl mx-auto space-y-16 md:space-y-24'>
+        <div className="bg-surface-container-lowest min-h-screen flex flex-col justify-between antialiased text-on-surface">
 
-                
-                <div className='border-b border-gray-200 pb-4'>
-                    <Title text1={'MY'} text2={'ORDERS'} subtext={'Track order status and history'} />
+            <main className="flex-grow w-full max-w-container-max mx-auto px-md md:px-gutter py-xl pb-24 md:pb-xl">
+                <div className="mb-lg">
+                    <h1 className="text-display-lg-mobile md:text-display-lg font-bold text-primary mb-xs">
+                        Order History
+                    </h1>
+                    <p className="text-on-surface-variant text-body-md">
+                        Track and manage your recent purchases.
+                    </p>
                 </div>
 
-                <div className='space-y-4'>
-                    {orders.length === 0 && (
-                        <div className='w-full py-20 flex flex-col items-center justify-center text-center bg-gray-surface border border-gray-200 rounded-2xl p-8 space-y-3 shadow-sm'>
-                            <p className='text-lg font-semibold text-charcoal'>No orders placed yet</p>
-                            <p className='text-xs text-gray-500'>Your purchase history will appear here once you place an order.</p>
+                <div className="grid grid-cols-1 gap-lg">
+                    {orders.length === 0 ? (
+                        <div className="bg-surface-container-low border border-outline-variant/30 rounded-xl p-xl flex flex-col items-center justify-center text-center gap-md">
+                            <span className="material-symbols-outlined text-4xl text-outline">package_2</span>
+                            <h3 className="text-headline-md font-bold text-on-surface">No orders placed yet</h3>
+                            <p className="text-body-md text-on-surface-variant max-w-md">
+                                Your purchase history will appear here once you place an order.
+                            </p>
+                            <button
+                                onClick={() => navigate("/collection")}
+                                className="bg-primary hover:bg-primary/90 text-on-primary rounded text-label-caps uppercase px-lg py-md transition-colors shadow-sm cursor-pointer"
+                            >
+                                Start Shopping
+                            </button>
                         </div>
-                    )}
+                    ) : (
+                        orders.map((order, orderIdx) => {
+                            const { percent, activeIndex } = getStageProgress(order.status)
 
-                    {orders.map((order, index) => (
-                        <div 
-                            key={index} 
-                            className='bg-white border border-gray-200 hover:border-gray-300 rounded-2xl p-6 shadow-sm transition-all flex flex-col lg:flex-row lg:items-center justify-between gap-6'
-                        >
-                            {/* items list & details */}
-                            <div className='space-y-3 flex-1'>
-                                <div className='flex items-center gap-2'>
-                                    <span className='px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-teal bg-teal/10 rounded-md border border-teal/20'>
-                                        Order #{index + 1}
-                                    </span>
-                                    <span className='text-xs text-gray-500'>
-                                        {new Date(order.date).toLocaleDateString()}
-                                    </span>
-                                </div>
+                            return (
+                                <div key={order._id || orderIdx} className="bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-md shadow-sm space-y-md">
+                                    {order.items.map((item, itemIdx) => (
+                                        <div key={itemIdx} className="flex flex-col md:flex-row gap-lg border-b border-outline-variant/20 pb-md last:border-b-0 last:pb-0">
+                                            <div className="w-full md:w-32 h-32 rounded-lg bg-surface-container overflow-hidden shrink-0 border border-outline-variant/30">
+                                                <img className="w-full h-full object-cover" src={item.image1} alt={item.name} />
+                                            </div>
 
-                                <div className='space-y-1'>
-                                    {order.items.map((item, i) => (
-                                        <p key={i} className='text-charcoal text-sm font-semibold'>
-                                            {item.name} × {item.quantity}
-                                            <span className='text-gray-500 text-xs font-normal ml-1.5'>({item.size})</span>
-                                        </p>
+                                            <div className="flex-grow flex flex-col justify-between">
+                                                <div>
+                                                    <div className="flex justify-between items-start mb-sm">
+                                                        <div>
+                                                            <h3 className="text-headline-md font-bold text-primary">{item.name}</h3>
+                                                            <p className="text-on-surface-variant text-label-caps uppercase mt-xs">
+                                                                Order #{order._id ? order._id.slice(-8).toUpperCase() : `VC-${orderIdx + 1}`} • {new Date(order.date).toLocaleDateString()}
+                                                            </p>
+                                                            <p className="text-body-md text-on-surface-variant mt-xs">
+                                                                Size: <strong className="text-on-surface font-semibold">{item.size}</strong> • Qty: <strong className="text-on-surface font-semibold">{item.quantity}</strong> • Payment: <span className="font-semibold text-secondary">{order.paymentMethod}</span>
+                                                            </p>
+                                                        </div>
+                                                        <span className={`px-sm py-xs rounded text-label-caps uppercase shadow-xs ${getBadgeClass(order.status)}`}>
+                                                            {order.status}
+                                                        </span>
+                                                    </div>
+                                                    <p className="text-headline-md font-bold text-primary mt-sm">
+                                                        {currency} {item.price * item.quantity}
+                                                    </p>
+                                                </div>
+
+                                                {/* 5-Stage Visual Progress Bar */}
+                                                <div className="mt-lg">
+                                                    <div className="flex justify-between text-label-caps uppercase text-on-surface-variant mb-sm text-[11px]">
+                                                        {STAGES.map((stg, i) => (
+                                                            <span
+                                                                key={stg.key}
+                                                                className={i <= activeIndex ? 'text-secondary font-bold' : 'text-outline/60'}
+                                                            >
+                                                                {stg.label}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                    <div className="w-full bg-surface-container-high h-2 rounded-full overflow-hidden relative">
+                                                        <div
+                                                            className="bg-secondary h-full rounded-full transition-all duration-500"
+                                                            style={{ width: `${percent}%` }}
+                                                        ></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex md:flex-col justify-end gap-sm mt-md md:mt-0 shrink-0">
+                                                <button
+                                                    onClick={fetchOrders}
+                                                    className="bg-primary hover:bg-primary/90 text-on-primary px-lg py-sm rounded text-label-caps uppercase whitespace-nowrap cursor-pointer shadow-xs"
+                                                >
+                                                    Track Order
+                                                </button>
+                                                <button
+                                                    onClick={() => navigate(`/productdetail/${item._id}`)}
+                                                    className="border border-secondary text-secondary hover:bg-secondary/10 px-lg py-sm rounded text-label-caps uppercase whitespace-nowrap cursor-pointer transition-colors"
+                                                >
+                                                    View Product
+                                                </button>
+                                            </div>
+                                        </div>
                                     ))}
                                 </div>
-
-                                <div className='text-xs text-gray-500 leading-relaxed pt-1'>
-                                    <p className='text-charcoal font-medium'>
-                                        Deliver to: {order.address.firstName} {order.address.lastName} ({order.address.phone})
-                                    </p>
-                                    <p>{order.address.street}, {order.address.city}, {order.address.state} - {order.address.pinCode}</p>
-                                </div>
-                            </div>
-
-                            {/* order meta & total */}
-                            <div className='flex flex-row lg:flex-col justify-between items-start lg:items-end gap-2 border-t lg:border-t-0 border-gray-200 pt-3 lg:pt-0'>
-                                <div className='text-left lg:text-right'>
-                                    <span className='text-xs text-gray-500 block'>Payment: {order.paymentMethod}</span>
-                                    <span className='text-xl font-extrabold text-navy'>{currency} {order.amount}</span>
-                                </div>
-
-                                {/* status + track button */}
-                                <div className='flex flex-col items-end gap-2'>
-                                    <div className={`inline-flex items-center gap-2 px-3 py-1 border rounded-full text-xs ${getStatusBadgeClass(order.status)}`}>
-                                        <span className='w-2 h-2 rounded-full bg-current animate-pulse'></span>
-                                        {order.status}
-                                    </div>
-                                    <button
-                                        onClick={fetchOrders}
-                                        className='px-4 py-1.5 border border-gray-300 bg-white text-charcoal text-xs font-medium rounded-xl hover:bg-navy hover:text-white transition-all shadow-sm cursor-pointer'
-                                    >
-                                        Track Order
-                                    </button>
-                                </div>
-                            </div>
-
-                        </div>
-                    ))}
+                            )
+                        })
+                    )}
                 </div>
+            </main>
 
-            </div>
+            <Footer />
         </div>
     )
 }
 
 export default Order
-

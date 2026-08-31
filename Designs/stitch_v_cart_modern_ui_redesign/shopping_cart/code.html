@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>V-Cart - Shopping Cart</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#ffffff",
+                      "surface-container": "#eceef2",
+                      "on-tertiary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-surface": "#191c1f",
+                      "inverse-primary": "#aec7fd",
+                      "on-surface-variant": "#44474f",
+                      "tertiary": "#2c1100",
+                      "error": "#ba1a1a",
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed": "#97f2ef",
+                      "outline-variant": "#c4c6d0",
+                      "primary-fixed-dim": "#aec7fd",
+                      "on-primary-fixed-variant": "#2d4674",
+                      "surface-variant": "#e1e2e6",
+                      "on-secondary-fixed-variant": "#00504e",
+                      "tertiary-fixed": "#ffdcc6",
+                      "inverse-on-surface": "#eff1f5",
+                      "tertiary-container": "#4b2200",
+                      "on-tertiary-container": "#c5875a",
+                      "secondary": "#006a68",
+                      "on-primary-fixed": "#001a41",
+                      "on-error-container": "#93000a",
+                      "surface-bright": "#f8f9fd",
+                      "surface-dim": "#d8dade",
+                      "surface-container-low": "#f2f3f8",
+                      "on-secondary-fixed": "#00201f",
+                      "inverse-surface": "#2e3134",
+                      "surface-container-highest": "#e1e2e6",
+                      "surface-tint": "#465e8e",
+                      "primary-fixed": "#d8e2ff",
+                      "secondary-container": "#94efec",
+                      "outline": "#747780",
+                      "background": "#f8f9fd",
+                      "tertiary-fixed-dim": "#fdb787",
+                      "on-primary-container": "#7c94c8",
+                      "error-container": "#ffdad6",
+                      "surface": "#f8f9fd",
+                      "on-tertiary-fixed-variant": "#6a3b15",
+                      "primary": "#00173b",
+                      "on-secondary-container": "#006e6d",
+                      "primary-container": "#0f2c59",
+                      "surface-container-high": "#e7e8ec",
+                      "on-tertiary-fixed": "#301400",
+                      "secondary-fixed-dim": "#7ad6d3",
+                      "on-background": "#191c1f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xl": "48px",
+                      "container-max": "1280px",
+                      "sm": "8px",
+                      "md": "16px",
+                      "xs": "4px",
+                      "unit": "4px",
+                      "lg": "24px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "label-caps": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "display-lg-mobile": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #ffffff; /* Pure White background */
+        }
+        .text-premium-charcoal {
+            color: #191c1f; /* Assuming on-background is Premium Charcoal */
+        }
+        .bg-deep-navy {
+            background-color: #00173b; /* primary */
+        }
+        .text-deep-navy {
+            color: #00173b; /* primary */
+        }
+        .border-interface-gray {
+            border-color: #e1e2e6; /* surface-variant */
+        }
+        .text-interface-gray {
+            color: #747780; /* outline */
+        }
+        .bg-secure-teal {
+            background-color: #006a68; /* secondary */
+        }
+        .text-secure-teal {
+            color: #006a68; /* secondary */
+        }
+        .border-secure-teal {
+            border-color: #006a68; /* secondary */
+        }
+      </style>
+</head>
+<body class="font-body-md text-body-md text-premium-charcoal min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-primary text-on-primary docked full-width top-0 bg-primary shadow-md z-50">
+<div class="flex justify-between items-center w-full px-gutter py-md max-w-container-max mx-auto">
+<div class="text-headline-md font-display-lg text-on-primary">
+                V-Cart
+            </div>
+<nav class="hidden md:flex gap-lg">
+<a class="text-surface-variant hover:text-on-primary transition-colors text-label-caps font-label-caps hover:opacity-80 transition-all" href="#">Home</a>
+<a class="text-surface-variant hover:text-on-primary transition-colors text-label-caps font-label-caps hover:opacity-80 transition-all" href="#">Collections</a>
+<a class="text-surface-variant hover:text-on-primary transition-colors text-label-caps font-label-caps hover:opacity-80 transition-all" href="#">About</a>
+<a class="text-surface-variant hover:text-on-primary transition-colors text-label-caps font-label-caps hover:opacity-80 transition-all" href="#">Contact</a>
+</nav>
+<div class="flex items-center gap-md">
+<button aria-label="search" class="hover:opacity-80 transition-all active:scale-95 transition-transform flex items-center justify-center w-10 h-10 rounded-full bg-primary-container text-on-primary-container">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button aria-label="shopping_cart" class="text-secondary-fixed font-bold border-b-2 border-secondary-fixed pb-1 hover:opacity-80 transition-all active:scale-95 transition-transform flex items-center justify-center w-10 h-10 rounded-full bg-primary-container text-on-primary-container relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-0 right-0 -mt-1 -mr-1 bg-secondary text-on-secondary text-xs rounded-full h-4 w-4 flex items-center justify-center">2</span>
+</button>
+<button aria-label="account_circle" class="hover:opacity-80 transition-all active:scale-95 transition-transform flex items-center justify-center w-10 h-10 rounded-full bg-primary-container text-on-primary-container overflow-hidden">
+<img alt="User avatar" class="w-full h-full object-cover" data-alt="A minimalist, high-key portrait of a person in a bright, white studio, wearing a dark navy blazer, embodying a modern, secure, and professional aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD566KD5dkwOX39l_YA5nakLNL1NJpM4ewca7dl-GW8ySR0Y4W-WKESCtuEWP7tOVxaSJ_yPt16_3ECTU5orpS3hLb5WtB1p_zXWCg6QgLzlrEcXGP7shQx-FXs6anIWyTomyQGkuDvdf1UfQNtHVrpOtbY2ZLgX2JzIZtWGA_fF_-QlUvJ-vkO_pO86_eJzwobHzuw37LZHX2RTOCRJQtH0ZbFCyi765iVdDiCHBwRYHs5oantCj3Myg"/>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-gutter py-xl md:grid md:grid-cols-12 md:gap-gutter">
+<!-- Cart Items Column -->
+<section class="md:col-span-8 space-y-md">
+<h1 class="text-display-lg-mobile md:text-display-lg font-display-lg-mobile md:font-display-lg mb-lg">Your Cart</h1>
+<div class="border-t border-interface-gray py-md">
+<!-- Item 1 -->
+<div class="flex items-start gap-md py-md border-b border-interface-gray">
+<div class="w-24 h-32 md:w-32 md:h-40 shrink-0 bg-surface-container rounded-lg overflow-hidden border border-interface-gray">
+<img class="w-full h-full object-cover" data-alt="A high-end editorial shot of a minimalist black leather tote bag, resting on a stark white pedestal, illuminated by soft, diffused studio lighting, conveying luxury and structural integrity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZmWFTJI3ZY4JBkmwtUahsqv4PK2WVgQEKwojXUwqVs1084j0a1-dj6Zx5d3EQMkLawgDn7d6YykbOkaJxU72Be6TAWef9_Evs81uWns9d-brizsEVaB_TuuKOhL6VFgcHmRGVhKH1uwEYgqblVGOko0sG4BKNTntp7FqM2CmOGafNXwa5no4OYxWEdMaK_4Wv5lhbq_4vqHiEdsnPPYNGaKBPQkK9zFo2vZJUu4c3Bcv0kIudn6A9Eg"/>
+</div>
+<div class="flex-grow flex flex-col justify-between h-32 md:h-40">
+<div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-body-lg font-body-lg font-semibold">Structured Leather Tote</h3>
+<p class="text-interface-gray text-body-md font-body-md mt-xs">Color: Obsidian</p>
+</div>
+<span class="text-body-lg font-body-lg font-bold">$450.00</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-auto">
+<div class="flex items-center border border-interface-gray rounded-md h-10 w-32">
+<button class="w-10 h-full flex items-center justify-center text-interface-gray hover:text-premium-charcoal transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input class="w-12 h-full text-center border-none p-0 text-body-md font-body-md bg-transparent focus:ring-0" readonly="" type="text" value="1"/>
+<button class="w-10 h-full flex items-center justify-center text-interface-gray hover:text-premium-charcoal transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<button class="text-interface-gray hover:text-error transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined">delete</span>
+<span class="hidden md:inline text-label-caps font-label-caps">Remove</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-start gap-md py-md border-b border-interface-gray">
+<div class="w-24 h-32 md:w-32 md:h-40 shrink-0 bg-surface-container rounded-lg overflow-hidden border border-interface-gray">
+<img class="w-full h-full object-cover" data-alt="A sleek, modern stainless steel watch with a minimalist navy blue dial, lying flat on a pristine white surface, under crisp, bright lighting, emphasizing precision and high-end design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt0pugP_-X0RVFZIHIVHd4CAihCNGCdvsbHc41jTf46zoNb728CzIgE_FVZ6P0tMlhg9WENoqhP2_Q5QSeadT60f5tJ3gchjBOshzh5wzYtxCuZ4pKSGeLYce10XdRgJT3qVS1cQh83nn8eVXS6swPPtP_eqGIjuaUnwKNJaE1oODP3wEPyslmjAqjBDfkTRv63qlRd5vfYAee1mvrg5AWiwZ0GNce_b-lyljWlflnUtJKhrbotngBdQ"/>
+</div>
+<div class="flex-grow flex flex-col justify-between h-32 md:h-40">
+<div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-body-lg font-body-lg font-semibold">Minimalist Chronograph</h3>
+<p class="text-interface-gray text-body-md font-body-md mt-xs">Size: 42mm</p>
+</div>
+<span class="text-body-lg font-body-lg font-bold">$225.00</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-auto">
+<div class="flex items-center border border-interface-gray rounded-md h-10 w-32">
+<button class="w-10 h-full flex items-center justify-center text-interface-gray hover:text-premium-charcoal transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input class="w-12 h-full text-center border-none p-0 text-body-md font-body-md bg-transparent focus:ring-0" readonly="" type="text" value="1"/>
+<button class="w-10 h-full flex items-center justify-center text-interface-gray hover:text-premium-charcoal transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<button class="text-interface-gray hover:text-error transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined">delete</span>
+<span class="hidden md:inline text-label-caps font-label-caps">Remove</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-md">
+<a class="text-secure-teal font-label-caps text-label-caps hover:underline flex items-center gap-xs" href="#">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+                    Continue Shopping
+                </a>
+</div>
+</section>
+<!-- Order Summary Panel -->
+<aside class="md:col-span-4 mt-xl md:mt-0">
+<div class="bg-surface-bright rounded-xl border border-interface-gray p-lg shadow-sm sticky top-32">
+<h2 class="text-headline-md font-headline-md mb-lg border-b border-interface-gray pb-sm">Order Summary</h2>
+<div class="space-y-sm text-body-md font-body-md mb-lg">
+<div class="flex justify-between">
+<span class="text-interface-gray">Subtotal (2 items)</span>
+<span class="font-medium">$675.00</span>
+</div>
+<div class="flex justify-between">
+<span class="text-interface-gray">Delivery Fee</span>
+<span class="font-medium">$15.00</span>
+</div>
+<div class="flex justify-between">
+<span class="text-interface-gray">Estimated Tax</span>
+<span class="font-medium">Calculated at checkout</span>
+</div>
+</div>
+<div class="border-t border-interface-gray pt-md mb-lg">
+<div class="flex justify-between items-center">
+<span class="text-body-lg font-body-lg font-bold">Total</span>
+<span class="text-headline-md font-headline-md font-bold">$690.00</span>
+</div>
+<p class="text-label-caps font-label-caps text-interface-gray mt-xs text-right">USD</p>
+</div>
+<button class="w-full bg-deep-navy text-on-primary py-md rounded-md font-label-caps text-label-caps hover:opacity-90 transition-opacity flex items-center justify-center gap-sm">
+                    Proceed to Checkout
+                    <span class="material-symbols-outlined text-sm">lock</span>
+</button>
+<div class="mt-md text-center">
+<span class="text-secure-teal text-label-caps font-label-caps flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+                        Secure Bank-Grade Checkout
+                    </span>
+</div>
+</div>
+</aside>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center py-sm md:hidden bg-surface dark:bg-inverse-surface border-t border-outline-variant shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low active:scale-90 duration-100 p-2 rounded-lg text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+            Home
+        </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low active:scale-90 duration-100 p-2 rounded-lg text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined mb-1">grid_view</span>
+            Collections
+        </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low active:scale-90 duration-100 p-2 rounded-lg text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined mb-1">mail</span>
+            Contact
+        </a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-bold hover:bg-surface-container-low active:scale-90 duration-100 p-2 rounded-lg text-label-caps font-label-caps" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+            Cart
+        </a>
+</nav>
+<!-- Footer -->
+<footer class="bg-primary dark:bg-primary-container text-on-primary full-width mt-auto">
+<div class="w-full py-xl px-gutter flex flex-col items-center space-y-md text-center max-w-container-max mx-auto">
+<div class="text-headline-md font-display-lg text-on-primary mb-md">
+                V-Cart
+            </div>
+<div class="flex flex-wrap justify-center gap-lg mb-md">
+<a class="text-surface-variant hover:text-on-primary hover:text-secondary-fixed transition-colors text-label-caps font-label-caps" href="#">Privacy Policy</a>
+<a class="text-surface-variant hover:text-on-primary hover:text-secondary-fixed transition-colors text-label-caps font-label-caps" href="#">Terms of Service</a>
+<a class="text-surface-variant hover:text-on-primary hover:text-secondary-fixed transition-colors text-label-caps font-label-caps" href="#">Shipping Info</a>
+<a class="text-surface-variant hover:text-on-primary hover:text-secondary-fixed transition-colors text-label-caps font-label-caps" href="#">Returns</a>
+</div>
+<p class="text-body-md font-body-md text-surface-variant/80">
+                © 2024 V-Cart E-commerce. Secure &amp; Certified.
+            </p>
+</div>
+</footer>
+</body></html>
