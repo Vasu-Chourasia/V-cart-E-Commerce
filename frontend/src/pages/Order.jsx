@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 import { authDataContext } from '../context/authContext'
 import { shopDataContext } from '../context/ShopContext'
 import { useNavigate } from 'react-router-dom'
@@ -41,9 +42,11 @@ function Order() {
     const { serverUrl } = useContext(authDataContext)
     const { currency } = useContext(shopDataContext)
     const [orders, setOrders] = useState([])
+    const [trackingLoading, setTrackingLoading] = useState(false)
     const navigate = useNavigate()
 
-    const fetchOrders = async () => {
+    const fetchOrders = async (showToast = false) => {
+        if (showToast) setTrackingLoading(true)
         try {
             const result = await axios.post(
                 serverUrl + "/api/order/userorder",
@@ -52,9 +55,17 @@ function Order() {
             )
             if (result.data) {
                 setOrders(result.data.reverse())
+                if (showToast) {
+                    toast.info("Order status refreshed")
+                }
             }
         } catch (error) {
             console.log("fetchOrders error", error)
+            if (showToast) {
+                toast.error("Failed to refresh order status")
+            }
+        } finally {
+            if (showToast) setTrackingLoading(false)
         }
     }
 
@@ -146,10 +157,11 @@ function Order() {
 
                                             <div className="flex md:flex-col justify-end gap-sm mt-md md:mt-0 shrink-0">
                                                 <button
-                                                    onClick={fetchOrders}
-                                                    className="bg-primary hover:bg-primary/90 text-on-primary px-lg py-sm rounded text-label-caps uppercase whitespace-nowrap cursor-pointer shadow-xs"
+                                                    onClick={() => fetchOrders(true)}
+                                                    disabled={trackingLoading}
+                                                    className="bg-primary hover:bg-primary/90 text-on-primary px-lg py-sm rounded text-label-caps uppercase whitespace-nowrap cursor-pointer shadow-xs disabled:opacity-50 flex items-center justify-center gap-xs min-w-[120px]"
                                                 >
-                                                    Track Order
+                                                    {trackingLoading ? "Refreshing..." : "Track Order"}
                                                 </button>
                                                 <button
                                                     onClick={() => navigate(`/productdetail/${item._id}`)}

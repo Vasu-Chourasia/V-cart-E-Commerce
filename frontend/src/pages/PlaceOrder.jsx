@@ -40,7 +40,7 @@ function PlaceOrder() {
         setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
-    const initPay = (order) => {
+    const initPay = (order, orderData) => {
         const options = {
             key: import.meta.env.VITE_RAZORPAY_KEY_ID,
             amount: order.amount,
@@ -53,20 +53,32 @@ function PlaceOrder() {
                 try {
                     const { data } = await axios.post(
                         serverUrl + '/api/order/verifyrazorpay',
-                        response,
+                        {
+                            ...response,
+                            orderData
+                        },
                         { withCredentials: true }
                     )
                     if (data) {
                         setCartItem({})
+                        toast.success("Payment successful! Order placed.")
                         navigate("/order")
                     }
                 } catch (error) {
                     console.log(error)
                     toast.error("Payment verification failed")
                 }
+            },
+            modal: {
+                ondismiss: function () {
+                    toast.error("Payment cancelled or closed. Please try again.")
+                }
             }
         }
         const rzp = new window.Razorpay(options)
+        rzp.on('payment.failed', function (response) {
+            toast.error(`Payment failed: ${response.error?.description || 'Transaction failed'}`)
+        })
         rzp.open()
     }
 
@@ -109,7 +121,7 @@ function PlaceOrder() {
             } else if (method === 'razorpay') {
                 const result = await axios.post(serverUrl + "/api/order/razorpay", orderData, { withCredentials: true })
                 if (result.data) {
-                    initPay(result.data)
+                    initPay(result.data, orderData)
                 }
             } else if (method === 'stripe') {
                 toast.info("Stripe payment gateway integration coming soon!")
