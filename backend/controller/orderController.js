@@ -43,9 +43,9 @@ export const placeOrderRazorpay = async (req, res) => {
     try {
         const { amount } = req.body;
 
-        // create Razorpay order — amount must be in paise (multiply by 100)
+        // create Razorpay order — amount must be an integer in paise (multiply by 100 and round)
         const options = {
-            amount: amount * 100,
+            amount: Math.round(amount * 100),
             currency: "INR",
             receipt: `rcpt_${Date.now()}`,
         };
@@ -53,7 +53,10 @@ export const placeOrderRazorpay = async (req, res) => {
         razorpayInstance.orders.create(options, (error, order) => {
             if (error) {
                 console.log("razorpay order create error", error);
-                return res.status(500).json(error);
+                return res.status(400).json({
+                    message: error?.error?.description || "Razorpay order creation failed",
+                    error
+                });
             }
             return res.status(200).json(order);
         });
