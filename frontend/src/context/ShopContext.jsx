@@ -30,7 +30,7 @@ function ShopContext({ children }) {
     }
 
     // add item+size to cart — syncs to backend if logged in
-    const addtoCart = async (itemId, size) => {
+    const addToCart = async (itemId, size) => {
         if (!size) {
             toast.error("Please select a size")
             return
@@ -52,13 +52,16 @@ function ShopContext({ children }) {
                 await axios.post(serverUrl + "/api/cart/add", { itemId, size }, { withCredentials: true })
                 toast.success("Added to cart")
             } catch (error) {
-                console.log("addtoCart error", error)
+                console.log("addToCart error", error)
                 toast.error("Failed to add to cart")
             } finally {
                 setLoading(false)
             }
         }
     }
+
+    // alias for backwards compatibility
+    const addtoCart = addToCart
 
     // load cart from backend (called after login)
     const getUserCart = async () => {
@@ -73,7 +76,16 @@ function ShopContext({ children }) {
     // update quantity of a specific item+size
     const updateQuantity = async (itemId, size, quantity) => {
         let cartData = structuredClone(cartItem)
-        cartData[itemId][size] = quantity
+        if (!cartData[itemId]) cartData[itemId] = {}
+        
+        if (quantity === 0) {
+            delete cartData[itemId][size]
+            if (Object.keys(cartData[itemId]).length === 0) {
+                delete cartData[itemId]
+            }
+        } else {
+            cartData[itemId][size] = quantity
+        }
         setCartItem(cartData)
 
         if (userData) {
@@ -119,7 +131,7 @@ function ShopContext({ children }) {
     const value = {
         products, currency, delivery_fee, getProducts,
         search, setSearch, showSearch, setShowSearch,
-        cartItem, setCartItem, addtoCart, updateQuantity,
+        cartItem, setCartItem, addToCart, addtoCart, updateQuantity,
         getCartCount, getCartAmount, loading
     }
 

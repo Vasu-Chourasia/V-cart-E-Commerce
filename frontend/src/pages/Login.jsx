@@ -54,15 +54,15 @@ function Login() {
         <div className="bg-surface-container-lowest min-h-screen flex flex-col justify-between antialiased text-on-surface">
             <Nav />
 
-            <main className="flex-grow flex items-center justify-center py-xl px-gutter">
-                <div className="w-full max-w-md bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-md p-xl overflow-hidden relative">
+            <main className="flex-grow flex items-center justify-center py-md px-gutter">
+                <div className="w-full max-w-md bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-md p-lg overflow-hidden relative">
                     
-                    <div className="text-center mb-lg">
-                        <h1 className="text-display-lg-mobile text-on-surface mb-sm">Welcome Back</h1>
-                        <p className="text-body-md text-on-surface-variant">Sign in to your V-Cart account</p>
+                    <div className="text-center mb-md">
+                        <h1 className="text-headline-md font-bold text-on-surface mb-xs">Welcome Back</h1>
+                        <p className="text-body-md text-on-surface-variant text-sm">Sign in to your V-Cart account</p>
                     </div>
 
-                    <form onSubmit={handleLogin} className="space-y-md">
+                    <form onSubmit={handleLogin} className="space-y-sm">
                         <div>
                             <label className="block text-label-caps text-on-surface mb-xs" htmlFor="email">
                                 Email Address
@@ -74,7 +74,7 @@ function Login() {
                                 required
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant/80 rounded focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all outline-none text-body-md text-on-surface"
+                                className="w-full px-md py-xs bg-surface-container-lowest border border-outline-variant/80 rounded focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition-all outline-none text-body-md text-on-surface"
                             />
                         </div>
 
@@ -90,17 +90,17 @@ function Login() {
                                     required
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant/80 rounded focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all outline-none text-body-md text-on-surface pr-10"
+                                    className="w-full px-md py-xs bg-surface-container-lowest border border-outline-variant/80 rounded focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition-all outline-none text-body-md text-on-surface pr-10"
                                 />
                                 <button
                                     type="button"
                                     onClick={() => setShow(!show)}
-                                    className="absolute right-3 top-3 text-outline hover:text-on-surface cursor-pointer"
+                                    className="absolute right-3 top-2.5 text-outline hover:text-on-surface cursor-pointer"
                                 >
-                                    {show ? <IoEye className="w-5 h-5" /> : <IoEyeOutline className="w-5 h-5" />}
+                                    {show ? <IoEye className="w-4 h-4" /> : <IoEyeOutline className="w-4 h-4" />}
                                 </button>
                             </div>
-                            <div className="flex justify-end mt-sm">
+                            <div className="flex justify-end mt-xs">
                                 <button
                                     type="button"
                                     onClick={() => toast.info("Password reset feature coming soon!")}
@@ -114,28 +114,28 @@ function Login() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-primary hover:bg-primary/90 text-on-primary py-md rounded text-label-caps transition-colors shadow-sm cursor-pointer flex items-center justify-center"
+                            className="w-full bg-primary hover:bg-primary/90 text-on-primary py-sm rounded text-label-caps transition-colors shadow-sm cursor-pointer flex items-center justify-center font-bold"
                         >
                             {loading ? <Loading /> : "Sign In"}
                         </button>
                     </form>
 
-                    <div className="mt-lg relative">
+                    <div className="mt-md relative">
                         <div className="absolute inset-0 flex items-center">
                             <div className="w-full border-t border-outline-variant/50"></div>
                         </div>
                         <div className="relative flex justify-center text-label-caps">
-                            <span className="bg-surface-container-lowest px-md text-on-surface-variant">Or continue with</span>
+                            <span className="bg-surface-container-lowest px-sm text-on-surface-variant text-xs">Or continue with</span>
                         </div>
                     </div>
 
-                    <div className="mt-lg">
+                    <div className="mt-md">
                         <button
                             type="button"
                             onClick={googleLogin}
-                            className="w-full flex items-center justify-center px-md py-sm border border-outline-variant rounded hover:bg-surface-container-low transition-colors text-body-md text-on-surface shadow-sm cursor-pointer"
+                            className="w-full flex items-center justify-center px-md py-xs border border-outline-variant rounded hover:bg-surface-container-low transition-colors text-body-md text-on-surface shadow-sm cursor-pointer"
                         >
-                            <svg className="h-5 w-5 mr-sm" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg className="h-4 w-4 mr-sm" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
                                 <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
                                 <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
@@ -145,7 +145,7 @@ function Login() {
                         </button>
                     </div>
 
-                    <div className="mt-xl text-center text-body-md text-on-surface-variant">
+                    <div className="mt-md text-center text-body-md text-on-surface-variant text-sm">
                         Don't have an account?{" "}
                         <button
                             type="button"

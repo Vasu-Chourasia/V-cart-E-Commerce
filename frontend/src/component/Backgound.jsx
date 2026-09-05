@@ -1,16 +1,16 @@
 import React from 'react'
 
 const images = [
-    "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&q=80&w=1600",
-    "https://images.unsplash.com/photo-1486308512493-ae6a1c5abfb5?auto=format&fit=crop&q=80&w=1600",
-    "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=1600",
-    "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=1600"
+    "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=1600&auto=format&fit=crop"
 ]
 
 // background image that switches in sync with Hero slideIndex
 function Backgound({ slideIndex }) {
     return (
-        <div className='w-full h-full absolute top-0 left-0 overflow-hidden'>
+        <div className="w-full h-full absolute top-0 left-0 overflow-hidden">
             {images.map((img, i) => (
                 <img
                     key={i}
@@ -20,12 +20,10 @@ function Backgound({ slideIndex }) {
                 />
             ))}
             {/* premium subtle dimming overlay */}
-            <div className='absolute inset-0 bg-black/15'></div>
-            <div className='absolute inset-0 bg-gradient-to-r from-black/10 to-transparent'></div>
+            <div className="absolute inset-0 bg-black/15"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent"></div>
         </div>
     )
 }
 
 export default Backgound
-
-

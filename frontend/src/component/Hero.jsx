@@ -20,27 +20,26 @@ function Hero({ slideIndex, setSlideIndex }) {
     }, [setSlideIndex])
 
     return (
-        <section className="relative w-full h-[70vh] md:h-[80vh] flex items-center overflow-hidden">
+        <section className="relative w-full h-[50vh] md:h-[60vh] flex items-center overflow-hidden">
             <Backgound slideIndex={slideIndex} />
 
             {/* Container for alignment */}
             <div className="relative z-10 w-full max-w-container-max mx-auto px-gutter flex justify-start items-center">
                 
                 {/* Minimal top-left styled card */}
-                <div className="bg-surface-container-lowest/90 backdrop-blur-md p-lg md:p-xl rounded-xl border border-outline-variant/30 shadow-lg max-w-md flex flex-col items-start text-left">
+                <div className="bg-surface-container-lowest/90 backdrop-blur-md p-md md:p-lg rounded-xl border border-outline-variant/30 shadow-lg max-w-md flex flex-col items-start text-left">
 
-                    
-                    <h1 className="text-headline-md font-bold text-on-surface mb-sm leading-snug">
+                    <h1 className="text-headline-md font-bold text-on-surface mb-xs leading-snug">
                         {slides[slideIndex].heading}
                     </h1>
                     
-                    <p className="text-body-md text-on-surface-variant mb-md leading-relaxed">
+                    <p className="text-body-md text-on-surface-variant mb-sm leading-relaxed text-sm">
                         {slides[slideIndex].sub}
                     </p>
 
                     <button
                         onClick={() => navigate("/collection")}
-                        className="bg-primary hover:bg-primary/90 text-on-primary rounded text-label-caps uppercase px-md py-sm transition-colors tracking-wider shadow-md cursor-pointer font-bold mb-md"
+                        className="bg-primary hover:bg-primary/90 text-on-primary rounded text-label-caps uppercase px-md py-xs transition-colors tracking-wider shadow-md cursor-pointer font-bold mb-sm"
                     >
                         Shop Collection
                     </button>
@@ -64,4 +63,3 @@ function Hero({ slideIndex, setSlideIndex }) {
 }
 
 export default Hero
-

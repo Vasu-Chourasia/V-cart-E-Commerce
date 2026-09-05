@@ -6,15 +6,15 @@ import Footer from '../component/Footer'
 
 const CATEGORIES = ["Men", "Women", "Kids"]
 const SUB_CATEGORIES = ["TopWear", "BottomWear", "WinterWear"]
-const ITEMS_PER_PAGE = 8
+const ITEMS_PER_PAGE = 12
 
 function Collections() {
-    const { products, search, showSearch } = useContext(shopDataContext)
+    const { products, search, showSearch, currency } = useContext(shopDataContext)
 
     const [selectedCategories, setSelectedCategories] = useState([])
     const [selectedSubCategories, setSelectedSubCategories] = useState([])
     const [sortType, setSortType] = useState("relevant")
-    const [maxPrice, setMaxPrice] = useState(1000)
+    const [maxPrice, setMaxPrice] = useState(3000)
     const [currentPage, setCurrentPage] = useState(1)
     const [showMobileFilter, setShowMobileFilter] = useState(false)
     const [filtered, setFiltered] = useState([])
@@ -29,7 +29,7 @@ function Collections() {
     const clearAllFilters = () => {
         setSelectedCategories([])
         setSelectedSubCategories([])
-        setMaxPrice(1000)
+        setMaxPrice(3000)
         setCurrentPage(1)
     }
 
@@ -117,7 +117,7 @@ function Collections() {
                 </div>
 
                 {/* Active Filter Chips Bar */}
-                {(selectedCategories.length > 0 || selectedSubCategories.length > 0 || maxPrice < 1000) && (
+                {(selectedCategories.length > 0 || selectedSubCategories.length > 0 || maxPrice < 3000) && (
                     <div className="flex flex-wrap items-center gap-sm mb-lg bg-surface-container-low p-sm rounded-lg">
                         <span className="text-label-caps text-on-surface-variant uppercase mr-xs">Active Filters:</span>
                         {selectedCategories.map(cat => (
@@ -132,10 +132,10 @@ function Collections() {
                                 <button onClick={() => toggleFilter(sub, selectedSubCategories, setSelectedSubCategories)} className="hover:text-error cursor-pointer">✕</button>
                             </span>
                         ))}
-                        {maxPrice < 1000 && (
+                        {maxPrice < 3000 && (
                             <span className="inline-flex items-center gap-xs px-sm py-xs bg-surface-container-lowest border border-outline-variant rounded-full text-label-caps text-on-surface">
-                                Under ${maxPrice}
-                                <button onClick={() => setMaxPrice(1000)} className="hover:text-error cursor-pointer">✕</button>
+                                Under {currency}{maxPrice}
+                                <button onClick={() => setMaxPrice(3000)} className="hover:text-error cursor-pointer">✕</button>
                             </span>
                         )}
                         <button onClick={clearAllFilters} className="text-label-caps text-secondary font-bold hover:underline cursor-pointer ml-xs">
@@ -188,20 +188,20 @@ function Collections() {
                         <div className="pb-lg">
                             <div className="flex justify-between items-center mb-sm">
                                 <h3 className="text-headline-md font-semibold text-primary-container">Max Price</h3>
-                                <span className="text-body-md font-bold text-secondary">${maxPrice}</span>
+                                <span className="text-body-md font-bold text-secondary">{currency}{maxPrice}</span>
                             </div>
                             <input
                                 type="range"
                                 min="0"
-                                max="1000"
-                                step="10"
+                                max="3000"
+                                step="50"
                                 value={maxPrice}
                                 onChange={(e) => { setMaxPrice(Number(e.target.value)); setCurrentPage(1); }}
                                 className="w-full accent-secondary cursor-pointer"
                             />
                             <div className="flex justify-between text-xs text-on-surface-variant mt-xs">
-                                <span>$0</span>
-                                <span>$1000+</span>
+                                <span>{currency}0</span>
+                                <span>{currency}3000+</span>
                             </div>
                         </div>
                     </aside>
@@ -209,7 +209,7 @@ function Collections() {
                     {/* Products Grid Section */}
                     <div className="flex-1">
                         {paginatedProducts.length > 0 ? (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-md">
                                 {paginatedProducts.map(product => (
                                     <Card
                                         key={product._id}
