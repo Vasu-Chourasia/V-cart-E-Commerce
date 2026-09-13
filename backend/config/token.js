@@ -1,11 +1,11 @@
 import jwt from "jsonwebtoken";
 
-// generates token for regular users — payload contains userId
-export const genToken = (userId) => {
-    return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
+// generates token for users — payload contains userId, email, and role
+export const genToken = (userId, email = "", role = "user") => {
+    return jwt.sign({ userId, email, role }, process.env.JWT_SECRET, { expiresIn: "7d" });
 };
 
-// generates token for admin — payload contains email
+// generates token for .env admin login — explicitly includes role: 'admin'
 export const genToken1 = (email) => {
-    return jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: "1d" });
+    return jwt.sign({ email, role: "admin" }, process.env.JWT_SECRET, { expiresIn: "1d" });
 };

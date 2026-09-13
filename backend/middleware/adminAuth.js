@@ -11,12 +11,12 @@ const adminAuth = (req, res, next) => {
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        // admin tokens carry email, user tokens carry userId
-        if (!decoded.email) {
+        // Role is the sole source of truth — token must explicitly contain role: "admin"
+        if (decoded.role !== "admin") {
             return res.status(403).json({ message: "Access denied. Admins only." });
         }
 
-        req.adminEmail = decoded.email;
+        req.adminEmail = decoded.email || process.env.ADMIN_EMAIL;
         next();
     } catch (error) {
         console.log("adminAuth error", error);

@@ -105,7 +105,7 @@ function Nav() {
 
                         {/* Profile Dropdown */}
                         {showProfile && (
-                            <div className="absolute top-12 right-0 w-52 bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-2xl overflow-hidden py-1 z-50 text-on-surface">
+                            <div style={{ minWidth: '220px' }} className="absolute top-12 right-0 bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-2xl overflow-hidden py-1 z-50 text-on-surface">
                                 <div className="px-md py-sm border-b border-outline-variant/30 text-xs text-on-surface-variant bg-surface-container-low">
                                     {userData ? (
                                         <>
@@ -125,6 +125,21 @@ function Nav() {
                                         </li>
                                     ) : (
                                         <>
+                                            {userData?.role === 'admin' && (
+                                                <li
+                                                    className="px-md py-sm bg-secondary/10 text-secondary hover:bg-secondary/20 font-semibold cursor-pointer transition-colors flex items-center justify-between border-b border-outline-variant/30"
+                                                    onClick={() => {
+                                                        const adminUrl = import.meta.env.VITE_ADMIN_URL || "http://localhost:5173"
+                                                        window.open(adminUrl, "_blank")
+                                                        setShowProfile(false)
+                                                    }}
+                                                >
+                                                    <span className="text-sm">Admin Dashboard</span>
+                                                    <svg className="w-4 h-4 ml-2 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                    </svg>
+                                                </li>
+                                            )}
                                             <li
                                                 className="px-md py-sm hover:bg-surface-container-low hover:text-secondary cursor-pointer transition-colors"
                                                 onClick={() => { navigate("/order"); setShowProfile(false) }}

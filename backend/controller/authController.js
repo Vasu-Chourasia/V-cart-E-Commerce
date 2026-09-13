@@ -27,9 +27,10 @@ export const registration = async (req, res) => {
         }
 
         const hashPassword = await bcrypt.hash(password, 10);
-        const user = await User.create({ name, email, password: hashPassword });
+        // Explicitly hardcode role: "user" — any "role" sent in req.body is completely ignored
+        const user = await User.create({ name, email, password: hashPassword, role: "user" });
 
-        const token = genToken(user._id);
+        const token = genToken(user._id, user.email, "user");
         res.cookie("token", token, cookieOptions(7 * 24 * 60 * 60 * 1000));
 
         return res.status(201).json(user);
@@ -54,7 +55,8 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: "Incorrect password" });
         }
 
-        const token = genToken(user._id);
+        const role = user.role || "user";
+        const token = genToken(user._id, user.email, role);
         res.cookie("token", token, cookieOptions(7 * 24 * 60 * 60 * 1000));
 
         return res.status(200).json(user);
@@ -82,10 +84,11 @@ export const googleLogin = async (req, res) => {
 
         let user = await User.findOne({ email });
         if (!user) {
-            user = await User.create({ name, email });
+            user = await User.create({ name, email, role: "user" });
         }
 
-        const token = genToken(user._id);
+        const role = user.role || "user";
+        const token = genToken(user._id, user.email, role);
         res.cookie("token", token, cookieOptions(7 * 24 * 60 * 60 * 1000));
 
         return res.status(200).json(user);
