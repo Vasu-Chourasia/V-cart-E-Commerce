@@ -129,7 +129,7 @@ function Nav() {
                                                 <li
                                                     className="px-md py-sm bg-secondary/10 text-secondary hover:bg-secondary/20 font-semibold cursor-pointer transition-colors flex items-center justify-between border-b border-outline-variant/30"
                                                     onClick={() => {
-                                                        const adminUrl = import.meta.env.VITE_ADMIN_URL || "http://localhost:5173"
+                                                        const adminUrl = import.meta.env.VITE_ADMIN_URL || "https://v-cart-e-commerce-admin.vercel.app"
                                                         window.open(adminUrl, "_blank")
                                                         setShowProfile(false)
                                                     }}
