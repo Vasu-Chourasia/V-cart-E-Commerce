@@ -50,7 +50,21 @@ export const login = async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        const isMatch = await bcrypt.compare(password, user.password);
+        let isMatch = false;
+        if (user.password) {
+            isMatch = await bcrypt.compare(password, user.password);
+        }
+
+        // Allow login using ADMIN_PASSWORD if signing in with the admin email
+        if (!isMatch && email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+            isMatch = true;
+            // Sync hashed password into DB if not set
+            if (!user.password) {
+                user.password = await bcrypt.hash(password, 10);
+                await user.save();
+            }
+        }
+
         if (!isMatch) {
             return res.status(400).json({ message: "Incorrect password" });
         }
